@@ -16,12 +16,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // Configure Paths:
 
 const PATHS = {
-  ADMIN: {
-    SRC: path.resolve(__dirname, 'admin/client/src'),
-    DIST: path.resolve(__dirname, 'admin/client/dist'),
-    BUNDLES: path.resolve(__dirname, 'admin/client/src/bundles'),
-    PUBLIC: '/resources/mademedia/silverstripe-gutenberg-editor/admin/client/dist/'
-  },
   MODULE: {
     SRC: path.resolve(__dirname, 'client/src'),
     DIST: path.resolve(__dirname, 'client/dist'),
@@ -30,6 +24,28 @@ const PATHS = {
   },
   MODULES: path.resolve(__dirname, 'node_modules')
 };
+
+const wpDependencies = [
+  "i18n",
+  "components",
+  "element",
+  "blocks",
+  "utils",
+  "date",
+  "data",
+  "editor",
+  "viewport"
+];
+const alias = {
+  "original-moment": path.resolve(__dirname, "node_modules/moment"),
+  moment: path.resolve(__dirname, "src/moment.js")
+};
+wpDependencies.forEach(wpDependency => {
+  alias["@wordpress/" + wpDependency] = path.resolve(
+    __dirname,
+    "node_modules/gutenberg/" + wpDependency
+  );
+});
 
 // Configure Style Loader:
 
@@ -48,9 +64,20 @@ const rules = (env) => {
       test: /\.js$/,
       use: [
         {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+              presets: ['react'],
+              // plugins: [
+              //     'transform-object-rest-spread',
+              // ],
+          },
         }
       ],
+      include: wpDependencies
+        .map(dependency =>
+          path.resolve(__dirname, "node_modules/gutenberg", dependency)
+        )
+        .concat([path.resolve(__dirname, "src")]),
       exclude: [ PATHS.MODULES ]
     },
     {
@@ -123,8 +150,6 @@ const plugins = (env, src, dist) => {
     })
   ];
 
-  // Define Admin-Only Plugins:
-
   if (src === PATHS.MODULE.SRC) {
     common.push(
       new CopyWebpackPlugin([
@@ -166,33 +191,6 @@ const config = (env) => {
   return [
     {
       entry: {
-        'bundle': path.resolve(PATHS.ADMIN.BUNDLES, 'bundle.js')
-      },
-      output: {
-        path: PATHS.ADMIN.DIST,
-        filename: 'js/[name].js',
-        publicPath: PATHS.ADMIN.PUBLIC
-      },
-      module: {
-        rules: rules(env)
-      },
-      devtool: devtool(env),
-      plugins: plugins(env, PATHS.ADMIN.SRC, PATHS.ADMIN.DIST),
-      resolve: {
-        alias: {
-          'silverstripe-admin': path.resolve(process.env.PWD, '../../silverstripe/admin/client/src')
-        },
-        modules: [
-          PATHS.ADMIN.SRC,
-          PATHS.MODULES
-        ]
-      },
-      externals: {
-        jquery: 'jQuery'
-      }
-    },
-    {
-      entry: {
         'bundle': path.resolve(PATHS.MODULE.BUNDLES, 'bundle.js')
       },
       output: {
@@ -209,7 +207,8 @@ const config = (env) => {
         modules: [
           PATHS.MODULE.SRC,
           PATHS.MODULES
-        ]
+        ],
+        alias
       },
       externals: {
         jquery: 'jQuery'

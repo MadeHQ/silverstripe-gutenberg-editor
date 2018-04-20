@@ -1,11 +1,23 @@
 ---
 Name: silverstripe-gutenberg-editor
+After:
+  - '#corefieldtypes'
 ---
 
 # Configure Admin Extensions:
 
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_css:
-    - "mademedia/silverstripe-gutenberg-editor: admin/client/dist/styles/bundle.css"
+    - "mademedia/silverstripe-gutenberg-editor: client/dist/styles/bundle.css"
   extra_requirements_javascript:
-    - "mademedia/silverstripe-gutenberg-editor: admin/client/dist/js/bundle.js"
+    - "mademedia/silverstripe-gutenberg-editor: client/dist/js/bundle.js"
+
+SilverStripe\Core\Injector\Injector:
+  HTMLText:
+    class: MadeHQ\Gutenberg\FieldTypes\DBGutenbergText
+    properties:
+      ProcessShortcodes: true
+
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - MadeHQ\Gutenberg\Extensions\GutenbergContentFields

@@ -30,18 +30,22 @@
     "watch": "webpack --env.development --colors --watch",
     "build": "webpack --env.production --colors --optimize-minimize"
   },
-  "dependencies": {},
+  "dependencies": {
+    "gutenberg": "Wordpress/gutenberg"
+  },
   "devDependencies": {
+    "@wordpress/babel-preset-default": "^1.1.0",
+    "@wordpress/browserslist-config": "^2.1.0",
     "autoprefixer": "^7.1.6",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.5",
-    "gutenberg": "^2.7.0",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.8",
     "sass-loader": "^6.0.6",
