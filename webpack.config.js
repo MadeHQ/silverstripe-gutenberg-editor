@@ -1,28 +1,41 @@
-/* Webpack Configuration
-===================================================================================================================== */
+/**
+ * External dependencies
+ */
+const path = require("path");
+const webpack = require("webpack");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-// Load Core Modules:
+// Main CSS loader for everything but blocks..
+const cssExtractTextPlugin = new ExtractTextPlugin({
+  filename: "build/style.css"
+});
 
-const path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-
-// Load Plugin Modules:
-
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-// Configure Paths:
-
-const PATHS = {
-  MODULE: {
-    SRC: path.resolve(__dirname, 'client/src'),
-    DIST: path.resolve(__dirname, 'client/dist'),
-    BUNDLES: path.resolve(__dirname, 'client/src/bundles'),
-    PUBLIC: '/resources/mademedia/silverstripe-gutenberg-editor/client/dist/',
-  },
-  MODULES: path.resolve(__dirname, 'node_modules')
+// Configuration for the ExtractTextPlugin.
+const extractConfig = {
+  use: [
+    { loader: "raw-loader" },
+    {
+      loader: "postcss-loader",
+      options: {
+        plugins: [require("autoprefixer")]
+      }
+    },
+    {
+      loader: "sass-loader",
+      query: {
+        includePaths: [
+          path.resolve(
+            __dirname,
+            "node_modules/gutenberg/edit-post/assets/stylesheets"
+          )
+        ],
+        data:
+          '@import "colors"; @import "admin-schemes"; @import "breakpoints"; @import "variables"; @import "mixins"; @import "animations";@import "z-index";',
+        outputStyle:
+          "production" === process.env.NODE_ENV ? "compressed" : "nested"
+      }
+    }
+  ]
 };
 
 const wpDependencies = [
@@ -38,7 +51,7 @@ const wpDependencies = [
 ];
 const alias = {
   "original-moment": path.resolve(__dirname, "node_modules/moment"),
-  moment: path.resolve(__dirname, "src/moment.js")
+  moment: path.resolve(__dirname, "client/src/moment.js")
 };
 wpDependencies.forEach(wpDependency => {
   alias["@wordpress/" + wpDependency] = path.resolve(
@@ -47,180 +60,63 @@ wpDependencies.forEach(wpDependency => {
   );
 });
 
-// Configure Style Loader:
-
-const style = (env, loaders) => {
-  return (env === 'production') ? ExtractTextPlugin.extract({
-    fallback: 'style-loader',
-    use: loaders
-  }) : [{ loader: 'style-loader' }].concat(loaders);
-};
-
-// Configure Rules:
-
-const rules = (env) => {
-  return [
-    {
-      test: /\.js$/,
-      use: [
-        {
-          loader: 'babel-loader',
-          options: {
-              presets: ['react'],
-              // plugins: [
-              //     'transform-object-rest-spread',
-              // ],
-          },
-        }
-      ],
-      include: wpDependencies
-        .map(dependency =>
-          path.resolve(__dirname, "node_modules/gutenberg", dependency)
-        )
-        .concat([path.resolve(__dirname, "src")]),
-      exclude: [ PATHS.MODULES ]
-    },
-    {
-      test: /\.css$/,
-      use: style(env, [
-        {
-          loader: 'css-loader'
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            plugins: [ autoprefixer ] // see "browserslist" in package.json
-          }
-        }
-      ])
-    },
-    {
-      test: /\.scss$/,
-      use: style(env, [
-        {
-          loader: 'css-loader'
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            plugins: [ autoprefixer ] // see "browserslist" in package.json
-          }
-        },
-        {
-          loader: 'sass-loader',
-          options: {
-            includePaths: [
-              path.resolve(process.env.PWD, '../') // allows resolving of framework paths in symlinked modules
-            ]
-          }
-        }
-      ])
-    },
-    {
-      test: /\.(gif|jpg|png)$/,
-      use: [
-        {
-          loader: 'url-loader',
-          options: {
-            name: 'images/[name].[ext]',
-            limit: 10000
-          }
-        }
-      ]
-    }
-  ];
-};
-
-// Configure Devtool:
-
-const devtool = (env) => {
-  return (env === 'production') ? false : 'source-map';
-};
-
-// Configure Plugins:
-
-const plugins = (env, src, dist) => {
-
-  // Define Common Plugins:
-
-  var common = [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
+const config = {
+  entry: {
+    main: "./client/src/index.js",
+    // globals: "./client/src/globals.js"
+  },
+  resolve: { alias },
+  output: {
+    filename: "client/dist/[name].js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.pegjs/,
+        use: "pegjs-loader"
+      },
+      {
+        test: /\.js$/,
+        include: wpDependencies
+          .map(dependency =>
+            path.resolve(__dirname, "node_modules/gutenberg", dependency)
+          )
+          .concat([path.resolve(__dirname, "client/src")]),
+        use: "babel-loader"
+      },
+      {
+        test: /\.s?css$/,
+        use: cssExtractTextPlugin.extract(extractConfig)
+      }
+    ]
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(
+        process.env.NODE_ENV || "development"
+      )
+    }),
+    cssExtractTextPlugin,
+    new webpack.LoaderOptionsPlugin({
+      minimize: process.env.NODE_ENV === "production",
+      debug: process.env.NODE_ENV !== "production"
     })
-  ];
-
-  if (src === PATHS.MODULE.SRC) {
-    common.push(
-      new CopyWebpackPlugin([
-        { from: path.resolve(src, 'images/icons'), to: 'images/icons' }
-      ])
-    );
+  ],
+  stats: {
+    children: false
+  },
+  devServer: {
+    contentBase: "./public"
   }
-
-  // Answer Common + Environment-Specific Plugins:
-
-  return common.concat((env === 'production') ? [
-    new CleanWebpackPlugin([ dist ], {
-      verbose: true
-    }),
-    new ExtractTextPlugin({
-      filename: 'styles/[name].css',
-      allChunks: true
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      output: {
-        beautify: false,
-        comments: false,
-        semicolons: false
-      },
-      compress: {
-        unused: false,
-        warnings: false
-      }
-    })
-  ] : [
-
-  ]);
-
 };
 
-// Define Configuration:
+switch (process.env.NODE_ENV) {
+  case "production":
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+    break;
 
-const config = (env) => {
-  return [
-    {
-      entry: {
-        'bundle': path.resolve(PATHS.MODULE.BUNDLES, 'bundle.js')
-      },
-      output: {
-        path: PATHS.MODULE.DIST,
-        filename: 'js/[name].js',
-        publicPath: PATHS.MODULE.PUBLIC
-      },
-      module: {
-        rules: rules(env)
-      },
-      devtool: devtool(env),
-      plugins: plugins(env, PATHS.MODULE.SRC, PATHS.MODULE.DIST),
-      resolve: {
-        modules: [
-          PATHS.MODULE.SRC,
-          PATHS.MODULES
-        ],
-        alias
-      },
-      externals: {
-        jquery: 'jQuery'
-      }
-    }
-  ];
-};
+  default:
+    config.devtool = "source-map";
+}
 
-// Define Module Exports:
-
-module.exports = (env = {development: true}) => {
-  process.env.NODE_ENV = (env.production ? 'production' : 'development');
-  console.log(`Running in ${process.env.NODE_ENV} mode...`);
-  return config(process.env.NODE_ENV);
-};
+module.exports = config;

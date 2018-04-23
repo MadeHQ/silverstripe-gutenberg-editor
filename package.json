@@ -1,37 +1,15 @@
 {
-  "name": "silverstripe-gutenberg-editor",
+  "name": "standalone-gutenberg",
   "version": "1.0.0",
-  "description": "A block based editor for Silverstripe.",
-  "homepage": "https://github.com/MadeHQ/silverstripe-gutenberg-editor",
-  "keywords": [
-    "Silverstripe",
-    "Editor"
-  ],
-  "license": "BSD-3-Clause",
-  "author": "Made Media",
-  "contributors": [
-    {
-      "name": "Lee Bradley",
-      "email": "lee.bradley@mademedia.co.uk",
-      "url": "https://made.media"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/MadeHQ/silverstripe-gutenberg-editor.git"
-  },
-  "bugs": {
-    "url": "https://github.com/MadeHQ/silverstripe-gutenberg-editor/issues"
-  },
-  "engines": {
-    "node": ">=8.0.0"
+  "private": true,
+  "dependencies": {
+    "gutenberg": "Wordpress/gutenberg#d189d54372d6de189f7aaba21b775035f68b6829",
+    "moment": "^2.21.0",
+    "tinymce": "^4.7.9"
   },
   "scripts": {
-    "watch": "webpack --env.development --colors --watch",
-    "build": "webpack --env.production --colors --optimize-minimize"
-  },
-  "dependencies": {
-    "gutenberg": "Wordpress/gutenberg"
+    "build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
+    "start": "cross-env BABEL_ENV=default webpack-dev-server --open"
   },
   "devDependencies": {
     "@wordpress/babel-preset-default": "^1.1.0",
@@ -39,32 +17,19 @@
     "autoprefixer": "^7.1.6",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.17",
-    "copy-webpack-plugin": "^4.2.0",
-    "css-loader": "^0.28.7",
+    "cross-env": "^5.1.1",
     "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.5",
-    "node-sass": "^4.5.3",
-    "postcss-loader": "^2.0.8",
+    "node-sass": "^4.7.2",
+    "pegjs": "^0.10.0",
+    "pegjs-loader": "^0.5.4",
+    "postcss-loader": "^2.0.9",
+    "prettier": "^1.9.1",
+    "raw-loader": "^0.5.1",
     "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
-    "url-loader": "^0.6.2",
-    "webpack": "^3.8.1"
-  },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "modules": false
-        }
-      ]
-    ]
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.0.0"
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions"
+    "extends @wordpress/browserslist-config"
   ]
 }
