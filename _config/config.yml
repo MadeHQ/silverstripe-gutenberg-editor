@@ -8,9 +8,10 @@ After:
 
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_css:
-    - "mademedia/silverstripe-gutenberg-editor: client/dist/styles/bundle.css"
+    - "mademedia/silverstripe-gutenberg-editor: client/dist/style.css"
   extra_requirements_javascript:
-    - "mademedia/silverstripe-gutenberg-editor: client/dist/js/bundle.js"
+    - "mademedia/silverstripe-gutenberg-editor: client/dist/globals.js"
+    - "mademedia/silverstripe-gutenberg-editor: client/dist/bundle.js"
 
 SilverStripe\Core\Injector\Injector:
   HTMLText:

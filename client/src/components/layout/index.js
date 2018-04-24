@@ -19,7 +19,6 @@ function Layout({ showSidebar }) {
         <EditorNotices />
         <div className="edit-post-layout__editor">
           <div className="edit-post-visual-editor">
-            <PostTitle />
             <BlockList showContextualToolbar={true} />
           </div>
         </div>

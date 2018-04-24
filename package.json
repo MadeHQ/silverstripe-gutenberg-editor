@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
-    "start": "cross-env BABEL_ENV=default webpack-dev-server --open"
+    "start": "cross-env BABEL_ENV=default webpack-dev-server --open",
+    "watch": "cross-env BABEL_ENV=default webpack --watch --progress"
   },
   "devDependencies": {
     "@wordpress/babel-preset-default": "^1.1.0",

@@ -7,7 +7,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // Main CSS loader for everything but blocks..
 const cssExtractTextPlugin = new ExtractTextPlugin({
-  filename: "build/style.css"
+  filename: "client/dist/style.css"
 });
 
 // Configuration for the ExtractTextPlugin.
@@ -62,8 +62,8 @@ wpDependencies.forEach(wpDependency => {
 
 const config = {
   entry: {
-    main: "./client/src/index.js",
-    // globals: "./client/src/globals.js"
+    bundle: "./client/src/bundle.js",
+    globals: "./client/src/globals.js"
   },
   resolve: { alias },
   output: {
