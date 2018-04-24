@@ -11,6 +11,8 @@ import { registerCoreBlocks } from "@wordpress/blocks";
 
 import Layout from "./components/layout";
 
+registerCoreBlocks();
+
 jQuery.entwine('ss', ($) => {
   $('.js-injector-boot textarea.gutenburg-editor').entwine({
     Component: null,
@@ -33,7 +35,6 @@ jQuery.entwine('ss', ($) => {
     },
 
     onmatch() {
-      registerCoreBlocks();
       const cmsContent = this.closest('.cms-content').attr('id');
       const context = (cmsContent)
         ? { context: cmsContent }
