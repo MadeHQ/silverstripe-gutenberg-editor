@@ -54,35 +54,35 @@ jQuery.entwine('ss', ($) => {
     },
 
     refresh() {
-      const props = this.getAttributes();
       const form = $(this).closest('form');
-      const onChange = () => {
-        // Trigger change detection (see jquery.changetracker.js)
-        setTimeout(() => {
-          form.trigger('change');
-        }, 0);
+      const settings = {
+        bodyPlaceholder: 'Add page content here'
       };
-
-      // const EditorProvider = this.getComponent();
-
-      const settings = {};
-      const post = {
-        id: 1,
-        title: {
-          raw: ""
-        },
-        content: {
-          raw: ""
-        }
-      };
+      const post = {};
+      try {
+        post.content = JSON.parse(this.val());
+      } catch (e) {
+        post.content = {raw: ""};
+      }
 
       // TODO: rework entwine so that react has control of holder
-      ReactDOM.render(
+      const editor = ReactDOM.render(
         <EditorProvider settings={settings} post={post}>
          <Layout />
         </EditorProvider>,
         this.getContainer()
       );
+
+      editor.store.subscribe(() => {
+        const currentData = editor.store.getState().editor.present;
+        const retData = [];
+
+        currentData.blockOrder[''].map(uid => {
+          retData.push(currentData.blocksByUid[uid]);
+        });
+        this.val(JSON.stringify(retData));
+        form.trigger('change');
+      });
     },
   });
 });
