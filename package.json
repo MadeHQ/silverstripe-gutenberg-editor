@@ -1,0 +1,46 @@
+{
+  "name": "silverstripe-cloudinary",
+  "version": "4.0.0",
+  "description": "Replaces the Silverstripe File management with Cloudinary",
+  "bin": {
+    "webpack": "./node_modules/webpack/webpack.js"
+  },
+  "scripts": {
+    "build": "yarn && yarn test && NODE_ENV=production webpack -p --bail --progress",
+    "buildNoTest": "NODE_ENV=production webpack -p --bail --progress",
+    "dev": "NODE_ENV=development webpack --progress",
+    "watch": "NODE_ENV=development webpack --watch --progress",
+    "watchProd": "NODE_ENV=production webpack --watch --progress",
+    "css": "WEBPACK_CHILD=css npm run build",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "lint": "eslint client/src && sass-lint -v",
+    "js-fix": "eslint client/src --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:MadeHQ/silverstripe-cloudinary.git"
+  },
+  "keywords": [
+    "silverstripe",
+    "cloudinary"
+  ],
+  "author": "Made Media Ltd.",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/MadeHQ/silverstripe-cloudinary/issues"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "react": "15.3.1",
+    "react-dom": "15.3.1",
+    "redux": "^4.0.0"
+  },
+  "devDependencies": {
+    "@silverstripe/eslint-config": "^0.0.2",
+    "@silverstripe/webpack-config": "^0.4.0",
+    "copy-webpack-plugin": "^4.2.0",
+    "jest-cli": "^19.0.2"
+  },
+  "homepage": "https://github.com/MadeHQ/silverstripe-cloudinary"
+}

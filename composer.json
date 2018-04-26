@@ -1,0 +1,35 @@
+{
+  "name": "mademedia/silverstripe-gutenberg-editor",
+  "type": "silverstripe-vendormodule",
+  "description": "A block based editor for Silverstripe.",
+  "homepage": "https://github.com/MadeHQ/silverstripe-gutenberg-editor",
+  "keywords": ["Silverstripe","Editor"],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Lee Bradley",
+      "role": "Developer",
+      "email": "lee.bradley@mademedia.co.uk",
+      "homepage": "https://made.media"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "silverstripe/framework": "^4@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "MadeHQ\\Gutenberg\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    },
+    "expose": [
+      "client/dist"
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
