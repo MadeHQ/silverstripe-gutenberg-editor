@@ -13,7 +13,7 @@ import { select } from "@wordpress/data";
 
 import Layout from "./components/layout";
 
-import { isString, debounce, isEqual, extend } from "lodash";
+import { isString, debounce, isEqual, extend, has } from "lodash";
 
 import "./style.scss";
 
@@ -65,12 +65,13 @@ jQuery.entwine('ss', ($) => {
 
         refresh() {
             const originalValue = this.val();
-
-            let post = {
+            const defautltContent = {
                 content: {
                     raw: '<!-- wp:paragraph --><p></p><!-- /wp:paragraph -->'
                 }
             };
+
+            let post = null;
 
             try {
                 post = JSON.parse(originalValue);
@@ -83,9 +84,12 @@ jQuery.entwine('ss', ($) => {
                 //         }
                 //     };
                 // }
+                post = defautltContent;
             }
 
-            let pastValue = post
+            if (!has(post, 'content')) {
+                post = defautltContent;
+            }
 
             // Get a watcher going for content change every 1 second
             window.addEventListener('gutenberg:content', debounce(event => {

@@ -8062,9 +8062,6 @@ div.gutenbergeditor--loaded .form__field-holder {
       .edit-post-layout .components-notice-list .notice .notice-dismiss {
         margin: 5px; }
   @media (min-width: 600px) {
-    .edit-post-layout {
-      padding-top: 56px; } }
-  @media (min-width: 600px) {
     .edit-post-layout.has-fixed-toolbar {
       padding-top: 93px; }
       .edit-post-layout.has-fixed-toolbar .edit-post-layout__content {

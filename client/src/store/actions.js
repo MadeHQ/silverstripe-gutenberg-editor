@@ -11,8 +11,8 @@ export function setActivePanel(panel) {
   };
 }
 
-export function detectChange() {
+export function detectChanges() {
     return {
-        type: 'DETECT_CHANGE',
+        type: 'DETECT_CHANGES',
     };
 }

@@ -206,7 +206,7 @@ div.gutenbergeditor--loaded {
 
   // on mobile, toolbars behave differently
   @include break-small {
-    padding-top: $header-height;
+    // padding-top: $header-height;
   }
 
   &.has-fixed-toolbar {

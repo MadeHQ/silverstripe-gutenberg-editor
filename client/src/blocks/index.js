@@ -1,1 +1,1 @@
-export { default as DetectChange } from './detect-change';
+export { default as DetectChanges } from './detect-changes';

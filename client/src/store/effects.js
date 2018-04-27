@@ -1,7 +1,7 @@
 import { select } from '@wordpress/data';
 
 export default {
-    DETECT_CHANGE(action, store) {
+    DETECT_CHANGES(action, store) {
         const {
             getCurrentPost,
             getPostEdits,
