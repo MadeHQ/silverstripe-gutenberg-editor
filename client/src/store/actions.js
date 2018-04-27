@@ -10,3 +10,9 @@ export function setActivePanel(panel) {
     panel
   };
 }
+
+export function detectChange() {
+    return {
+        type: 'DETECT_CHANGE',
+    };
+}

@@ -8,81 +8,114 @@ import './store';
 
 import { EditorProvider } from "@wordpress/editor";
 import { registerCoreBlocks } from "@wordpress/blocks";
+import { setDefaultBlockName, getDefaultBlockName } from "@wordpress/blocks/api";
+import { select } from "@wordpress/data";
 
 import Layout from "./components/layout";
+
+import { isString, debounce, isEqual, extend } from "lodash";
+
+import "./style.scss";
 
 registerCoreBlocks();
 
 jQuery.entwine('ss', ($) => {
-  $('.js-injector-boot textarea.gutenburg-editor').entwine({
-    Component: null,
+    $('.js-injector-boot textarea.gutenbergeditor').entwine({
+        Component: null,
 
-    getContainer() {
-      let container = this.siblings('.gutenburg-editor-holder')[0];
-      if (!container) {
-        const newContainer = $('<div class="gutenburg-editor-holder"></div>');
-        this.before(newContainer);
+        Container: null,
 
-        container = newContainer[0];
-      }
-      return container;
-    },
+        Field: null,
 
-    onunmatch() {
-      this._super();
-      // solves errors given by ReactDOM "no matched root found" error.
-      ReactDOM.unmountComponentAtNode(this.siblings('.gutenburg-editor-holder')[0]);
-    },
+        onmatch() {
+            this._super();
 
-    onmatch() {
-      const cmsContent = this.closest('.cms-content').attr('id');
-      const context = (cmsContent)
-        ? { context: cmsContent }
-        : {};
+            // Grab the entire field
+            const field = this.parents('div.gutenbergeditor');
 
-      // const GutenburgEditorField = loadComponent('GutenburgEditorField', context);
-      // this.setComponent(GutenburgEditorField);
+            // Grab the holder & container
+            let container = field.siblings('.gutenberg__editor');
 
-      this._super();
-      this.hide();
-      this.refresh();
-    },
+            // If no container is present, make a container
+            if (!container.length) {
+                const newContainer = $('<div class="gutenberg__editor"></div>');
 
-    onclick(e) {
-      // we don't want the native upload dialog to show up
-      e.preventDefault();
-    },
+                this.parent().before(newContainer);
 
-    refresh() {
-      const props = this.getAttributes();
-      const form = $(this).closest('form');
-      const onChange = () => {
-        // Trigger change detection (see jquery.changetracker.js)
-        setTimeout(() => {
-          form.trigger('change');
-        }, 0);
-      };
+                container = newContainer;
+            }
 
-      // const EditorProvider = this.getComponent();
+            // Tell field we're ready to hide everything
+            field.addClass('gutenbergeditor--loaded');
 
-      const settings = {};
-      const post = {
-        id: 1,
-        title: {
-          raw: ""
+            // Store field & container for future
+            this.setField(field);
+            this.setContainer(container);
+
+            // Refresh the render
+            this.refresh();
         },
-        content: {
-          raw: ""
-        }
-      };
 
-      // TODO: rework entwine so that react has control of holder
-      ReactDOM.render(
-        <EditorProvider settings={settings} post={post}>
-         <Layout />
-        </EditorProvider>,
-        this.getContainer()
-      );
-    },
-  });
+        onunmatch() {
+            this._super();
+
+            // solves errors given by ReactDOM "no matched root found" error.
+            // ReactDOM.unmountComponentAtNode(this.getContainer());
+        },
+
+        refresh() {
+            const originalValue = this.val();
+
+            let post = {
+                content: {
+                    raw: '<!-- wp:paragraph --><p></p><!-- /wp:paragraph -->'
+                }
+            };
+
+            try {
+                post = JSON.parse(originalValue);
+            } catch (error) {
+                // @todo Figure out how to get old content in
+                // if (originalValue.length) {
+                //     post = {
+                //         content: {
+                //             rendered: originalValue
+                //         }
+                //     };
+                // }
+            }
+
+            let pastValue = post
+
+            // Get a watcher going for content change every 1 second
+            window.addEventListener('gutenberg:content', debounce(event => {
+                // Merge old content with new content
+                const newPost = extend(post, {
+                    content: {
+                        raw: event.detail.content
+                    }
+                });
+
+                // No need to update if old and new content are the same
+                if (isEqual(post.raw, newPost.raw)) {
+                    return false;
+                }
+
+                // Using the textarea...
+                this
+                    // ...update the value
+                    .val(JSON.stringify(newPost))
+                    // ...and trigger the change
+                    .trigger('change');
+            }, 1000));
+
+            // TODO: rework entwine so that react has control of holder
+            ReactDOM.render(
+                <EditorProvider post={post}>
+                    <Layout />
+                </EditorProvider>,
+                this.getContainer().get(0)
+            );
+        },
+    });
 });

@@ -13,6 +13,6 @@ trim_trailing_whitespace = true
 [*.md]
 trim_trailing_whitespace = false
 
-[*.php]
+[{*.php,*.js}]
 indent_size = 4
 indent_style = space

@@ -3,6 +3,14 @@ import { registerStore } from "@wordpress/data";
 import reducer from "./reducer";
 import * as selectors from "./selectors";
 import * as actions from "./actions";
+import applyMiddlewares from './middlewares';
 
-const MODULE_KEY = "standalone-gutenberg";
-registerStore(MODULE_KEY, { reducer, actions, selectors });
+const store = registerStore("standalone-gutenberg", {
+    reducer,
+    actions,
+    selectors
+});
+
+applyMiddlewares(store);
+
+export default store;

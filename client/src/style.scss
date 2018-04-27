@@ -15,6 +15,17 @@ $admin-bar-height-big: 0;
 @include admin-scheme-color-overrides("ocean", $scheme-ocean__spot-color);
 @include admin-scheme-color-overrides("sunrise", $scheme-sunrise__spot-color);
 
+@mixin visually-hidden {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+}
+
 @keyframes animate_fade {
   from {
     opacity: 0;
@@ -53,13 +64,15 @@ $admin-bar-height-big: 0;
   }
 }
 
-body {
+div.gutenbergeditor {
   color: #444;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-size: 13px;
   line-height: 1.4em;
   min-width: 600px;
+  position: relative;
+  height: 720px;
 
   background: $white;
 
@@ -94,6 +107,13 @@ body {
   select {
     font-size: $default-font-size;
     color: $dark-gray-500;
+  }
+}
+
+div.gutenbergeditor--loaded {
+  .form__field-label,
+  .form__field-holder {
+    @include visually-hidden;
   }
 }
 
@@ -191,7 +211,7 @@ body {
 
   &.has-fixed-toolbar {
     .edit-post-layout__content {
-      padding-top: $block-controls-height;
+      // padding-top: $block-controls-height;
     }
 
     // on mobile, toolbars behave differently
@@ -393,7 +413,7 @@ body {
 // Sidebar
 
 .edit-post-sidebar {
-  position: fixed;
+  position: absolute;
   z-index: z-index(".edit-post-sidebar");
   top: 0;
   right: 0;
@@ -551,7 +571,7 @@ body {
   // on mobile the main content area has to scroll
   // otherwise you can invoke the overscroll bounce on the non-scrolling container, causing (ノಠ益ಠ)ノ彡┻━┻
   @include break-small {
-    position: fixed;
+    // position: fixed;
     padding: $item-spacing;
     top: $admin-bar-height-big;
   }

@@ -6,8 +6,7 @@ import {
   EditorHistoryUndo,
   Inserter,
   MultiBlocksSwitcher,
-  NavigableToolbar,
-  PostPublishButton
+  NavigableToolbar
 } from "@wordpress/editor";
 import { __ } from "@wordpress/i18n";
 
@@ -29,7 +28,6 @@ function Header(props) {
         <MultiBlocksSwitcher />
       </NavigableToolbar>
       <div className="edit-post-header__settings">
-        <PostPublishButton />
         <IconButton
           icon="admin-generic"
           label={__("Settings")}

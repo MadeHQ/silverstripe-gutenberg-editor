@@ -1,3 +1,5 @@
+import { get } from 'lodash';
+
 export function getPreferences(state) {
   return state.preferences;
 }
@@ -14,4 +16,8 @@ export function isSidebarOpened(state) {
 
 export function getActivePanel(state) {
   return state.panel;
+}
+
+export function getChanges(state) {
+    return get(state, ['editor', 'present', 'edits'], {});
 }
