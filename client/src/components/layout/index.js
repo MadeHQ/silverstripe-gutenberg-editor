@@ -1,5 +1,5 @@
 import { Popover } from "@wordpress/components";
-import { BlockList, EditorNotices } from "@wordpress/editor";
+import { BlockList, EditorNotices, PreserveScrollInReorder } from "@wordpress/editor";
 import { __ } from "@wordpress/i18n";
 import { withSelect } from "@wordpress/data";
 
@@ -7,6 +7,7 @@ import Header from "../header";
 import Sidebar from "../sidebar";
 
 import { DetectChanges } from "../../blocks";
+import VisualEditor from "../visual-editor";
 
 function Layout({showSidebar, pageContent}) {
     return (
@@ -20,11 +21,9 @@ function Layout({showSidebar, pageContent}) {
                 tabIndex="-1"
             >
                 <EditorNotices />
-                <div className="edit-post-layout__editor">
-                    <div className="edit-post-visual-editor">
-                        <BlockList showContextualToolbar={true} />
-                    </div>
-                </div>
+                <PreserveScrollInReorder />
+                <VisualEditor />
+
             </div>
             {showSidebar && <Sidebar />}
             <Popover.Slot />
@@ -35,3 +34,11 @@ function Layout({showSidebar, pageContent}) {
 export default withSelect(select => ({
     showSidebar: select("standalone-gutenberg").isSidebarOpened(),
 }))(Layout);
+
+/*
+                <div className="edit-post-layout__editor">
+                    <div className="edit-post-visual-editor">
+                        <BlockList showContextualToolbar={true} />
+                    </div>
+                </div>
+                */

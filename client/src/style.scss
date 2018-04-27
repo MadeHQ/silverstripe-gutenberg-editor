@@ -2,6 +2,8 @@
 
 $admin-bar-height: 0;
 $admin-bar-height-big: 0;
+$content-width: 636px;
+$block-side-ui-padding: 36px;
 
 // main.scss
 // Output overrides for each scheme
@@ -329,7 +331,7 @@ div.gutenbergeditor--loaded {
 
   @include break-small() {
     .editor-block-list__block-edit {
-      margin-left: -$block-side-ui-padding;
+      // margin-left: -$block-side-ui-padding;
       margin-right: -$block-side-ui-padding;
     }
 

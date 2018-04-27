@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "gutenberg": "Wordpress/gutenberg#d189d54372d6de189f7aaba21b775035f68b6829",
+    "gutenberg": "github:Wordpress/gutenberg#95f4118d2193260351e879872af625b5d1ad74fb",
     "moment": "^2.21.0",
     "tinymce": "^4.7.9"
   },

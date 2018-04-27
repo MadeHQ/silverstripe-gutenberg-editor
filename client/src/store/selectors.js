@@ -21,3 +21,11 @@ export function getActivePanel(state) {
 export function getChanges(state) {
     return get(state, ['editor', 'present', 'edits'], {});
 }
+
+export function isFeatureActive(state, feature) {
+    return !!getPreference(state, 'feature', [])[feature];
+}
+
+export function getActiveGeneralSidebarName(state) {
+    return getPreference(state, 'activeGeneralSidebar', null);
+}

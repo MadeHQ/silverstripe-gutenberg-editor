@@ -17,8 +17,6 @@ import { isString, debounce, isEqual, extend, has } from "lodash";
 
 import "./style.scss";
 
-registerCoreBlocks();
-
 jQuery.entwine('ss', ($) => {
     $('.js-injector-boot textarea.gutenbergeditor').entwine({
         Component: null,
@@ -52,18 +50,18 @@ jQuery.entwine('ss', ($) => {
             this.setField(field);
             this.setContainer(container);
 
-            // Refresh the render
-            this.refresh();
+            // Start the instance of gutenberg
+            this.startGutenberg();
         },
 
         onunmatch() {
             this._super();
 
-            // solves errors given by ReactDOM "no matched root found" error.
-            // ReactDOM.unmountComponentAtNode(this.getContainer());
+            // Stop the instance of gutenberg
+            this.stopGutenberg();
         },
 
-        refresh() {
+        startGutenberg() {
             const originalValue = this.val();
             const defautltContent = {
                 content: {
@@ -113,13 +111,18 @@ jQuery.entwine('ss', ($) => {
                     .trigger('change');
             }, 1000));
 
-            // TODO: rework entwine so that react has control of holder
+            // Register core blocks
+            registerCoreBlocks();
+
+            // @todo rework entwine so that react has control of holder
             ReactDOM.render(
-                <EditorProvider post={post}>
-                    <Layout />
-                </EditorProvider>,
+                <EditorProvider post={post}><Layout /></EditorProvider>,
                 this.getContainer().get(0)
             );
         },
+
+        stopGutenberg() {
+            ReactDOM.unmountComponentAtNode(this.getContainer().get(0));
+        }
     });
 });

@@ -1,27 +1,39 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
 export function preferences(state = { sidebar: false }, action) {
-  switch (action.type) {
-    case "TOGGLE_SIDEBAR":
-      return {
-        ...state,
-        sidebar: !state.sidebar
-      };
-  }
+    switch (action.type) {
+        case 'TOGGLE_SIDEBAR':
+            return {
+                ...state,
+                sidebar: !state.sidebar
+            };
+    }
 
-  return state;
+    return state;
 }
 
-export function panel(state = "template", action) {
-  switch (action.type) {
-    case "SET_ACTIVE_PANEL":
-      return action.panel;
-  }
+export function panel(state = 'template', action) {
+    switch (action.type) {
+        case 'SET_ACTIVE_PANEL':
+            return action.panel;
+    }
 
-  return state;
+    return state;
+}
+
+export function features(state = { fixedToolbar: false }, action) {
+    if (action.type === 'TOGGLE_FEATURE') {
+        return {
+            ...state,
+            [action.feature]: !state[action.feature],
+        };
+    }
+
+    return state;
 }
 
 export default combineReducers({
-  preferences,
-  panel
+    preferences,
+    panel,
+    features,
 });
