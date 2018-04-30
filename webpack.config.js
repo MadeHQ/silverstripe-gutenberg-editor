@@ -82,7 +82,22 @@ const config = {
             path.resolve(__dirname, "node_modules/gutenberg", dependency)
           )
           .concat([path.resolve(__dirname, "client/src")]),
-        use: "babel-loader"
+        loader: "babel-loader",
+        options: {
+            presets: [
+                ['env', { modules: false }],
+                'react',
+                'es2015',
+            ],
+            // presets: ['react', 'es2015', 'stage-2']
+            plugins: [
+                'transform-object-rest-spread',
+            ],
+        },
+        // query: {
+        //     cacheDirectory: true,
+        //     presets: ['react', 'es2015']
+        //   }
       },
       {
         test: /\.s?css$/,

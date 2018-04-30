@@ -9,7 +9,13 @@ import Sidebar from "../sidebar";
 import { DetectChanges } from "../../blocks";
 import VisualEditor from "../visual-editor";
 
+import * as CloudinaryImage from "../../blocks/cloudinary-image";
+
+import { registerBlockType, unregisterBlockType } from '@wordpress/blocks/api';
+
 function Layout({showSidebar, pageContent}) {
+    registerBlockType(CloudinaryImage.name, CloudinaryImage.settings);
+
     return (
         <div className="edit-post-layout">
             <Header />
