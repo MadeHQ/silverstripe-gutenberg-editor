@@ -4,7 +4,6 @@
 import {
     BlockList,
     CopyHandler,
-    PostTitle,
     WritingFlow,
     ObserveTyping,
     EditorGlobalKeyboardShortcuts,
@@ -29,7 +28,6 @@ function VisualEditor( { hasFixedToolbar, isLargeViewport } ) {
             <MultiSelectScrollIntoView />
             <ObserveTyping>
                 <WritingFlow>
-                    <PostTitle />
                     <BlockList
                         showContextualToolbar={ ! isLargeViewport || ! hasFixedToolbar }
                         renderBlockMenu={ ( { children, onClose } ) => (

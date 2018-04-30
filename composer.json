@@ -15,7 +15,8 @@
   ],
   "require": {
     "php": ">=5.6.0",
-    "silverstripe/framework": "^4@dev"
+    "silverstripe/framework": "^4@dev",
+    "embed/embed": "^3.3"
   },
   "autoload": {
     "psr-4": {

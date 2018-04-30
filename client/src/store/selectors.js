@@ -1,4 +1,6 @@
-import { get } from 'lodash';
+import { get, map } from 'lodash';
+import createSelector from 'rememo';
+import { serialize } from '@wordpress/blocks';
 
 export function getPreferences(state) {
   return state.preferences;
@@ -16,10 +18,6 @@ export function isSidebarOpened(state) {
 
 export function getActivePanel(state) {
   return state.panel;
-}
-
-export function getChanges(state) {
-    return get(state, ['editor', 'present', 'edits'], {});
 }
 
 export function isFeatureActive(state, feature) {

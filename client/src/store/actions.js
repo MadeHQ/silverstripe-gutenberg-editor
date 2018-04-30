@@ -1,20 +1,14 @@
 export function toggleSidebar() {
   return {
-    type: "TOGGLE_SIDEBAR"
+    type: 'TOGGLE_SIDEBAR'
   };
 }
 
 export function setActivePanel(panel) {
   return {
-    type: "SET_ACTIVE_PANEL",
+    type: 'SET_ACTIVE_PANEL',
     panel
   };
-}
-
-export function detectChanges() {
-    return {
-        type: 'DETECT_CHANGES',
-    };
 }
 
 export function openGeneralSidebar(name) {
@@ -27,5 +21,12 @@ export function openGeneralSidebar(name) {
 export function closeGeneralSidebar() {
     return {
         type: 'CLOSE_GENERAL_SIDEBAR',
+    };
+}
+
+
+export function notifyOfChange() {
+    return {
+        type: 'NOTIFY_OF_CHANGE',
     };
 }

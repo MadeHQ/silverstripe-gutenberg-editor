@@ -11,6 +11,9 @@
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -72,6 +75,9 @@
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -138,6 +144,9 @@
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -188,7 +197,8 @@
         border-bottom: none; }
     .components-popover:not(.is-mobile).is-bottom {
       top: 100%;
-      margin-top: 8px; }
+      margin-top: 8px;
+      z-index: 99990; }
       .components-popover:not(.is-mobile).is-bottom:before {
         top: -8px; }
       .components-popover:not(.is-mobile).is-bottom:after {
@@ -256,6 +266,9 @@
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -289,6 +302,9 @@
   .components-icon-button .dashicon {
     display: inline-block;
     flex: 0 0 auto; }
+  .components-icon-button svg {
+    fill: currentColor;
+    outline: none; }
   .components-icon-button:not(:disabled):hover {
     color: #191e23;
     box-shadow: inset 0 0 0 1px #e2e4e7, inset 0 0 0 2px #fff, 0 1px 1px rgba(25, 30, 35, 0.2); }
@@ -309,6 +325,9 @@
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -361,6 +380,9 @@
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -380,14 +402,90 @@
 /**
  * Applies editor right position to the selector passed as argument
  */
-.blocks-base-control {
+svg.dashicon {
+  fill: currentColor;
+  outline: none; }
+/**
+ * Colors
+ */
+/**
+ * Admin Color Scheme Overrides
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+ * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Editor Width mixin
+ *
+ * This mixin seeks to take the vinegar out of the responsive alignments in the editor.
+ */
+/**
+ * Button states and focus styles
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Applies editor right position to the selector passed as argument
+ */
+html.lockscroll,
+body.lockscroll {
+  overflow: hidden; }
+/**
+ * Colors
+ */
+/**
+ * Admin Color Scheme Overrides
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+ * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Editor Width mixin
+ *
+ * This mixin seeks to take the vinegar out of the responsive alignments in the editor.
+ */
+/**
+ * Button states and focus styles
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Applies editor right position to the selector passed as argument
+ */
+.components-base-control {
   margin: 0 0 1.5em 0; }
 
-.blocks-base-control__label {
+.components-base-control__label {
   display: block;
   margin-bottom: 5px; }
 
-.blocks-base-control__help {
+.components-base-control__help {
   font-style: italic; }
 /**
  * Colors
@@ -402,6 +500,9 @@
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -421,7 +522,53 @@
 /**
  * Applies editor right position to the selector passed as argument
  */
-.blocks-checkbox-control__input[type=checkbox] {
+.components-button-group {
+  display: inline-block;
+  margin-bottom: 20px; }
+  .components-button-group .components-button {
+    border-radius: 0; }
+    .components-button-group .components-button + .components-button {
+      margin-left: -1px; }
+    .components-button-group .components-button:first-child {
+      border-radius: 3px 0 0 3px; }
+    .components-button-group .components-button:last-child {
+      border-radius: 0 3px 3px 0; }
+/**
+ * Colors
+ */
+/**
+ * Admin Color Scheme Overrides
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+ * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Editor Width mixin
+ *
+ * This mixin seeks to take the vinegar out of the responsive alignments in the editor.
+ */
+/**
+ * Button states and focus styles
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Applies editor right position to the selector passed as argument
+ */
+.components-checkbox-control__input[type=checkbox] {
   margin-top: 0;
   margin-right: 6px; }
 /**
@@ -435,6 +582,9 @@
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -506,6 +656,9 @@
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -975,6 +1128,9 @@
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -1014,6 +1170,9 @@
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -1095,6 +1254,9 @@
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -1173,6 +1335,9 @@
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -1210,6 +1375,9 @@
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -1245,6 +1413,9 @@
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -1334,6 +1505,9 @@
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -1495,6 +1669,9 @@ input[type="text"].components-form-token-field__input {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -1514,39 +1691,13 @@ input[type="text"].components-form-token-field__input {
 /**
  * Applies editor right position to the selector passed as argument
  */
-.components-menu-items__group {
+.components-menu-group {
   width: 100%;
   padding: 10px; }
 
-.components-menu-items__group-label {
+.components-menu-group__label {
   margin-bottom: 10px;
   color: #6c7781; }
-
-.components-menu-items__button,
-.components-menu-items__button.components-icon-button {
-  width: 100%;
-  padding: 8px;
-  text-align: left;
-  padding-left: 25px;
-  color: #555d66; }
-  .components-menu-items__button .dashicon,
-  .components-menu-items__button.components-icon-button .dashicon {
-    margin-right: 5px; }
-  .components-menu-items__button.is-selected,
-  .components-menu-items__button.components-icon-button.is-selected {
-    padding-left: 0; }
-  .components-menu-items__button:hover,
-  .components-menu-items__button.components-icon-button:hover {
-    border: none;
-    box-shadow: none; }
-  .components-menu-items__button:focus,
-  .components-menu-items__button.components-icon-button:focus {
-    color: #000;
-    border: none;
-    box-shadow: none;
-    outline-offset: -2px;
-    color: #191e23;
-    outline: 1px dotted #555d66; }
 /**
  * Colors
  */
@@ -1558,6 +1709,79 @@ input[type="text"].components-form-token-field__input {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Editor Width mixin
+ *
+ * This mixin seeks to take the vinegar out of the responsive alignments in the editor.
+ */
+/**
+ * Button states and focus styles
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Applies editor right position to the selector passed as argument
+ */
+.components-menu-item__button,
+.components-menu-item__button.components-icon-button {
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  padding-left: 25px;
+  color: #555d66; }
+  .components-menu-item__button .dashicon,
+  .components-menu-item__button .components-menu-items__item-icon,
+  .components-menu-item__button.components-icon-button .dashicon,
+  .components-menu-item__button.components-icon-button .components-menu-items__item-icon {
+    margin-right: 5px; }
+  .components-menu-item__button .components-menu-items__item-icon,
+  .components-menu-item__button.components-icon-button .components-menu-items__item-icon {
+    display: inline-block;
+    flex: 0 0 auto; }
+  .components-menu-item__button.has-icon,
+  .components-menu-item__button.components-icon-button.has-icon {
+    padding-left: 0; }
+  .components-menu-item__button:hover,
+  .components-menu-item__button.components-icon-button:hover {
+    border: none;
+    box-shadow: none; }
+  .components-menu-item__button:focus,
+  .components-menu-item__button.components-icon-button:focus {
+    color: #000;
+    border: none;
+    box-shadow: none;
+    outline-offset: -2px;
+    color: #191e23;
+    outline: 1px dotted #555d66; }
+
+.components-menu-item__shortcut {
+  float: right;
+  opacity: .5; }
+/**
+ * Colors
+ */
+/**
+ * Admin Color Scheme Overrides
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+ * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -1593,6 +1817,9 @@ input[type="text"].components-form-token-field__input {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -1739,6 +1966,9 @@ input[type="text"].components-form-token-field__input {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -1758,14 +1988,14 @@ input[type="text"].components-form-token-field__input {
 /**
  * Applies editor right position to the selector passed as argument
  */
-.blocks-radio-control {
+.components-radio-control {
   display: flex;
   flex-direction: column; }
 
-.blocks-radio-control__option:not(:last-child) {
+.components-radio-control__option:not(:last-child) {
   margin-bottom: 4px; }
 
-.blocks-radio-control__input[type=radio] {
+.components-radio-control__input[type=radio] {
   margin-top: 0;
   margin-right: 6px; }
 /**
@@ -1781,6 +2011,9 @@ input[type="text"].components-form-token-field__input {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -1800,21 +2033,24 @@ input[type="text"].components-form-token-field__input {
 /**
  * Applies editor right position to the selector passed as argument
  */
-.blocks-range-control {
+.components-range-control .components-base-control__field {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-items: center; }
-  .blocks-range-control .dashicon {
-    flex-shrink: 0;
-    margin-right: 10px; }
-  .blocks-range-control .blocks-base-control__label {
-    width: 100%; }
-  .blocks-range-control .blocks-range-control__slider {
-    margin-left: 0;
-    flex: 1; }
 
-.blocks-range-control__slider {
+.components-range-control .dashicon {
+  flex-shrink: 0;
+  margin-right: 10px; }
+
+.components-range-control .components-base-control__label {
+  width: 100%; }
+
+.components-range-control .components-range-control__slider {
+  margin-left: 0;
+  flex: 1; }
+
+.components-range-control__slider {
   width: 100%;
   margin-left: 10px;
   padding: 0;
@@ -1826,7 +2062,7 @@ input[type="text"].components-form-token-field__input {
   /**
  	 * Track
  	 */ }
-  .blocks-range-control__slider::-webkit-slider-thumb {
+  .components-range-control__slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 18px;
     width: 18px;
@@ -1837,7 +2073,7 @@ input[type="text"].components-form-token-field__input {
     background-clip: padding-box;
     box-sizing: border-box;
     margin-top: -7px; }
-  .blocks-range-control__slider::-moz-range-thumb {
+  .components-range-control__slider::-moz-range-thumb {
     height: 18px;
     width: 18px;
     border-radius: 50%;
@@ -1846,7 +2082,7 @@ input[type="text"].components-form-token-field__input {
     border: 4px solid transparent;
     background-clip: padding-box;
     box-sizing: border-box; }
-  .blocks-range-control__slider::-ms-thumb {
+  .components-range-control__slider::-ms-thumb {
     height: 18px;
     width: 18px;
     border-radius: 50%;
@@ -1859,35 +2095,35 @@ input[type="text"].components-form-token-field__input {
     height: 14px;
     width: 14px;
     border: 2px solid transparent; }
-  .blocks-range-control__slider:focus {
+  .components-range-control__slider:focus {
     outline: none; }
-  .blocks-range-control__slider:focus::-webkit-slider-thumb {
+  .components-range-control__slider:focus::-webkit-slider-thumb {
     color: #191e23;
     box-shadow: inset 0 0 0 1px #6c7781, inset 0 0 0 2px #fff;
     outline: 2px solid transparent;
     outline-offset: -2px; }
-  .blocks-range-control__slider:focus::-moz-range-thumb {
+  .components-range-control__slider:focus::-moz-range-thumb {
     color: #191e23;
     box-shadow: inset 0 0 0 1px #6c7781, inset 0 0 0 2px #fff;
     outline: 2px solid transparent;
     outline-offset: -2px; }
-  .blocks-range-control__slider:focus::-ms-thumb {
+  .components-range-control__slider:focus::-ms-thumb {
     color: #191e23;
     box-shadow: inset 0 0 0 1px #6c7781, inset 0 0 0 2px #fff;
     outline: 2px solid transparent;
     outline-offset: -2px; }
-  .blocks-range-control__slider::-webkit-slider-runnable-track {
+  .components-range-control__slider::-webkit-slider-runnable-track {
     height: 3px;
     cursor: pointer;
     background: #e2e4e7;
     border-radius: 1.5px;
     margin-top: -4px; }
-  .blocks-range-control__slider::-moz-range-track {
+  .components-range-control__slider::-moz-range-track {
     height: 3px;
     cursor: pointer;
     background: #e2e4e7;
     border-radius: 1.5px; }
-  .blocks-range-control__slider::-ms-track {
+  .components-range-control__slider::-ms-track {
     margin-top: -4px;
     background: transparent;
     border-color: transparent;
@@ -1897,7 +2133,7 @@ input[type="text"].components-form-token-field__input {
     background: #e2e4e7;
     border-radius: 1.5px; }
 
-.blocks-range-control__number {
+.components-range-control__number {
   display: inline-block;
   margin-left: 10px;
   font-weight: 500;
@@ -1914,6 +2150,9 @@ input[type="text"].components-form-token-field__input {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -1960,6 +2199,9 @@ input[type="text"].components-form-token-field__input {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -1979,7 +2221,7 @@ input[type="text"].components-form-token-field__input {
 /**
  * Applies editor right position to the selector passed as argument
  */
-.blocks-select-control__input {
+.components-select-control__input {
   width: 100%; }
 /**
  * Colors
@@ -1994,6 +2236,9 @@ input[type="text"].components-form-token-field__input {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -2013,7 +2258,7 @@ input[type="text"].components-form-token-field__input {
 /**
  * Applies editor right position to the selector passed as argument
  */
-.blocks-text-control__input {
+.components-text-control__input {
   width: 100%;
   padding: 6px 8px; }
 /**
@@ -2029,6 +2274,9 @@ input[type="text"].components-form-token-field__input {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -2048,7 +2296,7 @@ input[type="text"].components-form-token-field__input {
 /**
  * Applies editor right position to the selector passed as argument
  */
-.blocks-textarea-control__input {
+.components-textarea-control__input {
   width: 100%;
   padding: 6px 8px; }
 /**
@@ -2064,6 +2312,9 @@ input[type="text"].components-form-token-field__input {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -2083,7 +2334,7 @@ input[type="text"].components-form-token-field__input {
 /**
  * Applies editor right position to the selector passed as argument
  */
-.blocks-toggle-control {
+.components-toggle-control .components-base-control__field {
   display: flex;
   justify-content: space-between; }
 /**
@@ -2097,6 +2348,9 @@ input[type="text"].components-form-token-field__input {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -2207,6 +2461,9 @@ div.components-toolbar > div + div {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -2248,6 +2505,9 @@ div.components-toolbar > div + div {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -2269,6 +2529,14 @@ div.components-toolbar > div + div {
  */
 .editor-block-list__block:not(.is-multi-selected) .wp-block-paragraph {
   background: white; }
+
+.blocks-font-size__main {
+  display: flex;
+  justify-content: space-between; }
+
+.blocks-font-size .blocks-range-control__slider + .dashicon {
+  width: 30px;
+  height: 30px; }
 /**
  * Colors
  */
@@ -2280,6 +2548,9 @@ div.components-toolbar > div + div {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -2301,6 +2572,18 @@ div.components-toolbar > div + div {
 /**
  * Applies editor right position to the selector passed as argument
  */
+p.is-small-text {
+  font-size: 14px; }
+
+p.is-regular-text {
+  font-size: 16px; }
+
+p.is-large-text {
+  font-size: 36px; }
+
+p.is-larger-text {
+  font-size: 48px; }
+
 p.has-drop-cap:first-letter {
   float: left;
   font-size: 4.1em;
@@ -2327,6 +2610,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -2390,6 +2676,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -2496,6 +2785,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -2579,6 +2871,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -2632,6 +2927,15 @@ p.has-background {
   cursor: pointer; }
   .blocks-color-palette__item.is-active {
     box-shadow: inset 0 0 0 4px; }
+  .blocks-color-palette__item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2); }
   .blocks-color-palette__item:focus {
     outline: none; }
     .blocks-color-palette__item:focus::after {
@@ -2709,6 +3013,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -2741,6 +3048,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -2778,6 +3088,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -2885,6 +3198,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -2986,6 +3302,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -3014,22 +3333,22 @@ p.has-background {
   margin: 0; }
 
 .wp-block-heading h1 {
-  font-size: 2em; }
+  font-size: 2.44em; }
 
 .wp-block-heading h2 {
-  font-size: 1.6em; }
+  font-size: 1.95em; }
 
 .wp-block-heading h3 {
-  font-size: 1.4em; }
+  font-size: 1.56em; }
 
 .wp-block-heading h4 {
-  font-size: 1.2em; }
+  font-size: 1.25em; }
 
 .wp-block-heading h5 {
-  font-size: 1.1em; }
+  font-size: 1em; }
 
 .wp-block-heading h6 {
-  font-size: 1em; }
+  font-size: 0.8em; }
 /**
  * Colors
  */
@@ -3041,6 +3360,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -3094,6 +3416,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -3134,6 +3459,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -3153,8 +3481,9 @@ p.has-background {
 /**
  * Applies editor right position to the selector passed as argument
  */
-.wp-block-gallery:not(.components-placeholder) {
-  margin: -8px; }
+.wp-block-gallery:not(.components-placeholder):not(.alignfull) {
+  margin-left: -8px;
+  margin-right: -8px; }
 
 .blocks-gallery-item .is-selected {
   outline: 4px solid #00a0d2;
@@ -3181,6 +3510,9 @@ p.has-background {
   height: 100%; }
 
 .blocks-gallery-item .button.blocks-gallery-add-item-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   box-shadow: none;
   border: none;
   border-radius: 0;
@@ -3222,6 +3554,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -3426,6 +3761,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -3461,6 +3799,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -3506,6 +3847,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -3587,6 +3931,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -3622,8 +3969,8 @@ p.has-background {
     padding: 11px 24px;
     text-align: center;
     text-decoration: none;
-    white-space: nowrap;
-    word-break: break-word; }
+    white-space: normal;
+    word-break: break-all; }
     .wp-block-button .wp-block-button__link:hover, .wp-block-button .wp-block-button__link:focus, .wp-block-button .wp-block-button__link:active {
       background-color: #32373c;
       color: #fff; }
@@ -3642,6 +3989,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -3680,6 +4030,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -3715,6 +4068,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -3794,6 +4150,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -3834,6 +4193,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -3893,6 +4255,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -3912,30 +4277,24 @@ p.has-background {
 /**
  * Applies editor right position to the selector passed as argument
  */
-.wp-block-cover-image .blocks-rich-text__tinymce[data-is-empty="true"]:before {
-  position: inherit; }
-
-.wp-block-cover-image .blocks-rich-text__tinymce a {
-  color: white; }
-
-.wp-block-cover-image .blocks-rich-text__tinymce:focus a[data-mce-selected] {
-  padding: 0 2px;
-  margin: 0 -2px;
-  border-radius: 2px;
-  box-shadow: none;
-  background: rgba(255, 255, 255, 0.3); }
-
-.wp-block-cover-image .blocks-rich-text strong {
-  font-weight: 300; }
-
-.wp-block-cover-image.components-placeholder h2 {
-  color: inherit; }
-
-.wp-block-cover-image.has-left-content .block-rich-text__inline-toolbar {
-  justify-content: flex-start; }
-
-.wp-block-cover-image.has-right-content .block-rich-text__inline-toolbar {
-  justify-content: flex-end; }
+.wp-block-cover-image {
+  margin: 0; }
+  .wp-block-cover-image .blocks-rich-text__tinymce[data-is-empty="true"]:before {
+    position: inherit; }
+  .wp-block-cover-image .blocks-rich-text__tinymce:focus a[data-mce-selected] {
+    padding: 0 2px;
+    margin: 0 -2px;
+    border-radius: 2px;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.3); }
+  .wp-block-cover-image .blocks-rich-text strong {
+    font-weight: 300; }
+  .wp-block-cover-image.components-placeholder h2 {
+    color: inherit; }
+  .wp-block-cover-image.has-left-content .block-rich-text__inline-toolbar {
+    justify-content: flex-start; }
+  .wp-block-cover-image.has-right-content .block-rich-text__inline-toolbar {
+    justify-content: flex-end; }
 /**
  * Colors
  */
@@ -3947,6 +4306,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -3971,30 +4333,43 @@ p.has-background {
 .wp-block-cover-image {
   position: relative;
   background-size: cover;
-  height: 430px;
+  min-height: 430px;
   width: 100%;
-  margin: 0;
+  margin: 0 0 1.5em 0;
   display: flex;
   justify-content: center;
   align-items: center; }
   .wp-block-cover-image.has-left-content {
     justify-content: flex-start; }
-    .wp-block-cover-image.has-left-content h2 {
+    .wp-block-cover-image.has-left-content h2,
+    .wp-block-cover-image.has-left-content .wp-block-cover-image-text {
       margin-left: 0;
       text-align: left; }
   .wp-block-cover-image.has-right-content {
     justify-content: flex-end; }
-    .wp-block-cover-image.has-right-content h2 {
+    .wp-block-cover-image.has-right-content h2,
+    .wp-block-cover-image.has-right-content .wp-block-cover-image-text {
       margin-right: 0;
       text-align: right; }
-  .wp-block-cover-image h2 {
+  .wp-block-cover-image h2,
+  .wp-block-cover-image .wp-block-cover-image-text {
     color: white;
-    font-size: 24pt;
-    line-height: 1em;
+    font-size: 2em;
+    line-height: 1.25;
     z-index: 1;
+    margin-bottom: 0;
     max-width: 636px;
     padding: 14px;
     text-align: center; }
+    .wp-block-cover-image h2 a,
+    .wp-block-cover-image h2 a:hover,
+    .wp-block-cover-image h2 a:focus,
+    .wp-block-cover-image h2 a:active,
+    .wp-block-cover-image .wp-block-cover-image-text a,
+    .wp-block-cover-image .wp-block-cover-image-text a:hover,
+    .wp-block-cover-image .wp-block-cover-image-text a:focus,
+    .wp-block-cover-image .wp-block-cover-image-text a:active {
+      color: white; }
   .wp-block-cover-image.has-parallax {
     background-attachment: fixed; }
   .wp-block-cover-image.has-background-dim:before {
@@ -4004,7 +4379,7 @@ p.has-background {
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.5); }
+    background-color: rgba(0, 0, 0, 0.5); }
   .wp-block-cover-image.has-background-dim.has-background-dim-10:before {
     background-color: rgba(0, 0, 0, 0.1); }
   .wp-block-cover-image.has-background-dim.has-background-dim-20:before {
@@ -4038,6 +4413,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -4075,6 +4453,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -4134,6 +4515,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -4367,6 +4751,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -4416,6 +4803,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -4450,6 +4840,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -4515,6 +4908,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -4550,6 +4946,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -4594,8 +4993,8 @@ p.has-background {
   content: '';
   position: absolute;
   top: calc( 50%);
-  left: 62px;
-  right: 62px;
+  left: 50px;
+  right: 50px;
   border-top: 3px dashed #ccd0d4;
   z-index: -1; }
 /**
@@ -4609,6 +5008,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -4646,6 +5048,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -4702,6 +5107,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -4755,6 +5163,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -4782,8 +5193,10 @@ p.has-background {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-size: 13px;
   justify-content: flex-end;
-  margin: 14px -14px -14px;
-  padding: 10px 14px; }
+  margin: 0 -14px;
+  padding: 10px 14px;
+  position: relative;
+  top: 14px; }
   .reusable-block-edit-panel .reusable-block-edit-panel__spinner {
     margin: 0 5px; }
   .reusable-block-edit-panel .reusable-block-edit-panel__info {
@@ -4807,6 +5220,55 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Editor Width mixin
+ *
+ * This mixin seeks to take the vinegar out of the responsive alignments in the editor.
+ */
+/**
+ * Button states and focus styles
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Applies editor right position to the selector passed as argument
+ */
+.reusable-block-indicator {
+  background: #fff;
+  border-left: 1px dashed #e2e4e7;
+  color: #555d66;
+  border-top: 1px dashed #e2e4e7;
+  bottom: -14px;
+  height: 30px;
+  padding: 5px;
+  position: absolute;
+  right: -14px;
+  width: 30px; }
+/**
+ * Colors
+ */
+/**
+ * Admin Color Scheme Overrides
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+ * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -4844,6 +5306,9 @@ p.has-background {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -4899,6 +5364,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -4935,6 +5403,9 @@ p.has-background {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -4969,6 +5440,9 @@ p.wp-block-subhead {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -5010,6 +5484,9 @@ p.wp-block-subhead {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -5046,6 +5523,9 @@ p.wp-block-subhead {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -5098,6 +5578,9 @@ p.wp-block-subhead {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -5130,6 +5613,9 @@ p.wp-block-subhead {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -5172,6 +5658,9 @@ pre.wp-block-verse,
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -5191,11 +5680,15 @@ pre.wp-block-verse,
 /**
  * Applies editor right position to the selector passed as argument
  */
-.wp-block-video figcaption {
-  margin-top: 0.5em;
-  color: #6c7781;
-  text-align: center;
-  font-size: 13px; }
+.wp-block-video {
+  margin: 0; }
+  .wp-block-video figcaption {
+    margin-top: 0.5em;
+    color: #6c7781;
+    text-align: center;
+    font-size: 13px; }
+  .wp-block-video.aligncenter {
+    text-align: center; }
 /**
  * Colors
  */
@@ -5207,6 +5700,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -5241,47 +5737,9 @@ pre.wp-block-verse,
   max-width: 400px; }
   .wp-block-video .components-placeholder__fieldset form {
     max-width: none; }
-/**
- * Colors
- */
-/**
- * Admin Color Scheme Overrides
- */
-/**
- * Breakpoints & Media Queries
- */
-/**
- * Often re-used variables
- */
-/**
- * Long content fade mixin
- *
- * Creates a fading overlay to signify that the content is longer
- * than the space allows.
- */
-/**
- * Editor Width mixin
- *
- * This mixin seeks to take the vinegar out of the responsive alignments in the editor.
- */
-/**
- * Button states and focus styles
- */
-/**
- * Applies editor left position to the selector passed as argument
- */
-/**
- * Applies editor right position to the selector passed as argument
- */
-.components-block-description:after {
-  content: '';
-  display: block;
-  border-bottom: 1px solid #e2e4e7;
-  margin: 1.5em 0; }
 
-.components-block-description p {
-  font-style: italic;
-  margin-top: 0; }
+.editor-block-list__block[data-align="center"] {
+  text-align: center; }
 @charset "UTF-8";
 /**
  * Colors
@@ -5294,6 +5752,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -5374,6 +5835,50 @@ pre.wp-block-verse,
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Editor Width mixin
+ *
+ * This mixin seeks to take the vinegar out of the responsive alignments in the editor.
+ */
+/**
+ * Button states and focus styles
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Applies editor right position to the selector passed as argument
+ */
+.editor-template-validation-notice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .editor-template-validation-notice .components-button {
+    margin-left: 5px; }
+/**
+ * Colors
+ */
+/**
+ * Admin Color Scheme Overrides
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+ * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -5410,6 +5915,9 @@ pre.wp-block-verse,
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -5444,6 +5952,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -5503,6 +6014,9 @@ pre.wp-block-verse,
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -5547,6 +6061,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -5596,6 +6113,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -5653,6 +6173,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -5765,6 +6288,9 @@ pre.wp-block-verse,
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -5826,6 +6352,9 @@ pre.wp-block-verse,
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -5877,6 +6406,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -5958,6 +6490,9 @@ pre.wp-block-verse,
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -5987,12 +6522,12 @@ pre.wp-block-verse,
     margin: 0;
     box-shadow: none;
     border: 1px solid transparent;
-    font-size: 2em;
     font-family: "Noto Serif", serif;
     line-height: 1.4;
+    font-size: 2.441em;
     font-weight: 600; }
   .editor-post-title.is-selected .editor-post-title__input,
-  .editor-post-title .editor-post-title__input:focus {
+  .editor-post-title .editor-post-title__input:hover {
     border: 1px solid #e2e4e7; }
 
 .editor-post-title .editor-post-permalink {
@@ -6012,6 +6547,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -6090,6 +6628,9 @@ pre.wp-block-verse,
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -6127,6 +6668,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -6191,6 +6735,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -6259,6 +6806,9 @@ pre.wp-block-verse,
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -6278,55 +6828,57 @@ pre.wp-block-verse,
 /**
  * Applies editor right position to the selector passed as argument
  */
-.editor-block-list__layout .editor-default-block-appender,
+@media (min-width: 600px) {
+  .editor-block-list__layout {
+    padding-left: 36px;
+    padding-right: 36px; } }
+
 .editor-block-list__layout .editor-block-list__block {
   position: relative;
-  margin-bottom: 4px;
   padding-left: 14px;
   padding-right: 14px;
-  padding-top: .05px;
-  padding-bottom: .05px;
+  padding-top: .1px;
+  padding-bottom: .1px;
+  margin-bottom: 4px;
+  /**
+	 * Warnings
+	 */
+  /**
+	 * Hovered Block style
+	 */
+  /**
+	 * Selected Block style
+	 */
+  /**
+	 * Selection Style
+	 */
+  /**
+	 * Reusable Block style
+	 */
   /**
 	 * Alignments
+	 */
+  /**
+	 * Left and right side UI
 	 */ }
   @media (min-width: 600px) {
-    .editor-block-list__layout .editor-default-block-appender,
     .editor-block-list__layout .editor-block-list__block {
-      padding-left: 62px;
-      padding-right: 62px; } }
-  .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-edit,
+      padding-left: 50px;
+      padding-right: 50px; } }
   .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit {
     margin-top: 14px;
     margin-bottom: 14px; }
-  .editor-block-list__layout .editor-default-block-appender:before,
-  .editor-block-list__layout .editor-block-list__block:before {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    outline: 1px solid transparent; }
-    @media (min-width: 600px) {
-      .editor-block-list__layout .editor-default-block-appender:before,
-      .editor-block-list__layout .editor-block-list__block:before {
-        left: 48px;
-        right: 48px; } }
-  .editor-block-list__layout .editor-default-block-appender.has-warning .editor-block-list__block-edit,
   .editor-block-list__layout .editor-block-list__block.has-warning .editor-block-list__block-edit {
     position: relative;
     min-height: 250px;
     max-height: 500px;
     overflow: hidden; }
-    .editor-block-list__layout .editor-default-block-appender.has-warning .editor-block-list__block-edit > :not(.editor-warning),
     .editor-block-list__layout .editor-block-list__block.has-warning .editor-block-list__block-edit > :not(.editor-warning) {
       pointer-events: none;
       -webkit-user-select: none;
          -moz-user-select: none;
           -ms-user-select: none;
               user-select: none; }
-  .editor-block-list__layout .editor-default-block-appender.has-warning .editor-block-list__block-edit:after,
   .editor-block-list__layout .editor-block-list__block.has-warning .editor-block-list__block-edit:after {
     content: '';
     position: absolute;
@@ -6336,10 +6888,6 @@ pre.wp-block-verse,
     left: 0;
     background-color: rgba(255, 255, 255, 0.6);
     background-image: linear-gradient(to bottom, transparent, #fff); }
-  .editor-block-list__layout .editor-default-block-appender.is-selected > .editor-block-mover:before,
-  .editor-block-list__layout .editor-default-block-appender.is-hovered > .editor-block-mover:before,
-  .editor-block-list__layout .editor-default-block-appender.is-selected > .editor-block-settings-menu:before,
-  .editor-block-list__layout .editor-default-block-appender.is-hovered > .editor-block-settings-menu:before,
   .editor-block-list__layout .editor-block-list__block.is-selected > .editor-block-mover:before,
   .editor-block-list__layout .editor-block-list__block.is-hovered > .editor-block-mover:before,
   .editor-block-list__layout .editor-block-list__block.is-selected > .editor-block-settings-menu:before,
@@ -6348,60 +6896,52 @@ pre.wp-block-verse,
     position: absolute;
     height: 36px;
     top: 10px; }
-  .editor-block-list__layout .editor-default-block-appender.is-selected > .editor-block-mover:before,
-  .editor-block-list__layout .editor-default-block-appender.is-hovered > .editor-block-mover:before,
   .editor-block-list__layout .editor-block-list__block.is-selected > .editor-block-mover:before,
   .editor-block-list__layout .editor-block-list__block.is-hovered > .editor-block-mover:before {
     border-right: 1px solid #e2e4e7;
     right: 6px; }
-  .editor-block-list__layout .editor-default-block-appender.is-typing .editor-block-list__empty-block-inserter,
-  .editor-block-list__layout .editor-default-block-appender.is-typing .editor-block-list__side-inserter,
   .editor-block-list__layout .editor-block-list__block.is-typing .editor-block-list__empty-block-inserter,
   .editor-block-list__layout .editor-block-list__block.is-typing .editor-block-list__side-inserter {
     opacity: 0; }
-  .editor-block-list__layout .editor-default-block-appender .editor-block-list__empty-block-inserter,
-  .editor-block-list__layout .editor-default-block-appender .editor-block-list__side-inserter,
   .editor-block-list__layout .editor-block-list__block .editor-block-list__empty-block-inserter,
   .editor-block-list__layout .editor-block-list__block .editor-block-list__side-inserter {
     opacity: 1;
     transition: opacity 0.2s; }
-  .editor-block-list__layout .editor-default-block-appender.is-reusable.is-selected > .editor-block-mover:before,
-  .editor-block-list__layout .editor-block-list__block.is-reusable.is-selected > .editor-block-mover:before {
-    border-right: none; }
-  .editor-block-list__layout .editor-default-block-appender.is-selected > .editor-block-settings-menu:before,
-  .editor-block-list__layout .editor-default-block-appender.is-hovered > .editor-block-settings-menu:before,
   .editor-block-list__layout .editor-block-list__block.is-selected > .editor-block-settings-menu:before,
   .editor-block-list__layout .editor-block-list__block.is-hovered > .editor-block-settings-menu:before {
     border-left: 1px solid #e2e4e7;
     left: 6px; }
-  .editor-block-list__layout .editor-default-block-appender.is-reusable.is-selected > .editor-block-settings-menu:before,
-  .editor-block-list__layout .editor-block-list__block.is-reusable.is-selected > .editor-block-settings-menu:before {
-    border-left: none; }
-  .editor-block-list__layout .editor-default-block-appender.is-selected:before,
-  .editor-block-list__layout .editor-block-list__block.is-selected:before {
+  .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit {
+    position: relative; }
+    .editor-block-list__layout .editor-block-list__block .editor-block-list__block-edit:before {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      bottom: -14px;
+      left: -14px;
+      outline: 1px solid transparent; }
+  .editor-block-list__layout .editor-block-list__block.is-selected > .editor-block-list__block-edit:before {
     outline: 1px solid #e2e4e7; }
-  .editor-block-list__layout .editor-default-block-appender.is-reusable.is-selected:before,
-  .editor-block-list__layout .editor-block-list__block.is-reusable.is-selected:before {
-    outline: 1px dashed #e2e4e7; }
-  .editor-block-list__layout .editor-default-block-appender ::-moz-selection,
   .editor-block-list__layout .editor-block-list__block ::-moz-selection {
     background: #b3e7fe; }
-  .editor-block-list__layout .editor-default-block-appender ::selection,
   .editor-block-list__layout .editor-block-list__block ::selection {
     background: #b3e7fe; }
-  .editor-block-list__layout .editor-default-block-appender.is-multi-selected *::-moz-selection,
   .editor-block-list__layout .editor-block-list__block.is-multi-selected *::-moz-selection {
     background: transparent; }
-  .editor-block-list__layout .editor-default-block-appender.is-multi-selected *::selection,
   .editor-block-list__layout .editor-block-list__block.is-multi-selected *::selection {
     background: transparent; }
-  .editor-block-list__layout .editor-default-block-appender.is-multi-selected:before,
-  .editor-block-list__layout .editor-block-list__block.is-multi-selected:before {
+  .editor-block-list__layout .editor-block-list__block.is-multi-selected .editor-block-list__block-edit:before {
     background: #b3e7fe; }
-  .editor-block-list__layout .editor-default-block-appender .iframe-overlay,
+  .editor-block-list__layout .editor-block-list__block.is-reusable > .editor-block-mover:before {
+    border-right: none; }
+  .editor-block-list__layout .editor-block-list__block.is-reusable > .editor-block-settings-menu:before {
+    border-left: none; }
+  .editor-block-list__layout .editor-block-list__block.is-reusable > .editor-block-list__block-edit:before {
+    outline: 1px dashed #e2e4e7; }
   .editor-block-list__layout .editor-block-list__block .iframe-overlay {
     position: relative; }
-  .editor-block-list__layout .editor-default-block-appender .iframe-overlay:before,
   .editor-block-list__layout .editor-block-list__block .iframe-overlay:before {
     content: '';
     display: block;
@@ -6410,147 +6950,118 @@ pre.wp-block-verse,
     right: 0;
     bottom: 0;
     left: 0; }
-  .editor-block-list__layout .editor-default-block-appender.is-selected .iframe-overlay:before,
   .editor-block-list__layout .editor-block-list__block.is-selected .iframe-overlay:before {
     display: none; }
-  .editor-block-list__layout .editor-default-block-appender[data-align="left"], .editor-block-list__layout .editor-default-block-appender[data-align="right"],
-  .editor-block-list__layout .editor-block-list__block[data-align="left"],
-  .editor-block-list__layout .editor-block-list__block[data-align="right"] {
+  .editor-block-list__layout .editor-block-list__block[data-align="left"], .editor-block-list__layout .editor-block-list__block[data-align="right"] {
     z-index: 20;
     width: 100%;
     margin-bottom: 0; }
-    .editor-block-list__layout .editor-default-block-appender[data-align="left"]:before, .editor-block-list__layout .editor-default-block-appender[data-align="right"]:before,
-    .editor-block-list__layout .editor-block-list__block[data-align="left"]:before,
-    .editor-block-list__layout .editor-block-list__block[data-align="right"]:before {
+    .editor-block-list__layout .editor-block-list__block[data-align="left"]:before, .editor-block-list__layout .editor-block-list__block[data-align="right"]:before {
       content: none; }
-  .editor-block-list__layout .editor-default-block-appender[data-align="left"] > .editor-block-list__block-edit, .editor-block-list__layout .editor-default-block-appender[data-align="right"] > .editor-block-list__block-edit,
-  .editor-block-list__layout .editor-block-list__block[data-align="left"] > .editor-block-list__block-edit,
-  .editor-block-list__layout .editor-block-list__block[data-align="right"] > .editor-block-list__block-edit {
+  .editor-block-list__layout .editor-block-list__block[data-align="left"] > .editor-block-list__block-edit, .editor-block-list__layout .editor-block-list__block[data-align="right"] > .editor-block-list__block-edit {
     max-width: 360px;
     width: 100%; }
-  .editor-block-list__layout .editor-default-block-appender[data-align="left"][data-resized="true"] > .editor-block-list__block-edit, .editor-block-list__layout .editor-default-block-appender[data-align="right"][data-resized="true"] > .editor-block-list__block-edit,
-  .editor-block-list__layout .editor-block-list__block[data-align="left"][data-resized="true"] > .editor-block-list__block-edit,
-  .editor-block-list__layout .editor-block-list__block[data-align="right"][data-resized="true"] > .editor-block-list__block-edit {
+  .editor-block-list__layout .editor-block-list__block[data-align="left"][data-resized="true"] > .editor-block-list__block-edit, .editor-block-list__layout .editor-block-list__block[data-align="right"][data-resized="true"] > .editor-block-list__block-edit {
     max-width: none;
     width: auto; }
-  .editor-block-list__layout .editor-default-block-appender[data-align="left"] .editor-block-list__block-edit,
   .editor-block-list__layout .editor-block-list__block[data-align="left"] .editor-block-list__block-edit {
     float: left;
     margin-right: 2em; }
-  .editor-block-list__layout .editor-default-block-appender[data-align="right"] .editor-block-list__block-edit,
   .editor-block-list__layout .editor-block-list__block[data-align="right"] .editor-block-list__block-edit {
     float: right;
     margin-left: 2em; }
-  .editor-block-list__layout .editor-default-block-appender[data-align="right"] .editor-block-toolbar,
   .editor-block-list__layout .editor-block-list__block[data-align="right"] .editor-block-toolbar {
     float: right; }
-  .editor-block-list__layout .editor-default-block-appender[data-align="full"], .editor-block-list__layout .editor-default-block-appender[data-align="wide"],
-  .editor-block-list__layout .editor-block-list__block[data-align="full"],
-  .editor-block-list__layout .editor-block-list__block[data-align="wide"] {
+  .editor-block-list__layout .editor-block-list__block[data-align="full"], .editor-block-list__layout .editor-block-list__block[data-align="wide"] {
     clear: both;
     z-index: 20; }
-  .editor-block-list__layout .editor-default-block-appender[data-align="full"],
-  .editor-block-list__layout .editor-block-list__block[data-align="full"] {
-    padding-left: 0;
-    padding-right: 0; }
-    .editor-block-list__layout .editor-default-block-appender[data-align="full"]:before,
-    .editor-block-list__layout .editor-block-list__block[data-align="full"]:before {
-      left: 0;
-      right: 0;
-      border-left-width: 0;
-      border-right-width: 0; }
-    .editor-block-list__layout .editor-default-block-appender[data-align="full"] .editor-block-mover,
+  @media (min-width: 600px) {
+    .editor-block-list__layout .editor-block-list__block[data-align="full"] {
+      margin-left: -36px;
+      margin-right: -36px; } }
+  .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-list__block-edit {
+    margin-left: -14px;
+    margin-right: -14px; }
+    @media (min-width: 600px) {
+      .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-list__block-edit {
+        margin-left: -50px;
+        margin-right: -50px; } }
+  .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-list__block-edit:before {
+    left: 0;
+    right: 0;
+    border-left-width: 0;
+    border-right-width: 0; }
+  .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-mover {
+    display: none; }
+  @media (min-width: 1280px) {
     .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-mover {
-      display: none; }
-    @media (min-width: 1280px) {
-      .editor-block-list__layout .editor-default-block-appender[data-align="full"] .editor-block-mover,
-      .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-mover {
-        display: block;
-        top: -29px;
-        left: 10px;
-        height: auto; }
-        .editor-block-list__layout .editor-default-block-appender[data-align="full"] .editor-block-mover:before,
-        .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-mover:before {
-          content: none; }
-      .editor-block-list__layout .editor-default-block-appender[data-align="full"] .editor-block-mover__control,
-      .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-mover__control {
-        float: left;
-        margin-right: 8px; } }
-    .editor-block-list__layout .editor-default-block-appender[data-align="full"] .editor-block-settings-menu__control,
-    .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-settings-menu__control {
-      float: left;
-      margin-right: 8px; }
-    .editor-block-list__layout .editor-default-block-appender[data-align="full"] .editor-block-settings-menu,
-    .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-settings-menu {
-      top: -41px;
-      right: 10px;
+      display: block;
+      top: -29px;
+      left: 10px;
       height: auto; }
-      .editor-block-list__layout .editor-default-block-appender[data-align="full"] .editor-block-settings-menu:before,
-      .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-settings-menu:before {
+      .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-mover:before {
         content: none; }
-  .editor-block-list__layout .editor-default-block-appender[data-clear="true"],
+    .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-mover__control {
+      float: left;
+      margin-right: 8px; } }
+  .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-settings-menu__control {
+    float: left;
+    margin-right: 8px; }
+  .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-settings-menu {
+    top: -41px;
+    right: 10px;
+    height: auto; }
+    .editor-block-list__layout .editor-block-list__block[data-align="full"] .editor-block-settings-menu:before {
+      content: none; }
   .editor-block-list__layout .editor-block-list__block[data-clear="true"] {
     float: none; }
-  .editor-block-list__layout .editor-default-block-appender > .components-drop-zone,
-  .editor-block-list__layout .editor-block-list__block > .components-drop-zone {
+  .editor-block-list__layout .editor-block-list__block .components-drop-zone {
     border: none;
     top: -4px;
     bottom: -3px;
-    margin: 0 48px;
+    margin: 0 36px;
     border-radius: 0; }
-    .editor-block-list__layout .editor-default-block-appender > .components-drop-zone .components-drop-zone__content,
-    .editor-block-list__layout .editor-block-list__block > .components-drop-zone .components-drop-zone__content {
+    .editor-block-list__layout .editor-block-list__block .components-drop-zone .components-drop-zone__content {
       display: none; }
-    .editor-block-list__layout .editor-default-block-appender > .components-drop-zone.is-close-to-top,
-    .editor-block-list__layout .editor-block-list__block > .components-drop-zone.is-close-to-top {
+    .editor-block-list__layout .editor-block-list__block .components-drop-zone.is-close-to-top {
       background: none;
       border-top: 3px solid #00a0d2; }
-    .editor-block-list__layout .editor-default-block-appender > .components-drop-zone.is-close-to-bottom,
-    .editor-block-list__layout .editor-block-list__block > .components-drop-zone.is-close-to-bottom {
+    .editor-block-list__layout .editor-block-list__block .components-drop-zone.is-close-to-bottom {
       background: none;
       border-bottom: 3px solid #00a0d2; }
-  .editor-block-list__layout .editor-default-block-appender > .editor-block-settings-menu,
-  .editor-block-list__layout .editor-default-block-appender > .editor-block-mover,
   .editor-block-list__layout .editor-block-list__block > .editor-block-settings-menu,
   .editor-block-list__layout .editor-block-list__block > .editor-block-mover {
     position: absolute;
     top: 0;
     padding: 0; }
-  .editor-block-list__layout .editor-default-block-appender > .editor-block-settings-menu,
   .editor-block-list__layout .editor-block-list__block > .editor-block-settings-menu {
-    right: 18px;
+    right: -30px;
     padding-top: 2px;
     display: none; }
     @media (min-width: 600px) {
-      .editor-block-list__layout .editor-default-block-appender > .editor-block-settings-menu,
       .editor-block-list__layout .editor-block-list__block > .editor-block-settings-menu {
         display: flex;
         flex-direction: column; } }
-  .editor-block-list__layout .editor-default-block-appender > .editor-block-mover,
   .editor-block-list__layout .editor-block-list__block > .editor-block-mover {
-    left: 20px;
+    left: -28px;
     padding-top: 6px;
     z-index: 1;
     display: none; }
     @media (min-width: 600px) {
-      .editor-block-list__layout .editor-default-block-appender > .editor-block-mover,
       .editor-block-list__layout .editor-block-list__block > .editor-block-mover {
         display: block; } }
-  .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar,
   .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar {
     display: flex;
     flex-direction: row;
     margin-top: 10px; }
-    .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar .editor-inserter,
+    @media (min-width: 600px) {
+      .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar {
+        display: none; } }
     .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar .editor-inserter {
       position: relative;
       left: auto;
       top: auto;
       margin: 0; }
-    .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar .editor-inserter__toggle,
-    .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar .editor-block-settings-menu__toggle,
-    .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar > .editor-block-settings-menu__control,
-    .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar .editor-block-mover__control,
     .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar .editor-inserter__toggle,
     .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar .editor-block-settings-menu__toggle,
     .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar > .editor-block-settings-menu__control,
@@ -6561,20 +7072,14 @@ pre.wp-block-verse,
       margin: 0;
       justify-content: center;
       align-items: center; }
-      .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar .editor-inserter__toggle .dashicon,
-      .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar .editor-block-settings-menu__toggle .dashicon,
-      .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar > .editor-block-settings-menu__control .dashicon,
-      .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar .editor-block-mover__control .dashicon,
       .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar .editor-inserter__toggle .dashicon,
       .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar .editor-block-settings-menu__toggle .dashicon,
       .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar > .editor-block-settings-menu__control .dashicon,
       .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar .editor-block-mover__control .dashicon {
         margin: auto; }
-    .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar .editor-block-mover,
     .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar .editor-block-mover {
+      display: flex;
       margin-right: auto; }
-      .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar .editor-block-mover .editor-inserter,
-      .editor-block-list__layout .editor-default-block-appender .editor-block-list__block-mobile-toolbar .editor-block-mover .editor-block-mover__control,
       .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar .editor-block-mover .editor-inserter,
       .editor-block-list__layout .editor-block-list__block .editor-block-list__block-mobile-toolbar .editor-block-mover .editor-block-mover__control {
         float: left; }
@@ -6591,7 +7096,7 @@ pre.wp-block-verse,
 
 .editor-block-list__insertion-point-indicator {
   position: absolute;
-  top: 16px;
+  top: 13px;
   height: 2px;
   left: 0;
   right: 0;
@@ -6603,12 +7108,13 @@ pre.wp-block-verse,
   border: none;
   display: block;
   top: 0;
-  height: 34px;
+  height: 28px;
   width: 100%;
-  cursor: pointer; }
+  cursor: pointer;
+  padding: 0; }
   .editor-block-list__insertion-point-inserter:before {
     position: absolute;
-    top: 16px;
+    top: 13px;
     height: 2px;
     left: 14px;
     right: 14px;
@@ -6631,27 +7137,19 @@ pre.wp-block-verse,
 
 .editor-block-list__block > .editor-block-list__insertion-point {
   position: absolute;
-  bottom: -19px;
-  height: 34px;
+  bottom: -14px;
+  height: 28px;
   top: auto;
   left: 0;
   right: 0; }
-  @media (min-width: 600px) {
-    .editor-block-list__block > .editor-block-list__insertion-point {
-      left: 48px;
-      right: 48px; } }
 
 .editor-block-list__layout > .editor-block-list__insertion-point {
   position: relative;
+  top: -14px;
   margin-left: auto;
   margin-right: auto;
-  top: -19px;
   left: 0;
   right: 0; }
-  @media (min-width: 600px) {
-    .editor-block-list__layout > .editor-block-list__insertion-point .editor-block-list__insertion-point-inserter:before {
-      left: 48px;
-      right: 48px; } }
 
 .editor-block-list__block .editor-block-list__block-html-textarea {
   display: block;
@@ -6685,14 +7183,14 @@ pre.wp-block-verse,
   margin-left: -15px;
   margin-right: -15px;
   top: 55px; }
-  .edit-post-visual-editor .editor-block-list__block[data-align="left"] .editor-block-contextual-toolbar,
-  .edit-post-visual-editor .editor-block-list__block[data-align="right"] .editor-block-contextual-toolbar {
+  .editor-block-list__block[data-align="left"] .editor-block-contextual-toolbar,
+  .editor-block-list__block[data-align="right"] .editor-block-contextual-toolbar {
     margin-bottom: 1px;
     margin-top: -38px; }
   @media (min-width: 600px) {
     .editor-block-contextual-toolbar {
-      margin-left: auto;
-      margin-right: auto; } }
+      margin-left: -51px;
+      margin-right: -51px; } }
   @media (min-width: 600px) {
     .editor-block-contextual-toolbar {
       top: -1px; } }
@@ -6713,31 +7211,6 @@ pre.wp-block-verse,
         width: auto; } }
   .editor-block-contextual-toolbar > * {
     pointer-events: auto; }
-  @media (min-width: 600px) {
-    .editor-block-contextual-toolbar {
-      margin-left: -15px;
-      margin-right: -15px; } }
-
-.editor-block-list__side-inserter {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: none; }
-  @media (min-width: 600px) {
-    .editor-block-list__side-inserter {
-      right: 58px;
-      display: block; } }
-
-.editor-block-list__empty-block-inserter {
-  position: absolute;
-  top: 10px;
-  right: 10px; }
-  .editor-block-list__empty-block-inserter .editor-inserter__toggle {
-    border-radius: 50%; }
-  @media (min-width: 600px) {
-    .editor-block-list__empty-block-inserter {
-      left: 10px;
-      right: auto; } }
 /**
  * Colors
  */
@@ -6749,6 +7222,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -6805,6 +7281,9 @@ pre.wp-block-verse,
       box-shadow: inset 0 0 0 1px #6c7781, inset 0 0 0 2px #fff;
       outline: 2px solid transparent;
       outline-offset: -2px; } }
+
+.editor-block-mover__description {
+  display: none; }
 /**
  * Colors
  */
@@ -6816,6 +7295,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -6861,6 +7343,11 @@ pre.wp-block-verse,
   margin-bottom: 10px;
   border-top: 1px solid #e2e4e7; }
 
+.editor-block-settings-menu__title {
+  display: block;
+  padding: 6px;
+  color: #6c7781; }
+
 .editor-block-settings-menu__control {
   width: 100%;
   justify-content: flex-start;
@@ -6894,6 +7381,9 @@ pre.wp-block-verse,
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -6925,20 +7415,21 @@ pre.wp-block-verse,
   align-items: center;
   width: 96%;
   max-width: 780px;
-  padding: 20px 20px 0px 20px;
+  padding: 20px;
   background-color: #fff;
   border: 1px solid #e2e4e7;
   text-align: center;
   line-height: 1.4;
-  box-shadow: 0px 3px 20px rgba(25, 30, 35, 0.1), 0px 1px 3px rgba(25, 30, 35, 0.1); }
-  .editor-warning p:first-child {
-    margin-top: 0; }
-  .edit-post-visual-editor .editor-warning p {
-    width: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    font-size: 13px; }
-  .editor-warning .components-button {
-    margin: 0 5px 5px; }
+  box-shadow: 0px 3px 20px rgba(25, 30, 35, 0.1), 0px 1px 3px rgba(25, 30, 35, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 13px; }
+
+.editor-warning__actions {
+  display: flex;
+  margin-top: 20px; }
+
+.editor-warning__action {
+  margin: 0 5px 5px; }
 /**
  * Colors
  */
@@ -6950,6 +7441,9 @@ pre.wp-block-verse,
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -6997,7 +7491,7 @@ input[type="search"].editor-inserter__search {
   display: block;
   width: 100%;
   margin: 0;
-  padding: 8px 16px;
+  padding: 11px 16px;
   position: relative;
   z-index: 1;
   border: none;
@@ -7041,16 +7535,23 @@ input[type="search"].editor-inserter__search {
 .editor-inserter__block {
   display: flex;
   flex-direction: column;
-  width: 33%;
-  border-radius: 4px;
+  width: calc( 33% - 8px);
+  margin: 4px;
   font-size: 13px;
   color: #555d66;
-  padding: 12px;
+  padding: 8px 4px;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   border: none;
-  line-height: 20px;
-  background: transparent; }
+  line-height: 1em;
+  background: transparent;
+  outline: 1px solid #f3f4f5;
+  min-height: 5em;
+  overflow: hidden;
+  word-break: break-word; }
+  .editor-inserter__block .dashicon {
+    margin-bottom: 3px; }
   .editor-inserter__block:disabled {
     opacity: 0.6;
     cursor: default; }
@@ -7086,7 +7587,7 @@ input[type="search"].editor-inserter__search {
   display: block;
   text-align: center;
   font-style: italic;
-  padding: 8px; }
+  padding: 24px; }
 
 .editor-inserter__tabs {
   display: flex;
@@ -7111,7 +7612,7 @@ input[type="search"].editor-inserter__search {
     display: flex;
     justify-content: space-between;
     position: relative;
-    background: #edeff0;
+    background: #f8f9f9;
     border-bottom: 1px solid #e2e4e7;
     flex-shrink: 0;
     margin-top: 1px;
@@ -7149,6 +7650,9 @@ input[type="search"].editor-inserter__search {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -7192,6 +7696,8 @@ input[type="search"].editor-inserter__search {
     font-family: "Noto Serif", serif; }
   .editor-block-preview__content > div section {
     height: auto; }
+  .editor-block-preview__content > .reusable-block-indicator {
+    display: none; }
 /**
  * Colors
  */
@@ -7203,6 +7709,9 @@ input[type="search"].editor-inserter__search {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -7232,7 +7741,7 @@ input[type="search"].editor-inserter__search {
     border-radius: 4px; }
 
 .editor-inserter-with-shortcuts__block {
-  margin-right: 5px;
+  margin-right: 4px;
   width: 36px;
   height: 36px;
   padding-top: 8px; }
@@ -7247,6 +7756,9 @@ input[type="search"].editor-inserter__search {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -7269,25 +7781,28 @@ input[type="search"].editor-inserter__search {
  * Applies editor right position to the selector passed as argument
  */
 .editor-default-block-appender .editor-default-block-appender__content {
+  border: none;
+  background: none;
+  box-shadow: none;
+  display: block;
+  margin: 0;
+  max-width: none;
+  padding: 14px;
+  height: 56px;
+  font-size: 16px;
+  cursor: text;
+  width: 100%;
   height: 56px;
   color: #6c7781;
   outline: 1px solid transparent;
   transition: 0.2s outline; }
 
-.editor-default-block-appender .editor-inserter__toggle {
-  border-radius: 50%; }
+.editor-default-block-appender .editor-inserter-with-shortcuts .components-icon-button {
+  color: #ccd0d4;
+  transition: color 0.2s; }
 
-.editor-default-block-appender .editor-inserter-with-shortcuts {
-  position: absolute;
-  top: 10px;
-  right: 58px;
-  display: none; }
-  .editor-default-block-appender .editor-inserter-with-shortcuts .components-icon-button {
-    color: #ccd0d4;
-    transition: color 0.2s; }
-  @media (min-width: 600px) {
-    .editor-default-block-appender .editor-inserter-with-shortcuts {
-      display: flex; } }
+.editor-default-block-appender .editor-inserter {
+  opacity: 0; }
 
 .editor-default-block-appender:hover .editor-inserter-with-shortcuts {
   opacity: 1; }
@@ -7297,35 +7812,36 @@ input[type="search"].editor-inserter__search {
 .editor-default-block-appender:hover .editor-inserter {
   opacity: 1; }
 
+.editor-default-block-appender .components-drop-zone__content-icon {
+  display: none; }
+
+.editor-block-list__empty-block-inserter,
 .editor-default-block-appender .editor-inserter {
-  opacity: 0;
   position: absolute;
   top: 10px;
   right: 10px;
   transition: opacity 0.2s; }
   @media (min-width: 600px) {
+    .editor-block-list__empty-block-inserter,
     .editor-default-block-appender .editor-inserter {
-      left: 10px;
+      left: -36px;
       right: auto; } }
+  .editor-block-list__empty-block-inserter .editor-inserter__toggle,
+  .editor-default-block-appender .editor-inserter .editor-inserter__toggle {
+    border-radius: 50%; }
+  .editor-block-list__empty-block-inserter:disabled,
+  .editor-default-block-appender .editor-inserter:disabled {
+    display: none; }
 
-.editor-default-block-appender__content,
-input[type=text].editor-default-block-appender__content {
-  border: none;
-  background: none;
-  box-shadow: none;
-  display: block;
-  width: 100%;
-  height: 56px;
-  font-size: 16px;
-  cursor: text;
-  margin: 0;
-  max-width: none; }
-  .editor-default-block-appender__content:focus,
-  input[type=text].editor-default-block-appender__content:focus {
-    outline: 1px solid #e2e4e7; }
-
-.editor-default-block-appender .components-drop-zone__content-icon {
+.editor-inserter-with-shortcuts {
+  position: absolute;
+  top: 10px;
+  right: 14px;
   display: none; }
+  @media (min-width: 600px) {
+    .editor-inserter-with-shortcuts {
+      right: 0;
+      display: flex; } }
 /**
  * Colors
  */
@@ -7337,6 +7853,9 @@ input[type=text].editor-default-block-appender__content {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -7362,7 +7881,8 @@ input[type=text].editor-default-block-appender__content {
   display: inline-flex;
   overflow: auto;
   flex-grow: 1;
-  width: 100%; }
+  width: 100%;
+  background: #fff; }
   .editor-block-toolbar .components-toolbar {
     border: none;
     border-left: 1px solid #e2e4e7; }
@@ -7383,6 +7903,9 @@ input[type=text].editor-default-block-appender__content {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -7455,6 +7978,52 @@ input[type=text].editor-default-block-appender__content {
  * Often re-used variables
  */
 /**
+ * Breakpoint mixins
+ */
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Editor Width mixin
+ *
+ * This mixin seeks to take the vinegar out of the responsive alignments in the editor.
+ */
+/**
+ * Button states and focus styles
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Applies editor right position to the selector passed as argument
+ */
+.editor-writing-flow {
+  height: 100%;
+  display: flex;
+  flex-direction: column; }
+
+.editor-writing-flow__click-redirect {
+  flex-basis: 100%;
+  cursor: text; }
+/**
+ * Colors
+ */
+/**
+ * Admin Color Scheme Overrides
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+ * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
  * Long content fade mixin
  *
  * Creates a fading overlay to signify that the content is longer
@@ -7490,21 +8059,31 @@ input[type=text].editor-default-block-appender__content {
     list-style-type: disc; }
   .edit-post-visual-editor ol {
     list-style-type: decimal; }
+  .edit-post-visual-editor .button {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
+
+.edit-post-visual-editor .editor-writing-flow__click-redirect {
+  height: 50px;
+  width: 636px;
+  margin: -4px auto -50px; }
 
 .edit-post-visual-editor .editor-block-list__block {
   margin-left: auto;
   margin-right: auto;
-  max-width: 732px; }
+  max-width: 636px; }
+  @media (min-width: 600px) {
+    .edit-post-visual-editor .editor-block-list__block .editor-block-list__block-edit {
+      margin-left: -36px;
+      margin-right: -36px; }
+    .edit-post-visual-editor .editor-block-list__block[data-align="full"] .editor-block-contextual-toolbar,
+    .edit-post-visual-editor .editor-block-list__block[data-align="wide"] .editor-block-contextual-toolbar {
+      max-width: 638px;
+      margin-left: auto;
+      margin-right: auto; } }
   .edit-post-visual-editor .editor-block-list__block[data-align="wide"] {
     max-width: 1100px; }
   .edit-post-visual-editor .editor-block-list__block[data-align="full"] {
-    max-width: 100%; }
-  .edit-post-visual-editor .editor-block-list__block[data-align="full"] .editor-block-contextual-toolbar, .edit-post-visual-editor .editor-block-list__block[data-align="wide"] .editor-block-contextual-toolbar {
-    margin-left: auto;
-    margin-right: auto; }
-    @media (min-width: 600px) {
-      .edit-post-visual-editor .editor-block-list__block[data-align="full"] .editor-block-contextual-toolbar, .edit-post-visual-editor .editor-block-list__block[data-align="wide"] .editor-block-contextual-toolbar {
-        width: 638px; } }
+    max-width: none; }
 
 .edit-post-visual-editor .editor-block-list__block:not(.is-selected) .editor-block-list__block-edit {
   box-shadow: 0 0 0 0 #fff, 0 0 0 0 #191e23;
@@ -7516,34 +8095,31 @@ input[type=text].editor-default-block-appender__content {
 .edit-post-visual-editor .editor-post-title {
   margin-left: auto;
   margin-right: auto;
-  max-width: 732px; }
+  max-width: 708px; }
   .edit-post-visual-editor .editor-post-title .editor-post-permalink {
     left: 14px;
     right: 14px; }
   @media (min-width: 600px) {
     .edit-post-visual-editor .editor-post-title {
-      padding: 5px 47px; }
+      padding: 5px 35px; }
       .edit-post-visual-editor .editor-post-title .editor-post-permalink {
-        left: 48px;
-        right: 48px; } }
+        left: 36px;
+        right: 36px; } }
 
 .edit-post-visual-editor .editor-default-block-appender {
-  max-width: 732px;
-  clear: left;
+  max-width: 636px;
   margin-left: auto;
   margin-right: auto;
   position: relative; }
+  .edit-post-visual-editor .editor-default-block-appender[data-root-uid=""] .editor-default-block-appender__content:hover {
+    outline: 1px solid transparent; }
   @media (min-width: 600px) {
-    .edit-post-visual-editor .editor-default-block-appender {
-      padding: 0 48px; }
-      .edit-post-visual-editor .editor-default-block-appender .components-drop-zone {
-        left: 48px;
-        right: 48px; }
-      .edit-post-visual-editor .editor-default-block-appender .editor-default-block-appender__content {
-        padding: 0 14px; } }
+    .edit-post-visual-editor .editor-default-block-appender .editor-default-block-appender__content {
+      padding: 0 14px; } }
 
 .edit-post-visual-editor .editor-block-list__layout > .editor-block-list__insertion-point {
-  max-width: 732px; }
+  max-width: 636px;
+  position: relative; }
 /**
  * Colors
  */
@@ -7555,6 +8131,9 @@ input[type=text].editor-default-block-appender__content {
  */
 /**
  * Often re-used variables
+ */
+/**
+ * Breakpoint mixins
  */
 /**
  * Long content fade mixin
@@ -7995,8 +8574,6 @@ div.gutenbergeditor--loaded .form__field-holder {
   margin-right: auto;
   max-width: 636px; }
   @media (min-width: 600px) {
-    .edit-post-visual-editor .editor-block-list__block .editor-block-list__block-edit {
-      margin-right: -36px; }
     .edit-post-visual-editor .editor-block-list__block[data-align="full"] .editor-block-contextual-toolbar,
     .edit-post-visual-editor .editor-block-list__block[data-align="wide"] .editor-block-contextual-toolbar {
       max-width: 638px;

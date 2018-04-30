@@ -15,15 +15,6 @@ const SidebarHeader = ({ panel, onSetPanel, onToggleSidebar, count }) => {
   return (
     <div className="components-panel__header edit-post-sidebar__panel-tabs">
       <button
-        onClick={() => onSetPanel("template")}
-        className={`edit-post-sidebar__panel-tab ${
-          panel === "template" ? "is-active" : ""
-        }`}
-        aria-label={__("Template settings")}
-      >
-        {__("Template")}
-      </button>
-      <button
         onClick={() => onSetPanel("block")}
         className={`edit-post-sidebar__panel-tab ${
           panel === "block" ? "is-active" : ""
@@ -51,3 +42,14 @@ export default compose(
     onToggleSidebar: dispatch("standalone-gutenberg").toggleSidebar
   }))
 )(SidebarHeader);
+
+/*      <button
+        onClick={() => onSetPanel("template")}
+        className={`edit-post-sidebar__panel-tab ${
+          panel === "template" ? "is-active" : ""
+        }`}
+        aria-label={__("Template settings")}
+      >
+        {__("Template")}
+      </button>
+*/

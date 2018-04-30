@@ -12,7 +12,7 @@ export function preferences(state = { sidebar: false }, action) {
     return state;
 }
 
-export function panel(state = 'template', action) {
+export function panel(state = 'block', action) {
     switch (action.type) {
         case 'SET_ACTIVE_PANEL':
             return action.panel;

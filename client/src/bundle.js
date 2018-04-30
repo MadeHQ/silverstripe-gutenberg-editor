@@ -4,18 +4,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import { render } from "@wordpress/element";
 
+import { registerBlocks } from "./blocks";
 import './store';
 
 import { EditorProvider } from "@wordpress/editor";
-import { registerCoreBlocks } from "@wordpress/blocks";
-import { setDefaultBlockName, getDefaultBlockName } from "@wordpress/blocks/api";
-import { select } from "@wordpress/data";
-
 import Layout from "./components/layout";
 
 import { isString, debounce, isEqual, extend, has } from "lodash";
 
 import "./style.scss";
+
+let blocksRegistered = false;
 
 jQuery.entwine('ss', ($) => {
     $('.js-injector-boot textarea.gutenbergeditor').entwine({
@@ -46,9 +45,19 @@ jQuery.entwine('ss', ($) => {
             // Tell field we're ready to hide everything
             field.addClass('gutenbergeditor--loaded');
 
+            // Set the global config
+            window.gutenbergConfig = this.data('gutenberg') || {};
+
             // Store field & container for future
             this.setField(field);
             this.setContainer(container);
+
+            // Register blocks if not registered
+            if (!blocksRegistered) {
+                registerBlocks();
+
+                blocksRegistered = true;
+            }
 
             // Start the instance of gutenberg
             this.startGutenberg();
@@ -65,7 +74,7 @@ jQuery.entwine('ss', ($) => {
             const originalValue = this.val();
             const defautltContent = {
                 content: {
-                    raw: '<!-- wp:paragraph --><p></p><!-- /wp:paragraph -->'
+                    raw: ''// <!-- wp:paragraph -->↵<p></p>↵<!-- /wp:paragraph -->
                 }
             };
 
@@ -92,14 +101,14 @@ jQuery.entwine('ss', ($) => {
             // Get a watcher going for content change every 1 second
             window.addEventListener('gutenberg:content', debounce(event => {
                 // Merge old content with new content
-                const newPost = extend(post, {
+                const newPost = extend({}, post, {
                     content: {
-                        raw: event.detail.content
+                        raw: event.detail
                     }
                 });
 
                 // No need to update if old and new content are the same
-                if (isEqual(post.raw, newPost.raw)) {
+                if (isEqual(post.content.raw, newPost.content.raw)) {
                     return false;
                 }
 
@@ -111,9 +120,6 @@ jQuery.entwine('ss', ($) => {
                     .trigger('change');
             }, 1000));
 
-            // Register core blocks
-            registerCoreBlocks();
-
             // @todo rework entwine so that react has control of holder
             ReactDOM.render(
                 <EditorProvider post={post}><Layout /></EditorProvider>,
@@ -122,7 +128,10 @@ jQuery.entwine('ss', ($) => {
         },
 
         stopGutenberg() {
-            ReactDOM.unmountComponentAtNode(this.getContainer().get(0));
+            // Remove gutenberg
+            ReactDOM.unmountComponentAtNode(
+                this.getContainer().get(0)
+            );
         }
     });
 });

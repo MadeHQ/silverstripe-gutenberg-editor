@@ -1,4 +1,6 @@
 import { createElement, Component } from "@wordpress/element";
+import 'whatwg-fetch';
+import { isString } from "lodash";
 
 window.wp = {};
 
@@ -66,11 +68,19 @@ window.userSettings = { uid: "dummy" };
 window.wpApiSettings = {
   schema: {}
 };
+
 window.wp.api = {
   getPostTypeRoute() {
     return "/none";
   }
 };
-window.wp.apiRequest = () => {
-  return Promise.reject("no API support yet");
+
+window.wp.apiRequest = (url) => {
+  if (!url) {
+    return Promise.reject("no URL provided");
+  }
+
+  return fetch(url.path, { credentials: 'include' }).then(response => {
+    return response.json();
+  });
 };

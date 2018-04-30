@@ -38,6 +38,10 @@ const extractConfig = {
   ]
 };
 
+const externals = {
+    moment: 'moment'
+};
+
 const wpDependencies = [
   "i18n",
   "components",
@@ -65,6 +69,7 @@ const config = {
     bundle: "./client/src/bundle.js",
     globals: "./client/src/globals.js"
   },
+  externals,
   resolve: { alias },
   output: {
     filename: "client/dist/[name].js"
