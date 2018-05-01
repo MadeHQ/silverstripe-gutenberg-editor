@@ -13,8 +13,6 @@ export class ChangesMonitor extends Component {
             clearTimeout(this.pendingNotification);
         }
 
-        // console.log( this.props.content );
-
         this.pendingNotification = setTimeout(
             () => this.props.notifyOfChange(),
             500
@@ -32,15 +30,9 @@ export class ChangesMonitor extends Component {
     }
 }
 
-// export default connect(state => ({
-//     changes: getEditedPostContent(state),
-// }), {
-//     notifyOfChange
-// })(ChangesMonitor);
-
 export default compose([
     withSelect(select => ({
-        content: select('core/editor').getPostEdits(),
+        content: select('core/editor').getEditedPostContent(),
     })),
 
     withDispatch(dispatch => ({

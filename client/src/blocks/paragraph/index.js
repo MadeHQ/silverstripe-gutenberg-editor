@@ -202,7 +202,7 @@ class ParagraphBlock extends paragraph.settings.edit {
                                     setAttributes( { content: before } );
                                     insertBlocksAfter( [
                                         ...blocks,
-                                        createBlock( 'made/paragraph', { content: after } ),
+                                        createBlock( 'core/paragraph', { content: after } ),
                                     ] );
                                 } :
                                 undefined
