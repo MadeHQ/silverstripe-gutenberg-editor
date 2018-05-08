@@ -11,6 +11,7 @@ import * as paragraph from './paragraph';
 import * as embed from './embed';
 // import * as list from './list';
 import * as heading from './heading';
+import * as image from './image';
 
 // import * as paragraph from '@wordpress/blocks/library/paragraph';
 // import * as heading from '@wordpress/blocks/library/heading';
@@ -28,6 +29,7 @@ import * as freeform from '@wordpress/blocks/library/freeform';
 const blocks = [
     paragraph, embed, list,
     heading, quote, pullquote,
+    image,
     code, /* html,*/ separator, table,
     freeform,
 ];

@@ -40,6 +40,8 @@ const extractConfig = {
 
 const externals = {
     moment: 'moment',
+    Injector: 'Injector',
+    schemaFieldValues: 'schemaFieldValues',
 };
 
 const wpDependencies = [
