@@ -39,7 +39,7 @@ const extractConfig = {
 };
 
 const externals = {
-    moment: 'moment'
+    moment: 'moment',
 };
 
 const wpDependencies = [
@@ -53,10 +53,13 @@ const wpDependencies = [
   "editor",
   "viewport"
 ];
+
 const alias = {
   "original-moment": path.resolve(__dirname, "node_modules/moment"),
-  moment: path.resolve(__dirname, "client/src/moment.js")
+  moment: path.resolve(__dirname, "client/src/moment.js"),
+  InsertMediaModal: path.resolve(__dirname, '../../silverstripe/asset-admin/client/src/containers/InsertMediaModal/InsertMediaModal'),
 };
+
 wpDependencies.forEach(wpDependency => {
   alias["@wordpress/" + wpDependency] = path.resolve(
     __dirname,
@@ -87,26 +90,27 @@ const config = {
             path.resolve(__dirname, "node_modules/gutenberg", dependency)
           )
           .concat([path.resolve(__dirname, "client/src")]),
-        loader: "babel-loader",
-        options: {
-            presets: [
-                ['env', { modules: false }],
-                'react',
-                'es2015',
-            ],
-            // presets: ['react', 'es2015', 'stage-2']
-            plugins: [
-                'transform-object-rest-spread',
-            ],
-        },
-        // query: {
-        //     cacheDirectory: true,
-        //     presets: ['react', 'es2015']
-        //   }
+        use: "babel-loader"
       },
       {
         test: /\.s?css$/,
         use: cssExtractTextPlugin.extract(extractConfig)
+      },
+      {
+        test: /\.js$/,
+        loader: 'string-replace-loader',
+        options: {
+          search: 'wp-admin/load-scripts.php',
+          replace: 'resources/mademedia/silverstripe-gutenberg-editor/client/dist/code-mirror.js',
+        }
+      },
+      {
+        test: /\.js$/,
+        loader: 'string-replace-loader',
+        options: {
+          search: 'wp-admin/load-styles.php',
+          replace: 'resources/mademedia/silverstripe-gutenberg-editor/client/dist/code-mirror.css',
+        }
       }
     ]
   },

@@ -1,20 +1,28 @@
 <?php
 namespace MadeHQ\Gutenberg\FieldTypes;
 
-use SilverStripe\ORM\FieldType\DBText;
-use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\ORM\FieldType\{DBText, DBHTMLText};
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Convert;
 use SilverStripe\View\ArrayData;
-use SilverStripe\View\Requirements;
+
+use MadeHQ\Gutenberg\Blocks\{ParagraphBlock, EmbedBlock, ListBlock, PullQuoteBlock, HeadingBlock};
 
 class DBGutenbergText extends DBText
 {
     use Configurable;
 
-    private static $blockProcessors = [
-        'wp:paragraph' => 'MadeHQ\Gutenberg\BlockRenderers\WP\Paragraph'
+    /**
+     * @config
+     * @var array
+     */
+    private static $block_processors = [
+        'paragraph' => ParagraphBlock::class,
+        'embed' => EmbedBlock::class,
+        'list' => ListBlock::class,
+        'pullquote' => PullQuoteBlock::class,
+        'heading' => HeadingBlock::class,
     ];
 
     private static $casting = [
@@ -22,54 +30,108 @@ class DBGutenbergText extends DBText
     ];
 
     /**
-     * @config
-     * @var string
+     * @return HTMLText
      */
-    private static $escape_type = 'xml';
-
-    public function forTemplate()
+    public function RAW()
     {
-        $partDetails = $this->getPartDetails();
-        $blockProcessors = static::config()->uninherited('blockProcessors');
-
-        $html = array_reduce($partDetails, function ($carry, $block) use ($blockProcessors) {
-            $classKey = sprintf('%s:%s', $block['namespace'], $block['block']);
-            if (array_key_exists($classKey, $blockProcessors)) {
-                $class = $blockProcessors[$classKey];
-                $carry.= singleton($class)::render($block);
-            } else {
-                $carry.= $block['data'];
-            }
-            return $carry;
-        }, '');
-        return $html;
+        return $this->value;
     }
 
     /**
-     * Splits the commented RAW data value into the individual block elements
-     *   then processes each part to get an array with `namespace`, `block`,
-     *   `attributes` and `data` keys
-     * @return Array
+     * @return DBHTMLText
      */
-    protected function getPartDetails() {
-        $rawParts = preg_split('(<!--\s+\\\/(\w+):(\w+)\s+-->)', $this->value);
-        $partDetails = array_reduce($rawParts, function ($carry, $item) {
-            if (trim($item)) {
-                preg_match('/<!--\s+(\w+):(\w+)\s+(\{.*\})?\s?-->(.*)/', $item, $matches);
-                if ($matches) {
-                    array_push($carry, [
-                        'namespace' => $matches[1],
-                        'block' => $matches[2],
-                        'attributes' => json_decode($matches[3], true),
-                        'data' => strtr($matches[4], [
-                            '\/' => '/',
-                            '\n' => "\n",
-                        ]),
-                    ]);
+    public function forTemplate()
+    {
+        // Store locally
+        $value = $this->value;
+
+        // Add some functionality to make this extendebale
+        $this->extend('onBeforeBlockParse', $value);
+
+        // Call the processor
+        $content = $this->processBlocks($value);
+
+        // Add some functionality to make this extendebale
+        $this->extend('onAfterBlockParse', $content);
+
+        // Return the new content
+        return DBHTMLText::create()->setValue($content);
+    }
+
+    /**
+     * Shamelessly taken from Wordpress. It's a mess, but it works.
+     *
+     * @link https://github.com/WordPress/gutenberg/blob/master/lib/blocks.php#L126
+     * @param string $value
+     * @return string
+     */
+    protected function processBlocks($value = '')
+    {
+        $content = $value;
+
+        $rendered_content = '';
+
+        $block_processors = static::config()->get('block_processors');
+
+        $matcher = '/<!--\s+wp:(\w+)(\s+(\{.*?\}))?\s+(\/)?-->/s';
+
+        while (preg_match($matcher, $content, $block_match, PREG_OFFSET_CAPTURE)) {
+            $opening_tag = $block_match[0][0];
+            $offset = $block_match[0][1];
+            $block_name = $block_match[1][0];
+            $is_self_closing = isset($block_match[4]);
+
+            // Reset attributes JSON to prevent scope bleed from last iteration.
+            $block_attributes_json = null;
+
+            if (isset($block_match[3])) {
+                $block_attributes_json = $block_match[3][0];
+            }
+
+            $block_content = substr($content, strlen($opening_tag));
+
+            $content = substr($content, $offset + strlen($opening_tag));
+
+            if (!$is_self_closing) {
+                $end_tag_pattern = '/<!--\s+\/wp:' . str_replace('/', '\/', preg_quote($block_name)) . '\s+-->/s';
+
+                if (!preg_match($end_tag_pattern, $block_content, $block_match_end, PREG_OFFSET_CAPTURE)) {
+                    break;
+                }
+
+                $end_tag = $block_match_end[0][0];
+                $end_offset = $block_match_end[0][1];
+
+                $block_content = substr($block_content, 0, strpos($block_content, $end_tag));
+
+                $content = substr($content, $end_offset + strlen($end_tag));
+            }
+
+            if (!array_key_exists($block_name, $block_processors)) {
+                user_error(sprintf(
+                    'The block "%s" does not have a processor', $block_name
+                ), E_USER_WARNING);
+
+                continue;
+            }
+
+            $block_type = singleton($block_processors[$block_name]);
+
+            $attributes = array();
+
+            if (!empty($block_attributes_json)) {
+                $decoded_attributes = json_decode( $block_attributes_json, true );
+
+                if (!is_null($decoded_attributes)) {
+                    $attributes = $decoded_attributes;
                 }
             }
-            return $carry;
-        }, []);
-        return $partDetails;
+
+            $rendered_content .= $block_type->render($block_content, $attributes);
+
+            $content = trim($content);
+        }
+
+        return $rendered_content;
     }
 }

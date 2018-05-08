@@ -5,6 +5,7 @@ namespace MadeHQ\Gutenberg\Forms;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Control\{HTTPRequest, HTTPResponse_Exception, HTTPResponse};
 use SilverStripe\Core\Convert;
+use SilverStripe\View\Requirements;
 
 use Embed\Embed;
 use Embed\Adapters\Webpage;
@@ -35,13 +36,27 @@ class GutenbergEditorField extends TextareaField
     /**
      * {@inheritdoc}
      */
-    public function getAttributes()
+    public function Field($properties = array())
     {
-        return array_merge(parent::getAttributes(), [
-            'data-gutenberg' => Convert::array2json([
-                'oembed' => $this->Link('oembed'),
-            ]),
+        $config = Convert::array2json([
+            'oembed' => $this->Link('oembed'),
+            'personalisation' => [
+                [
+                    'label' => 'Something',
+                    'value' => 'Something',
+                ],
+                [
+                    'label' => 'Something Else',
+                    'value' => 'Something Else',
+                ],
+            ],
         ]);
+
+        Requirements::insertHeadTags(
+            sprintf('<script>window.gutenbergConfig = %s;</script>', $config)
+        );
+
+        return parent::Field($properties);
     }
 
     /**
@@ -57,34 +72,29 @@ class GutenbergEditorField extends TextareaField
             return new HTTPResponse_Exception();
         }
 
-        // Check if this is a Cloudinary URL because it needs to be treated differently
-        if (preg_match('/\.cloudinary\.com\/[^\/]+\/video\/upload/', $url)) {
-            // $data = $this->getCloudinaryDetails($url);
-        } else {
-            try {
-                // Embed options
-                $options = array_merge(
-                    Embed::$default_config, static::$oembed_options
-                );
+        try {
+            // Embed options
+            $options = array_merge(
+                Embed::$default_config, static::$oembed_options
+            );
 
-                // Useful if we ever wish to find out why fetch went wrong
-                $dispatcher = new CurlDispatcher();
+            // Useful if we ever wish to find out why fetch went wrong
+            $dispatcher = new CurlDispatcher();
 
-                // Try to fetch data
-                $webpage = Embed::create($url, $options, $dispatcher);
+            // Try to fetch data
+            $webpage = Embed::create($url, $options, $dispatcher);
 
-                // Get all providers
-                $providers = $webpage->getProviders();
+            // Get all providers
+            $providers = $webpage->getProviders();
 
-                if (array_key_exists('oembed', $providers)) {
-                    $data = $providers['oembed']->getBag()->getAll();
-                } else {
-                    $data = null;
-                }
-            } catch (Exception $exception) {
-                // Don't care about errors
+            if (array_key_exists('oembed', $providers)) {
+                $data = $providers['oembed']->getBag()->getAll();
+            } else {
                 $data = null;
             }
+        } catch (Exception $exception) {
+            // Don't care about errors
+            $data = null;
         }
 
         // Body & status code

@@ -11,6 +11,7 @@ import {
     BlockControls,
     BlockAlignmentToolbar,
     RichText,
+    InspectorControls,
 } from '@wordpress/blocks';
 
 import {
@@ -18,6 +19,7 @@ import {
     Placeholder,
     Button,
     SandBox,
+    PanelBody,
 } from '@wordpress/components';
 
 // These embeds do not work in sandboxes
@@ -60,7 +62,7 @@ class EmbedBlock extends embed.settings.edit {
                 });
 
                 setAttributes({
-                    type, providerNameSlug,
+                    html, type, providerNameSlug,
                 });
             } else if ('photo' === type) {
                 this.setState({
@@ -70,7 +72,9 @@ class EmbedBlock extends embed.settings.edit {
                 });
 
                 setAttributes({
-                    type, providerNameSlug
+                    html: this.getPhotoHtml(obj),
+                    type,
+                    providerNameSlug
                 });
             }
 
@@ -187,4 +191,28 @@ export const settings = {
     ...embed.settings,
 
     edit: EmbedBlock,
+
+    attributes: {
+        url: {
+            type: 'string',
+        },
+        html: {
+            type: 'string',
+        },
+        caption: {
+            type: 'array',
+            source: 'children',
+            selector: 'figcaption',
+            default: [],
+        },
+        align: {
+            type: 'string',
+        },
+        type: {
+            type: 'string',
+        },
+        providerNameSlug: {
+            type: 'string',
+        },
+    },
 };

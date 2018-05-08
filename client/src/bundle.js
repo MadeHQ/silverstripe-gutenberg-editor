@@ -1,14 +1,13 @@
-// import jQuery from 'jquery';
-// import entwine from 'entwine';
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { render } from "@wordpress/element";
 
 import { registerBlocks } from "./blocks";
 import './store';
 
 import { EditorProvider } from "@wordpress/editor";
 import Layout from "./components/layout";
+import { subscribe, select } from "@wordpress/data";
+import { rawHandler, serialize } from "@wordpress/blocks";
 
 import { isString, debounce, isEqual, extend, has } from "lodash";
 
@@ -45,9 +44,6 @@ jQuery.entwine('ss', ($) => {
             // Tell field we're ready to hide everything
             field.addClass('gutenbergeditor--loaded');
 
-            // Set the global config
-            window.gutenbergConfig = this.data('gutenberg') || {};
-
             // Store field & container for future
             this.setField(field);
             this.setContainer(container);
@@ -71,54 +67,52 @@ jQuery.entwine('ss', ($) => {
         },
 
         startGutenberg() {
-            const originalValue = this.val();
-            const defautltContent = {
+            // Grab current value
+            let originalValue = this.val();
+
+            // Check if we have wordpress content to ensure that
+            // we can provide raw content as editable content
+            if (originalValue.length && originalValue.indexOf('wp:') === -1) {
+                // Turn raw html into blocks
+                let blocks = rawHandler({
+                    HTML: originalValue,
+                    mode: 'BLOCKS',
+                });
+
+                // Turn into text for usage!
+                originalValue = serialize(blocks);
+            }
+
+            // Content to object which wordpress expects since
+            // we only store the raw value
+            let post = {
                 content: {
-                    raw: ''// <!-- wp:paragraph -->↵<p></p>↵<!-- /wp:paragraph -->
+                    raw: originalValue || '',
                 }
             };
 
-            let post = null;
+            // Listen for changes
+            subscribe(debounce(() => {
+                const content = select('core/editor').getEditedPostContent();
 
-            try {
-                post = JSON.parse(originalValue);
-            } catch (error) {
-                // @todo Figure out how to get old content in
-                // if (originalValue.length) {
-                //     post = {
-                //         content: {
-                //             rendered: originalValue
-                //         }
-                //     };
-                // }
-                post = defautltContent;
-            }
-
-            if (!has(post, 'content')) {
-                post = defautltContent;
-            }
-
-            // Get a watcher going for content change every 1 second
-            window.addEventListener('gutenberg:content', debounce(event => {
-                // Merge old content with new content
-                const newPost = extend({}, post, {
-                    content: {
-                        raw: event.detail
-                    }
-                });
-
-                // No need to update if old and new content are the same
-                if (isEqual(post.content.raw, newPost.content.raw)) {
+                if (isEqual(post.content.raw, content)) {
                     return false;
                 }
+
+                // Update post
+                post = {
+                    content: {
+                        raw: content,
+                    }
+                };
 
                 // Using the textarea...
                 this
                     // ...update the value
-                    .val(JSON.stringify(newPost))
+                    .val(content)
                     // ...and trigger the change
                     .trigger('change');
-            }, 1000));
+            }, 250));
 
             // @todo rework entwine so that react has control of holder
             ReactDOM.render(

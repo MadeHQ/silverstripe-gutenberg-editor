@@ -26,8 +26,6 @@ import {
     withFallbackStyles
 } from '@wordpress/components';
 
-import { CheckboxGroup } from '../../components';
-
 const { getComputedStyle } = window;
 
 const ContrastCheckerWithFallbackStyles = withFallbackStyles((node, ownProps) => {
@@ -120,22 +118,6 @@ class ParagraphBlock extends paragraph.settings.edit {
                         )}
                     </PanelBody>
                 )}
-
-                <CheckboxGroup
-                    heading={ __( 'Personalisation' ) }
-                    help={ __( 'Show this block for the selected groups' ) }
-                    options={ [
-                        {
-                            label: 'Education',
-                            value: 'Education',
-                        },
-                        {
-                            label: 'Development',
-                            value: 'Development',
-                        }
-                    ] }
-                    onChange={ ( values ) => setAttributes( { personalisation: values } ) }
-                />
 
                 { backgroundColorEnabled && (
                     <PanelColor title={ __( 'Background Color' ) } colorValue={ backgroundColor } initialOpen={ false }>
@@ -251,10 +233,10 @@ const schema = {
         type: 'string',
     },
     fontSize: {
-        type: 'number',
+        type: 'string',
     },
-    personalisation: {
-        type: 'array',
+    customFontSize: {
+        type: 'number',
     },
 };
 

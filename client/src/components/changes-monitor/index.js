@@ -13,6 +13,8 @@ export class ChangesMonitor extends Component {
             clearTimeout(this.pendingNotification);
         }
 
+        console.log(this.props.edits);
+
         this.pendingNotification = setTimeout(
             () => this.props.notifyOfChange(),
             500
@@ -33,6 +35,8 @@ export class ChangesMonitor extends Component {
 export default compose([
     withSelect(select => ({
         content: select('core/editor').getEditedPostContent(),
+        typing: select('core/editor').isTyping(),
+        edits: select('core/editor').getPostEdits(),
     })),
 
     withDispatch(dispatch => ({
