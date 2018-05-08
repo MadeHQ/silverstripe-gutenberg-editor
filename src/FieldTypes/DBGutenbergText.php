@@ -7,7 +7,11 @@ use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Convert;
 use SilverStripe\View\ArrayData;
 
-use MadeHQ\Gutenberg\Blocks\{ParagraphBlock, EmbedBlock, ListBlock, PullQuoteBlock, HeadingBlock};
+use MadeHQ\Gutenberg\Blocks\{
+    ParagraphBlock, EmbedBlock, ListBlock,
+    PullQuoteBlock, HeadingBlock, SeparatorBlock,
+    QuoteBlock, CodeBlock, TableBlock
+};
 
 class DBGutenbergText extends DBText
 {
@@ -23,6 +27,10 @@ class DBGutenbergText extends DBText
         'list' => ListBlock::class,
         'pullquote' => PullQuoteBlock::class,
         'heading' => HeadingBlock::class,
+        'separator' => SeparatorBlock::class,
+        'quote' => QuoteBlock::class,
+        'code' => CodeBlock::class,
+        'table' => TableBlock::class,
     ];
 
     private static $casting = [

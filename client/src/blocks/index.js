@@ -24,14 +24,14 @@ import * as code from '@wordpress/blocks/library/code';
 // import * as html from '@wordpress/blocks/library/html';
 import * as separator from '@wordpress/blocks/library/separator';
 import * as table from '@wordpress/blocks/library/table';
-import * as freeform from '@wordpress/blocks/library/freeform';
+// import * as freeform from '@wordpress/blocks/library/freeform';
 
 const blocks = [
     paragraph, embed, list,
     heading, quote, pullquote,
     image,
     code, /* html,*/ separator, table,
-    freeform,
+    // freeform,
 ];
 
 export const registerBlocks = () => {
@@ -40,7 +40,7 @@ export const registerBlocks = () => {
     });
 
     setDefaultBlockName(paragraph.name);
-    setUnknownTypeHandlerName(freeform.name);
+    // setUnknownTypeHandlerName(freeform.name);
 };
 
 export const unregisterBlocks = () => {
