@@ -4,7 +4,6 @@ import { __ } from '@wordpress/i18n';
 import { withSelect } from '@wordpress/data';
 
 import Header from '../header';
-import ChangesMonitor from '../changes-monitor';
 import VisualEditor from '../visual-editor';
 import Sidebar from '../sidebar';
 
@@ -12,7 +11,6 @@ function Layout({showSidebar, pageContent}) {
     return (
         <div className="edit-post-layout">
             <Header />
-            <ChangesMonitor />
             <div
                 className="edit-post-layout__content"
                 role="region"

@@ -13,8 +13,6 @@ export class ChangesMonitor extends Component {
             clearTimeout(this.pendingNotification);
         }
 
-        console.log(this.props.edits);
-
         this.pendingNotification = setTimeout(
             () => this.props.notifyOfChange(),
             500

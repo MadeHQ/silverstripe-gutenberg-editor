@@ -1,4 +1,4 @@
-import { get, extend } from 'lodash';
+import { get, extend, isEmpty } from 'lodash';
 
 const defaultConfig = {
     blocks: {
@@ -52,10 +52,18 @@ let configCache = null;
 
 function getConfig() {
     if (!configCache) {
-        configCache = extend({}, defaultConfig, window.gutenbergConfig || {});
+        configCache = defaultConfig;
     }
 
     return configCache;
+}
+
+export function setConfig(config) {
+    if (isEmpty(config)) {
+        return false;
+    }
+
+    configCache = extend({}, defaultConfig, config || {});
 }
 
 export function isBlockFeatureEnabled(block, feature) {

@@ -11,6 +11,8 @@ import { rawHandler, serialize } from "@wordpress/blocks";
 
 import { isString, debounce, isEqual, extend, has } from "lodash";
 
+import { setConfig } from './config';
+
 import "./style.scss";
 
 let blocksRegistered = false;
@@ -22,6 +24,8 @@ jQuery.entwine('ss', ($) => {
         Container: null,
 
         Field: null,
+
+        Config: null,
 
         onmatch() {
             this._super();
@@ -43,6 +47,10 @@ jQuery.entwine('ss', ($) => {
 
             // Tell field we're ready to hide everything
             field.addClass('gutenbergeditor--loaded');
+
+            // Set the global config
+            setConfig(this.data('gutenberg'));
+            // this.setConfig(this.data('gutenberg') || {});
 
             // Store field & container for future
             this.setField(field);

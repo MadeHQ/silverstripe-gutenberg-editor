@@ -36,27 +36,23 @@ class GutenbergEditorField extends TextareaField
     /**
      * {@inheritdoc}
      */
-    public function Field($properties = array())
+    public function getAttributes()
     {
-        $config = Convert::array2json([
-            'oembed' => $this->Link('oembed'),
-            'personalisation' => [
-                [
-                    'label' => 'Something',
-                    'value' => 'Something',
+        return array_merge(parent::getAttributes(), [
+            'data-gutenberg' => Convert::array2json([
+                'oembed' => $this->Link('oembed'),
+                'personalisation' => [
+                    [
+                        'label' => 'Something',
+                        'value' => 'Something',
+                    ],
+                    [
+                        'label' => 'Something Else',
+                        'value' => 'Something Else',
+                    ],
                 ],
-                [
-                    'label' => 'Something Else',
-                    'value' => 'Something Else',
-                ],
-            ],
+            ]),
         ]);
-
-        Requirements::insertHeadTags(
-            sprintf('<script>window.gutenbergConfig = %s;</script>', $config)
-        );
-
-        return parent::Field($properties);
     }
 
     /**
