@@ -53,6 +53,11 @@ class DBGutenbergText extends DBText
         // Store locally
         $value = $this->value;
 
+        // Don't try to parse content if it's not Gutenberg
+        if (stripos($value, 'wp:') === false) {
+            return DBHTMLText::create()->setValue($value);
+        }
+
         // Add some functionality to make this extendebale
         $this->extend('onBeforeBlockParse', $value);
 
