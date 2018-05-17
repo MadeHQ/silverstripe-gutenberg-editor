@@ -1,5 +1,5 @@
 ---
-Name: silverstripe-gutenberg-editor
+Name: silverstripegutenberg
 After:
   - '#corefieldtypes'
 ---

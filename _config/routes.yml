@@ -1,0 +1,9 @@
+---
+Name: silverstripegutenbergroutes
+After:
+  - '#rootroutes'
+  - '#coreroutes'
+---
+SilverStripe\Control\Director:
+  rules:
+    'gutenberg-api': 'MadeHQ\Gutenberg\Controllers\APIController'

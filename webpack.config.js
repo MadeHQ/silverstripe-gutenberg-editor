@@ -42,6 +42,7 @@ const externals = {
     moment: 'moment',
     Injector: 'Injector',
     schemaFieldValues: 'schemaFieldValues',
+    jQuery: 'jQuery'
 };
 
 const wpDependencies = [
@@ -58,8 +59,8 @@ const wpDependencies = [
 
 const alias = {
   "original-moment": path.resolve(__dirname, "node_modules/moment"),
-  moment: path.resolve(__dirname, "client/src/moment.js"),
-  InsertMediaModal: path.resolve(__dirname, '../../silverstripe/asset-admin/client/src/containers/InsertMediaModal/InsertMediaModal'),
+  "moment": path.resolve(__dirname, "client/src/moment.js"),
+  "InsertMediaModal": path.resolve(__dirname, "../../silverstripe/asset-admin/client/src/containers/InsertMediaModal/InsertMediaModal")
 };
 
 wpDependencies.forEach(wpDependency => {

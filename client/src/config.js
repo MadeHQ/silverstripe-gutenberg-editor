@@ -45,7 +45,7 @@ const defaultConfig = {
         },
     },
     oembed: null,
-    personalisation: null,
+    personalisation: [],
 };
 
 let configCache = null;

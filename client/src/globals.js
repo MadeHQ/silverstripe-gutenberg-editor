@@ -1,8 +1,10 @@
 import { createElement, Component } from "@wordpress/element";
 import 'whatwg-fetch';
 import { isString } from "lodash";
+import { apiRequest } from './api-request';
+import './api-request';
 
-window.wp = {};
+window.wp = window.wp || {};
 
 // Necessary for the pragma config
 // Component is used by the Dashicon component
@@ -71,16 +73,6 @@ window.wpApiSettings = {
 
 window.wp.api = {
   getPostTypeRoute() {
-    return "/none";
+    return "none";
   }
-};
-
-window.wp.apiRequest = (url) => {
-  if (!url) {
-    return Promise.reject("no URL provided");
-  }
-
-  return fetch(url.path, { credentials: 'include' }).then(response => {
-    return response.json();
-  });
 };
