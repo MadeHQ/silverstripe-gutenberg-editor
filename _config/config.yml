@@ -14,11 +14,5 @@ SilverStripe\Admin\LeftAndMain:
     - "mademedia/silverstripe-gutenberg-editor: client/dist/bundle.js"
 
 SilverStripe\Core\Injector\Injector:
-  HTMLText:
+  GutenbergText:
     class: MadeHQ\Gutenberg\FieldTypes\DBGutenbergText
-    properties:
-      ProcessShortcodes: true
-
-SilverStripe\CMS\Model\SiteTree:
-  extensions:
-    - MadeHQ\Gutenberg\Extensions\GutenbergContentFields
