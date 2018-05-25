@@ -26,6 +26,11 @@ import * as separator from '@wordpress/blocks/library/separator';
 import * as table from '@wordpress/blocks/library/table';
 // import * as freeform from '@wordpress/blocks/library/freeform';
 
+window.wp = window.wp || {};
+window.wp.registerBlockType = registerBlockType;
+window.wp.unregisterBlockType = unregisterBlockType;
+window.wp.setDefaultBlockName = setDefaultBlockName;
+
 const blocks = [
     paragraph, embed, list,
     heading, quote, pullquote,
