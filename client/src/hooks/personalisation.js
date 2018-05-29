@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { assign, pull } from 'lodash';
+import { assign, pull, map } from 'lodash';
 import classnames from 'classnames';
 
 /**
@@ -85,7 +85,7 @@ export function withInspectorControl( BlockEdit ) {
         return [
             <BlockEdit key="block-edit-personalisation" { ...props } />,
             personalisationEnabled && <InspectorControls key="inspector-personalisation">
-                <PanelBody title={ __( 'Text Alignment' ) }>
+                <PanelBody title={ __( 'Personalisation' ) }>
                     { checkboxes }
                 </PanelBody>
             </InspectorControls>,
