@@ -1,11 +1,6 @@
 import '../hooks';
 
-import {
-    registerBlockType,
-    unregisterBlockType,
-    setDefaultBlockName,
-    setUnknownTypeHandlerName,
-} from '@wordpress/blocks';
+import * as wpBlocks from '@wordpress/blocks';
 
 import * as paragraph from './paragraph';
 import * as embed from './embed';
@@ -27,9 +22,7 @@ import * as table from '@wordpress/blocks/library/table';
 // import * as freeform from '@wordpress/blocks/library/freeform';
 
 window.wp = window.wp || {};
-window.wp.registerBlockType = registerBlockType;
-window.wp.unregisterBlockType = unregisterBlockType;
-window.wp.setDefaultBlockName = setDefaultBlockName;
+window.wp.blocks = wpBlocks;
 
 const blocks = [
     paragraph, embed, list,
@@ -41,15 +34,15 @@ const blocks = [
 
 export const registerBlocks = () => {
     blocks.forEach(({ name, settings }) => {
-        registerBlockType(name, settings);
+        wpBlocks.registerBlockType(name, settings);
     });
 
-    setDefaultBlockName(paragraph.name);
+    wpBlocks.setDefaultBlockName(paragraph.name);
     // setUnknownTypeHandlerName(freeform.name);
 };
 
 export const unregisterBlocks = () => {
     blocks.forEach(({ name, settings }) => {
-        unregisterBlockType(name);
+        wpBlocks.unregisterBlockType(name);
     });
 }
