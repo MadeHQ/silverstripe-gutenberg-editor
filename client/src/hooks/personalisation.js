@@ -46,7 +46,7 @@ export function withInspectorControl( BlockEdit ) {
 
         let values = props.attributes.personalisation || '';
 
-        values = values.split(',');
+        values = pull(values.split(','), '');
 
         const onChange = (event) => {
             if (event.target.checked) {
@@ -62,7 +62,9 @@ export function withInspectorControl( BlockEdit ) {
             const { label, value } = option;
 
             const id = `personalisation-${value}`;
-            const isChecked = values.indexOf(value) !== -1;
+            const isChecked = values.some(item => {
+                return String(item).toLowerCase() === String(value).toLowerCase();
+            });
 
             return (
                 <div key={ index } className="components-checkbox-control">

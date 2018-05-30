@@ -140,7 +140,11 @@ class DBGutenbergText extends DBText
                 }
             }
 
-            $rendered_content .= $block_type->render($block_content, $attributes);
+            $this->extend('beforeBlockRender', $block_content, $attributes);
+
+            if (is_string($block_content)) {
+                $rendered_content .= $block_type->render($block_content, $attributes);
+            }
 
             $content = trim($content);
         }
