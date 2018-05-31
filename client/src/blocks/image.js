@@ -5,42 +5,8 @@ import ReactDOM from 'react-dom';
 import { __ } from '@wordpress/i18n';
 
 class CloudinaryImageBlock extends Component {
-    constructor(props) {
-        super(props);
-        this.handleAddInsert.bind(this);
-        this.state = {
-            showUpload: false
-        };
-    }
-
-    handleAddInsert() {
-        console.log('CloudinaryImageBlock::handleAddInsert', this);
-    }
-
-    onBrowse(folderId, fileId, query) {
-        console.log(this, folderId, fileId, query, ...arguments);
-        debugger;
-    }
-
-    getHolder() {
-        return ReactDOM.findDOMNode(this).querySelector('.uploadfield-holder');
-    }
-
-    renderUploadField() {
-        return false;
-
-        const UploadField = Injector.loadComponent('UploadField', {context: 'pages-controller-cms-content'});
-        const props = schemaFieldValues.schemaMerge(this.getSchemaData(), this.getStateData());
-        const onChange = () => {
-            console.log('image::onChange', ...arguments);
-        }
-        return (
-            <UploadField
-                {...props}
-                onChange={onChange}
-                noHolder
-            />
-        );
+    componentDidMount() {
+        jQuery.entwine.triggerMatching()
     }
 
     render() {
@@ -57,8 +23,7 @@ class CloudinaryImageBlock extends Component {
                 >
                     <div id={`Form_EditForm_DynamicImage${instanceId}_File_Holder`}>
                         <div>
-                            <div className="uploadfield-holder">
-                            </div>
+                            <div className="uploadfield-holder" />
                             <input
                                 type="file"
                                 multiple="multiple"
@@ -78,14 +43,14 @@ class CloudinaryImageBlock extends Component {
     getStateData() {
         const { instanceId } = this.props;
         return {
-            "name": `DynamicImage${instanceId}[File]`,
-            "id": `Form_EditForm_DynamicImage${instanceId}_File`,
-            "value": {
-                "Files": []
+            'name': `DynamicImage${instanceId}[File]`,
+            'id': `Form_EditForm_DynamicImage${instanceId}_File`,
+            'value': {
+                'Files': []
             },
-            "message": null,
-            "data": {
-                "files": []
+            'message': null,
+            'data': {
+                'files': []
             }
         }
     }
@@ -93,35 +58,35 @@ class CloudinaryImageBlock extends Component {
     getSchemaData() {
         const { instanceId } = this.props;
         return {
-            "name": `DynamicImage${instanceId}[File]`,
-            "id": `Form_EditForm_DynamicImage${instanceId}_File`,
-            "type": "file",
-            "schemaType": "Custom",
-            "component": "UploadField",
-            "holderId": `Form_EditForm_DynamicImage${instanceId}_File_Holder`,
-            "title": "File",
-            "source": null,
-            "extraClass": "entwine-uploadfield uploadfield",
-            "description": null,
-            "rightTitle": null,
-            "leftTitle": null,
-            "readOnly": false,
-            "disabled": false,
-            "customValidationMessage": "",
-            "validation": [],
-            "attributes": [],
-            "autoFocus": false,
-            "data":  {
-                "createFileEndpoint":  {
-                    "url": `admin\/pages\/edit\/EditForm\/1\/field\/DynamicImage${instanceId}[File]\/upload`,
-                    "method": "post",
-                    "payloadFormat":  "urlencoded"
+            'name': `DynamicImage${instanceId}[File]`,
+            'id': `Form_EditForm_DynamicImage${instanceId}_File`,
+            'type': "file",
+            'schemaType': "Custom",
+            'component': "UploadField",
+            'holderId': `Form_EditForm_DynamicImage${instanceId}_File_Holder`,
+            'title': "File",
+            'source': null,
+            'extraClass': "entwine-uploadfield uploadfield",
+            'description': null,
+            'rightTitle': null,
+            'leftTitle': null,
+            'readOnly': false,
+            'disabled': false,
+            'customValidationMessage': '',
+            'validation': [],
+            'attributes': [],
+            'autoFocus': false,
+            'data':  {
+                'createFileEndpoint':  {
+                    'url': `admin\/pages\/edit\/EditForm\/1\/field\/DynamicImage${instanceId}[File]\/upload`,
+                    'method': "post",
+                    'payloadFormat':  "urlencoded"
                 },
-                "maxFiles": 1,
-                "multi": true,
-                "parentid": 1,
-                "canUpload": true,
-                "canAttach": true
+                'maxFiles': 1,
+                'multi': true,
+                'parentid': 1,
+                'canUpload': true,
+                'canAttach': true
             }
         };
     }
