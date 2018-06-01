@@ -9,7 +9,6 @@ import debounce from 'lodash/debounce';
 class CloudinaryImageBlock extends Component {
     constructor(props) {
         super(props);
-        this.uploadFieldInputChangeListener = this.uploadFieldInputChangeListener.bind(this);
         this.updateFileDataFromServer = this.updateFileDataFromServer.bind(this);
         this.titleChangeHandler = this.titleChangeHandler.bind(this);
         this.altTextChangeHandler = this.altTextChangeHandler.bind(this);
@@ -27,7 +26,11 @@ class CloudinaryImageBlock extends Component {
             // Get File data before triggering entwine
             fetch(`/gutenberg-api/filedata/${this.getFileId()}`)
                 .then(response => response.json())
-                .then(this.updateFileDataFromServer)
+                .then((fileData) => {
+                    this.setState({
+                        fileData,
+                    })
+                })
                 .then(() => {
                     jQuery.entwine.triggerMatching();
                 });
@@ -89,15 +92,6 @@ class CloudinaryImageBlock extends Component {
             title: fileData.title,
             altText: '',
         });
-    }
-
-    uploadFieldInputChangeListener(event) {
-        const input = event.target.querySelector('input');
-        if (!input) {
-            this.setState({ fileId: false });
-            return false;
-        }
-        this.setState({ fileId: input.value });
     }
 
     setState(state) {
