@@ -5,12 +5,19 @@ namespace MadeHQ\Gutenberg\Controllers;
 use SilverStripe\Control\{Controller, HTTPRequest, HTTPResponse};
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Core\Convert;
+use SilverStripe\Assets\File;
+
+use SilverStripe\AssetAdmin\Controller\AssetAdmin;
+use SilverStripe\AssetAdmin\Model\ThumbnailGenerator;
+use SilverStripe\AssetAdmin\Forms\UploadField;
 
 use Embed\Embed;
 use Embed\Http\CurlDispatcher;
 
 class APIController extends Controller
 {
+    private $thumbnailGenerator;
+
     /**
      * @var array
      */
@@ -18,6 +25,7 @@ class APIController extends Controller
         'oembed',
         'posts',
         'none',
+        'filedata',
     ];
 
     /**
@@ -32,6 +40,38 @@ class APIController extends Controller
             'external_images' => false,
         ],
     ];
+
+    /**
+     * Used to get File data to be used in the File Selector
+     * @param HTTPRequest $request
+     * @return HTTPResponse
+     */
+    public function filedata(HTTPRequest $request)
+    {
+        if (!$request->param('ID')) {
+            return $this->output();
+        }
+        if (!($file = File::get_by_id(File::class, $request->param('ID')))) {
+            return $this->output();
+        }
+
+        $smallWidth = UploadField::config()->uninherited('thumbnail_width');
+        $smallHeight = UploadField::config()->uninherited('thumbnail_height');
+
+        $largeWidth = AssetAdmin::config()->uninherited('thumbnail_width');
+        $largeHeight = AssetAdmin::config()->uninherited('thumbnail_height');
+
+        return $this->output([
+            'id' => $file->ID,
+            'title' => $file->Title,
+            'exists' => true,
+            'type' => $file->Type,
+            'category' => File::get_app_category($file->Format),
+            'name' => $file->Name,
+            'smallThumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $smallWidth, $smallHeight),
+            'thumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $largeWidth, $largeHeight),
+        ]);
+    }
 
     /**
      * @param HTTPRequest $request
@@ -136,5 +176,16 @@ class APIController extends Controller
 
         // Return
         return $response;
+    }
+
+    public function getThumbnailGenerator()
+    {
+        return $this->thumbnailGenerator;
+    }
+
+    public function setThumbnailGenerator(ThumbnailGenerator $generator)
+    {
+        $this->thumbnailGenerator = $generator;
+        return $this;
     }
 }

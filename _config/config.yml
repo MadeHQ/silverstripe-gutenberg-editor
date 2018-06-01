@@ -16,3 +16,6 @@ SilverStripe\Admin\LeftAndMain:
 SilverStripe\Core\Injector\Injector:
   GutenbergText:
     class: MadeHQ\Gutenberg\FieldTypes\DBGutenbergText
+  MadeHQ\Gutenberg\Controllers\APIController:
+    properties:
+      ThumbnailGenerator: '%$SilverStripe\AssetAdmin\Model\ThumbnailGenerator.assetadmin'
