@@ -18,26 +18,15 @@
   }
 
   .uploadfield-item__view-btn {
+    background-color: rgba(231, 235, 240, 0.6);
     border-radius: 100%;
     bottom: 5%;
     position: absolute;
     right: 5%;
 
-    // height: 100%;
-    // left: 0;
-    // padding: 0;
-    // position: absolute;
-    // top: 0;
-    // width: 100%;
-    //
-    // &:hover,
-    // &:focus {
-    //   background-color: rgba(231, 235, 240, 0.3);
-    // }
-    //
-    // &::before {
-    //   content: '';
-    // }
+    &::before {
+      top: -2px;
+    }
   }
 
   /**
