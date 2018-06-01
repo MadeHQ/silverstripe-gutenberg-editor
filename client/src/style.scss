@@ -17,6 +17,8 @@ $block-side-ui-padding: 36px;
 @include admin-scheme-color-overrides("ocean", $scheme-ocean__spot-color);
 @include admin-scheme-color-overrides("sunrise", $scheme-sunrise__spot-color);
 
+@import 'blocks/image/style';
+
 @mixin visually-hidden {
   border: 0 !important;
   clip: rect(0 0 0 0) !important;

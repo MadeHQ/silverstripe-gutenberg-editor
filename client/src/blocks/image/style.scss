@@ -1,0 +1,64 @@
+.gutenberg__editor .gutenbergeditor-image {
+  position: relative;
+
+  .full-preview__image {
+
+  }
+  .uploadfield-item {
+    border: none;
+    height: auto;
+    position: static;
+  }
+  .uploadfield-item:last-child {
+    height: auto;
+  }
+  .uploadfield-item__thumbnail,
+  .uploadfield-item__details {
+    display: none;
+  }
+
+  .uploadfield-item__view-btn {
+    border-radius: 100%;
+    bottom: 5%;
+    position: absolute;
+    right: 5%;
+
+    // height: 100%;
+    // left: 0;
+    // padding: 0;
+    // position: absolute;
+    // top: 0;
+    // width: 100%;
+    //
+    // &:hover,
+    // &:focus {
+    //   background-color: rgba(231, 235, 240, 0.3);
+    // }
+    //
+    // &::before {
+    //   content: '';
+    // }
+  }
+
+  /**
+   * As the block can be removed there is no need for the image to be removed
+   */
+  .uploadfield-item__remove-btn {
+    display: none;
+  }
+
+  fieldset.full-preview__fields {
+    background-color: rgba(255, 255, 255, 0.8);
+    display: none;
+    height: 100%;
+    left: 0;
+    padding: 10%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  &:hover fieldset.full-preview__fields {
+    display: block;
+  }
+}

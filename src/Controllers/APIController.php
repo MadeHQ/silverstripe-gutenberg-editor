@@ -19,6 +19,16 @@ class APIController extends Controller
     private $thumbnailGenerator;
 
     /**
+     * Thumbnail Width to be used for the image to appear in the editor
+     */
+    private static $thumbnail_width = 800;
+
+    /**
+     * Thumbnail Height to be used for the image to appear in the editor
+     */
+    private static $thumbnail_height = 500;
+
+    /**
      * @var array
      */
     private static $allowed_actions = [
@@ -55,6 +65,9 @@ class APIController extends Controller
             return $this->output();
         }
 
+        $previewWidth = static::config()->uninherited('thumbnail_width');
+        $previewHeight = static::config()->uninherited('thumbnail_height');
+
         $smallWidth = UploadField::config()->uninherited('thumbnail_width');
         $smallHeight = UploadField::config()->uninherited('thumbnail_height');
 
@@ -68,6 +81,7 @@ class APIController extends Controller
             'type' => $file->Type,
             'category' => File::get_app_category($file->Format),
             'name' => $file->Name,
+            'largeThumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $previewWidth, $previewHeight),
             'smallThumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $smallWidth, $smallHeight),
             'thumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $largeWidth, $largeHeight),
         ]);
