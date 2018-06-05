@@ -12,12 +12,16 @@ class CloudinaryImageBlock extends Component {
         this.updateFileDataFromServer = this.updateFileDataFromServer.bind(this);
         this.titleChangeHandler = this.titleChangeHandler.bind(this);
         this.altTextChangeHandler = this.altTextChangeHandler.bind(this);
+        this.heightChangeHandler = this.heightChangeHandler.bind(this);
+        this.widthChangeHandler = this.widthChangeHandler.bind(this);
 
         this.state = {
             fileData: false,
             fileId: props.attributes.fileId,
             title: props.attributes.title,
             altText: props.attributes.altText,
+            height: props.attributes.height,
+            width: props.attributes.width,
         };
     }
 
@@ -27,8 +31,14 @@ class CloudinaryImageBlock extends Component {
             fetch(`/gutenberg-api/filedata/${this.getFileId()}`)
                 .then(response => response.json())
                 .then((fileData) => {
+                    // Will use the state value if supplied otherwise use the image width/height
+                    const width = this.state.width || fileData.previewWidth;
+                    const height = this.state.height || fileData.previewHeight;
+
                     this.setState({
                         fileData,
+                        height,
+                        width
                     })
                 })
                 .then(() => {
@@ -50,6 +60,28 @@ class CloudinaryImageBlock extends Component {
 
     altTextChangeHandler(altText) {
         this.setState({altText});
+    }
+
+    /**
+     * Prevent the height from going above the original height
+     * @param int height
+     */
+    heightChangeHandler(height) {
+        if (height > this.state.fileData.height) {
+            return false;
+        }
+        this.setState({height});
+    }
+
+    /**
+     * Prevent the width from going above the original width
+     * @param int width
+     */
+    widthChangeHandler(width) {
+        if (width > this.state.fileData.width) {
+            return false;
+        }
+        this.setState({width});
     }
 
     addListeners() {
@@ -109,6 +141,12 @@ class CloudinaryImageBlock extends Component {
         if (state.altText !== undefined) {
             this.props.setAttributes({altText: state.altText});
         }
+        if (state.height !== undefined) {
+            this.props.setAttributes({height: state.height});
+        }
+        if (state.width !== undefined) {
+            this.props.setAttributes({width: state.width});
+        }
         super.setState(state);
     }
 
@@ -128,7 +166,7 @@ class CloudinaryImageBlock extends Component {
         return this.state.fileData;
     }
 
-    renderFullPreviewImage() {
+    renderFullPreviewImageAndFields() {
         if (!this.hasFileId() || !this.fileDataIsLoaded()) {
             return null;
         }
@@ -150,6 +188,26 @@ class CloudinaryImageBlock extends Component {
                         <label htmlFor={`DynamicImage${instanceId}_AltText`} id={`title-DynamicImage${instanceId}_AltText`}>Alt</label>
                         <div>
                             <input type="text" className="text" id={`DynamicImage${instanceId}_AltText`} value={this.state.altText} onChange={e => this.altTextChangeHandler(e.target.value)} />
+                        </div>
+                    </div>
+                    <div className="form__fieldgroup field CompositeField fieldgroup">
+                        <div id={`DynamicImage${instanceId}_Height_Holder`} className="form__fieldgroup-item field field--small">
+                            <label htmlFor={`DynamicImage${instanceId}_Height`} id={`title-DynamicImage${instanceId}_Height`}>Height</label>
+                            <div>
+                                <input placeholder={this.state.height} type="number" className="text" id={`DynamicImage${instanceId}_Height`} value={this.state.height} onChange={e => this.heightChangeHandler(e.target.value)} />
+                            </div>
+                            <div className="form__field-description">
+                                max. {this.state.fileData.height}px
+                            </div>
+                        </div>
+                        <div id={`DynamicImage${instanceId}_Width_Holder`} className="form__fieldgroup-item field field--small">
+                            <label htmlFor={`DynamicImage${instanceId}_Width`} id={`title-DynamicImage${instanceId}_Width`}>Width</label>
+                            <div>
+                                <input placeholder={this.state.width} type="number" className="text" id={`DynamicImage${instanceId}_Width`} value={this.state.width} onChange={e => this.widthChangeHandler(e.target.value)} />
+                            </div>
+                            <div className="form__field-description">
+                                max. {this.state.fileData.width}px
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -178,7 +236,7 @@ class CloudinaryImageBlock extends Component {
                 >
                     <div id={`Form_EditForm_DynamicImage${instanceId}_File_Holder`}>
                         <div>
-                            {this.renderFullPreviewImage()}
+                            {this.renderFullPreviewImageAndFields()}
                             <div className="uploadfield-holder" />
                             <input
                                 type="file"
@@ -290,6 +348,12 @@ export const settings = {
         },
         altText: {
             type: 'string',
+        },
+        height: {
+            type: 'string'
+        },
+        width: {
+            type: 'string'
         },
     },
 

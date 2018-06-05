@@ -20,13 +20,10 @@ class APIController extends Controller
 
     /**
      * Thumbnail Width to be used for the image to appear in the editor
+     * If set to 0 then it will be ignored
+     * @var Int
      */
-    private static $thumbnail_width = 800;
-
-    /**
-     * Thumbnail Height to be used for the image to appear in the editor
-     */
-    private static $thumbnail_height = 500;
+    private static $max_preview_width = 800;
 
     /**
      * @var array
@@ -65,8 +62,14 @@ class APIController extends Controller
             return $this->output();
         }
 
-        $previewWidth = static::config()->uninherited('thumbnail_width');
-        $previewHeight = static::config()->uninherited('thumbnail_height');
+        $originalWidth = $file->getWidth();
+        $originalHeight = $file->getHeight();
+
+        list($previewWidth, $previewHeight) = static::calculateWidthHeight(
+            $originalWidth,
+            $originalHeight,
+            static::config()->uninherited('max_preview_width')
+        );
 
         $smallWidth = UploadField::config()->uninherited('thumbnail_width');
         $smallHeight = UploadField::config()->uninherited('thumbnail_height');
@@ -84,7 +87,27 @@ class APIController extends Controller
             'largeThumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $previewWidth, $previewHeight),
             'smallThumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $smallWidth, $smallHeight),
             'thumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $largeWidth, $largeHeight),
+            'width' => $originalWidth,
+            'height' => $originalHeight,
+            'previewWidth' => $previewWidth,
+            'previewHeight' => $previewHeight,
         ]);
+    }
+
+    private static function calculateWidthHeight(int $originalWidth, int $originalHeight, int $width)
+    {
+        if ($width > $originalWidth) {
+            return [
+                $originalWidth,
+                $originalHeight
+            ];
+        }
+        $widthRatio = $width / $originalWidth;
+        $height = $originalHeight * $widthRatio;
+        return [
+            (int)$width,
+            (int)$height
+        ];
     }
 
     /**
