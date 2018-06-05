@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 import { isString } from "lodash";
 import { apiRequest } from './api-request';
 import './api-request';
+import { __ } from '@wordpress/i18n';
 
 window.wp = window.wp || {};
 
@@ -76,3 +77,5 @@ window.wp.api = {
     return "none";
   }
 };
+
+window.wp.__ = __;

@@ -124,7 +124,7 @@ jQuery.entwine('ss', ($) => {
 
             // @todo rework entwine so that react has control of holder
             ReactDOM.render(
-                <EditorProvider post={post}><Layout /></EditorProvider>,
+                <EditorProvider post={post} settings={{bodyPlaceholder: 'Begin adding your content&hellip;'}}><Layout /></EditorProvider>,
                 this.getContainer().get(0)
             );
         },

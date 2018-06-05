@@ -4,6 +4,7 @@ const defaultConfig = {
     blocks: {
         paragraph: {
             textAlignment: true,
+            lede: true,
             dropCap: true,
             fontSize: false,
             backgroundColor: false,

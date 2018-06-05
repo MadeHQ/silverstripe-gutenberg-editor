@@ -26,6 +26,8 @@ import {
     withFallbackStyles
 } from '@wordpress/components';
 
+import './style.scss';
+
 const { getComputedStyle } = window;
 
 const ContrastCheckerWithFallbackStyles = withFallbackStyles((node, ownProps) => {
@@ -41,6 +43,16 @@ const ContrastCheckerWithFallbackStyles = withFallbackStyles((node, ownProps) =>
 })(ContrastChecker);
 
 class ParagraphBlock extends paragraph.settings.edit {
+    constructor() {
+        super( ...arguments );
+        this.toggleLede = this.toggleLede.bind( this );
+    }
+
+    toggleLede() {
+        const { attributes, setAttributes } = this.props;
+        setAttributes( { lede: ! attributes.lede } );
+    }
+
     render() {
         const {
             attributes,
@@ -54,6 +66,7 @@ class ParagraphBlock extends paragraph.settings.edit {
         const {
             align,
             content,
+            lede,
             dropCap,
             placeholder,
             fontSize,
@@ -62,9 +75,20 @@ class ParagraphBlock extends paragraph.settings.edit {
             width,
         } = attributes;
 
-        const className = dropCap ? 'has-drop-cap' : null;
+        let className = [];
+
+        if (lede) {
+            className.push('is-lede');
+        }
+
+        if (dropCap) {
+            className.push('has-drop-cap');
+        }
+
+        className = className.join(' ');
 
         const textAlignmentEnabled = isBlockFeatureEnabled('paragraph', 'textAlignment');
+        const ledeEnabled = isBlockFeatureEnabled('paragraph', 'lede');
         const dropCapEnabled = isBlockFeatureEnabled('paragraph', 'dropCap');
         const fontSizeEnabled = isBlockFeatureEnabled('paragraph', 'fontSize');
         const backgroundColorEnabled = isBlockFeatureEnabled('paragraph', 'backgroundColor');
@@ -72,7 +96,7 @@ class ParagraphBlock extends paragraph.settings.edit {
         const blockAlignmentEnabled = isBlockFeatureEnabled('paragraph', 'blockAlignment');
 
         const textSettingsEnabled = (
-            dropCapEnabled || fontSizeEnabled
+            ledeEnabled || dropCapEnabled || fontSizeEnabled
         );
 
         const inspectorEnabled = (
@@ -97,6 +121,14 @@ class ParagraphBlock extends paragraph.settings.edit {
 
                 { textSettingsEnabled && (
                     <PanelBody title={ __( 'Text Settings' ) }>
+                        { ledeEnabled && (
+                            <ToggleControl
+                                label={ __( 'Lede' ) }
+                                checked={ !! lede }
+                                onChange={ this.toggleLede }
+                            />
+                        )}
+
                         { dropCapEnabled && (
                             <ToggleControl
                                 label={ __( 'Drop Cap' ) }
@@ -215,6 +247,10 @@ const schema = {
     },
     align: {
         type: 'string',
+    },
+    lede: {
+        type: 'boolean',
+        default: false,
     },
     dropCap: {
         type: 'boolean',
