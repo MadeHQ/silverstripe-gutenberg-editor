@@ -166,6 +166,35 @@ class CloudinaryImageBlock extends Component {
         return this.state.fileData;
     }
 
+    renderWidthHeightFieldGroup() {
+        return false;
+
+        const { instanceId } = this.props;
+
+        return (
+            <div className="form__fieldgroup field CompositeField fieldgroup">
+                <div id={`DynamicImage${instanceId}_Height_Holder`} className="form__fieldgroup-item field field--small">
+                    <label htmlFor={`DynamicImage${instanceId}_Height`} id={`title-DynamicImage${instanceId}_Height`}>Height</label>
+                    <div>
+                        <input placeholder={this.state.height} type="number" className="text" id={`DynamicImage${instanceId}_Height`} value={this.state.height} onChange={e => this.heightChangeHandler(e.target.value)} />
+                    </div>
+                    <div className="form__field-description">
+                        max. {this.state.fileData.height}px
+                    </div>
+                </div>
+                <div id={`DynamicImage${instanceId}_Width_Holder`} className="form__fieldgroup-item field field--small">
+                    <label htmlFor={`DynamicImage${instanceId}_Width`} id={`title-DynamicImage${instanceId}_Width`}>Width</label>
+                    <div>
+                        <input placeholder={this.state.width} type="number" className="text" id={`DynamicImage${instanceId}_Width`} value={this.state.width} onChange={e => this.widthChangeHandler(e.target.value)} />
+                    </div>
+                    <div className="form__field-description">
+                        max. {this.state.fileData.width}px
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     renderFullPreviewImageAndFields() {
         if (!this.hasFileId() || !this.fileDataIsLoaded()) {
             return null;
@@ -190,26 +219,7 @@ class CloudinaryImageBlock extends Component {
                             <input type="text" className="text" id={`DynamicImage${instanceId}_AltText`} value={this.state.altText} onChange={e => this.altTextChangeHandler(e.target.value)} />
                         </div>
                     </div>
-                    <div className="form__fieldgroup field CompositeField fieldgroup">
-                        <div id={`DynamicImage${instanceId}_Height_Holder`} className="form__fieldgroup-item field field--small">
-                            <label htmlFor={`DynamicImage${instanceId}_Height`} id={`title-DynamicImage${instanceId}_Height`}>Height</label>
-                            <div>
-                                <input placeholder={this.state.height} type="number" className="text" id={`DynamicImage${instanceId}_Height`} value={this.state.height} onChange={e => this.heightChangeHandler(e.target.value)} />
-                            </div>
-                            <div className="form__field-description">
-                                max. {this.state.fileData.height}px
-                            </div>
-                        </div>
-                        <div id={`DynamicImage${instanceId}_Width_Holder`} className="form__fieldgroup-item field field--small">
-                            <label htmlFor={`DynamicImage${instanceId}_Width`} id={`title-DynamicImage${instanceId}_Width`}>Width</label>
-                            <div>
-                                <input placeholder={this.state.width} type="number" className="text" id={`DynamicImage${instanceId}_Width`} value={this.state.width} onChange={e => this.widthChangeHandler(e.target.value)} />
-                            </div>
-                            <div className="form__field-description">
-                                max. {this.state.fileData.width}px
-                            </div>
-                        </div>
-                    </div>
+                    {this.renderWidthHeightFieldGroup()}
                 </fieldset>
             </div>
         );
