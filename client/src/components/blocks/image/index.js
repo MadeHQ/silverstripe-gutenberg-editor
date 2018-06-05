@@ -1,9 +1,10 @@
 import { Component } from '@wordpress/element';
 import ReactDOM from 'react-dom';
 
-class ImageBlock extends Component {
+class Image extends Component {
     constructor(props) {
         super(props);
+console.log('Image::constructor', props);
         this.updateFileDataFromServer = this.updateFileDataFromServer.bind(this);
         this.titleChangeHandler = this.titleChangeHandler.bind(this);
         this.altTextChangeHandler = this.altTextChangeHandler.bind(this);
@@ -317,4 +318,4 @@ class ImageBlock extends Component {
     }
 }
 
-export default ImageBlock;
+export default Image;
