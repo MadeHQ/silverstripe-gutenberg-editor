@@ -51,4 +51,11 @@
   &:hover fieldset.full-preview__fields {
     display: block;
   }
+
+  &.gutenbergeditor-image__error {
+    background-color: #FDD;
+    border: 2px solid #C33;
+    border-radius: 5px;
+    padding: 0 9px;
+  }
 }

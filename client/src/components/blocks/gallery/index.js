@@ -49,11 +49,10 @@ class Gallery extends Component {
         return (
             <div className="gutenberg-gallery__item">
                 <button
-                    className="gutenberg-gallery__item-remove"
+                    className="gutenberg-gallery__item-remove font-icon-cancel"
                     onClick={() => {this.removeItem(index)}}
-                >
-                    Remove
-                </button>
+                    title="Remove"
+                />
                 <Image key={index} attributes={item} setAttributes={setAttributes} instanceId={`gallery-${instanceId}-${index}-${item.fileId}`} />
             </div>
         );

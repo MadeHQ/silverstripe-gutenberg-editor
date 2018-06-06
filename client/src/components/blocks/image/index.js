@@ -39,6 +39,9 @@ class Image extends Component {
                 })
                 .then(() => {
                     jQuery.entwine.triggerMatching();
+                })
+                .catch(error => {
+                    this.setState({error});
                 });
         } else {
             this.addListeners();
@@ -252,9 +255,15 @@ class Image extends Component {
     }
 
     render() {
+        if (this.state.error) {
+            return (
+                <div className="gutenbergeditor-image gutenbergeditor-image__error ui-widget">Error loading file data</div>
+            );
+        }
+
         if (this.hasFileId() && !this.fileDataIsLoaded()) {
             return (
-                <div>Loading</div>
+                <div className="ui-widget">Loading</div>
             );
         }
 
