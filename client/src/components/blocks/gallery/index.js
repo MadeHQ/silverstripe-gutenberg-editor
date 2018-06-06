@@ -8,6 +8,7 @@ class Gallery extends Component {
 
         this.addItem = this.addItem.bind(this);
         this.renderGalleryItem = this.renderGalleryItem.bind(this);
+        this.removeItem = this.removeItem.bind(this);
 
         this.state = {
             items: props.attributes.items || [],
@@ -20,9 +21,21 @@ class Gallery extends Component {
         }
     }
 
+    /**
+     * Append a new item to the gallery
+     */
     addItem() {
         const items = this.state.items.slice(0);
         items.push({});
+        this.setState({items});
+    }
+
+    /**
+     * Removes the item based on the index provided
+     */
+    removeItem(index) {
+        const items = this.state.items.slice(0);
+        items.splice(index, 1);
         this.setState({items});
     }
 
@@ -35,7 +48,13 @@ class Gallery extends Component {
 
         return (
             <div className="gutenberg-gallery__item">
-                <Image key={index} attributes={item} setAttributes={setAttributes} instanceId={`gallery-${instanceId}-${index}`} />
+                <button
+                    className="gutenberg-gallery__item-remove"
+                    onClick={() => {this.removeItem(index)}}
+                >
+                    Remove
+                </button>
+                <Image key={index} attributes={item} setAttributes={setAttributes} instanceId={`gallery-${instanceId}-${index}-${item.fileId}`} />
             </div>
         );
     }

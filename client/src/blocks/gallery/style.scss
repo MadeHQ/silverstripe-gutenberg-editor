@@ -1,0 +1,21 @@
+.gutenberg__editor .gutenberg-gallery {
+  overflow-x: scroll;
+  // white-space: nowrap;
+  display: flex;
+  align-items: flex-end;
+
+  .gutenberg-gallery__item {
+    display: inline-block;
+    margin: 0 2% 0;
+    min-width: 30%
+  }
+
+  .gutenbergeditor-image fieldset.full-preview__fields {
+    display: block;
+    position: static;
+  }
+
+  .uploadfield-item__view-btn {
+    // Need to re-style the "View" button for changing the image
+  }
+}

@@ -18,6 +18,7 @@ $block-side-ui-padding: 36px;
 @include admin-scheme-color-overrides("sunrise", $scheme-sunrise__spot-color);
 
 @import 'blocks/image/style';
+@import 'blocks/gallery/style';
 
 @mixin visually-hidden {
   border: 0 !important;

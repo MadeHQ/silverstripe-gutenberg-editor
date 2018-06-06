@@ -1,9 +1,10 @@
 .gutenberg__editor .gutenbergeditor-image {
   position: relative;
 
-  .full-preview__image {
-
+  input.entwine-uploadfield {
+    display: none;
   }
+
   .uploadfield-item {
     border: none;
     height: auto;
