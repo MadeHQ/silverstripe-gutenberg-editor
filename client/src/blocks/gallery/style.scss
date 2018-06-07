@@ -1,0 +1,39 @@
+.gutenberg__editor .gutenberg-gallery {
+  align-items: flex-end;
+  display: flex;
+  overflow-x: scroll;
+  padding-top: 10px;
+
+  .gutenberg-gallery__item {
+    display: inline-block;
+    margin: 0 2% 0;
+    max-width: 30%;
+    min-width: 30%;
+    position: relative;
+  }
+
+  .gutenbergeditor-image fieldset.full-preview__fields {
+    display: block;
+    position: static;
+  }
+
+  .uploadfield-item__view-btn {
+    background-color: rgb(231, 235, 240);
+    bottom: auto;
+    left: -10px;
+    right: auto;
+    top: -10px;
+  }
+
+  .gutenberg-gallery__item-remove {
+    background-color: #e7ebf0;
+    border-radius: 100%;
+    cursor: pointer;
+    height: 30px;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 30px;
+    z-index: 1;
+  }
+}

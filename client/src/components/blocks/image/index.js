@@ -1,21 +1,22 @@
 import { Component } from '@wordpress/element';
 import ReactDOM from 'react-dom';
 
-class ImageBlock extends Component {
+class Image extends Component {
     constructor(props) {
         super(props);
-        this.updateFileDataFromServer = this.updateFileDataFromServer.bind(this);
+
         this.titleChangeHandler = this.titleChangeHandler.bind(this);
         this.altTextChangeHandler = this.altTextChangeHandler.bind(this);
         this.heightChangeHandler = this.heightChangeHandler.bind(this);
         this.widthChangeHandler = this.widthChangeHandler.bind(this);
 
         this.state = {
+            altText: props.attributes.altText,
             fileData: false,
             fileId: props.attributes.fileId,
-            title: props.attributes.title,
-            altText: props.attributes.altText,
             height: props.attributes.height,
+            instanceId: props.instanceId,
+            title: props.attributes.title,
             width: props.attributes.width,
         };
     }
@@ -38,6 +39,9 @@ class ImageBlock extends Component {
                 })
                 .then(() => {
                     jQuery.entwine.triggerMatching();
+                })
+                .catch(error => {
+                    this.setState({error});
                 });
         } else {
             this.addListeners();
@@ -113,21 +117,23 @@ class ImageBlock extends Component {
         this.mutationObserver.disconnect();
     }
 
-    updateFileDataFromServer(fileData) {
-        this.setState({
-            fileData,
-            title: fileData.title,
-            altText: '',
-        });
-    }
-
-    setState(state) {
+    setState(state, onlyUpdateFileDataFromServer = false) {
         if (state.fileId !== undefined && state.fileId !== null) {
             this.props.setAttributes({ fileId: state.fileId });
             if (state.fileId && this.state.fileId !== state.fileId) {
+                const that = this;
                 fetch(`/gutenberg-api/filedata/${state.fileId}`)
                     .then(response => response.json())
-                    .then(this.updateFileDataFromServer);
+                    .then(fileData => {
+                        const newState = {
+                            fileData,
+                        }
+                        if (!onlyUpdateFileDataFromServer) {
+                            newState.title = fileData.title;
+                            newState.altText = '';
+                        }
+                        that.setState(newState);
+                    });
             }
         }
         if (state.title !== undefined) {
@@ -161,10 +167,38 @@ class ImageBlock extends Component {
         return this.state.fileData;
     }
 
+    /**
+     * This is required for the Gallery (Remove) functionality to work
+     */
+    componentWillReceiveProps(nextProps) {
+        const newState = {};
+        if (this.props.attributes.altText !== nextProps.attributes.altText) {
+            newState.altText = nextProps.attributes.altText;
+        }
+        if (this.props.attributes.fileId !== nextProps.attributes.fileId) {
+            newState.fileId = nextProps.attributes.fileId;
+        }
+        if (this.props.attributes.height !== nextProps.attributes.height) {
+            newState.height = nextProps.attributes.height;
+        }
+        if (this.props.attributes.instanceId !== nextProps.attributes.instanceId) {
+            newState.instanceId = nextProps.attributes.instanceId;
+        }
+        if (this.props.attributes.title !== nextProps.attributes.title) {
+            newState.title = nextProps.attributes.title;
+        }
+        if (this.props.attributes.width !== nextProps.attributes.width) {
+            newState.width = nextProps.attributes.width;
+        }
+        if (Object.keys(newState).length) {
+            this.setState(newState, true);
+        }
+    }
+
     renderWidthHeightFieldGroup() {
         return false;
 
-        const { instanceId } = this.props;
+        const { instanceId } = this.state;
 
         return (
             <div className="form__fieldgroup field CompositeField fieldgroup">
@@ -195,7 +229,7 @@ class ImageBlock extends Component {
             return null;
         }
 
-        const { instanceId } = this.props;
+        const { instanceId } = this.state;
 
         // Adds the `ui-widget` class so as to reset the font being used (want it to match the rest of the admin)
         return (
@@ -221,13 +255,19 @@ class ImageBlock extends Component {
     }
 
     render() {
-        if (this.hasFileId() && !this.fileDataIsLoaded()) {
+        if (this.state.error) {
             return (
-                <div>Loading</div>
+                <div className="gutenbergeditor-image gutenbergeditor-image__error ui-widget">Error loading file data</div>
             );
         }
 
-        const { instanceId } = this.props;
+        if (this.hasFileId() && !this.fileDataIsLoaded()) {
+            return (
+                <div className="ui-widget">Loading</div>
+            );
+        }
+
+        const { instanceId } = this.state;
 
         return (
             <div
@@ -261,7 +301,7 @@ class ImageBlock extends Component {
 
 
     getStateData() {
-        const { instanceId } = this.props;
+        const { instanceId } = this.state;
         const state = {
             'name': `DynamicImage${instanceId}[File]`,
             'id': `Form_EditForm_DynamicImage${instanceId}_File`,
@@ -281,7 +321,7 @@ class ImageBlock extends Component {
     }
 
     getSchemaData() {
-        const { instanceId } = this.props;
+        const { instanceId } = this.state;
         return {
             'name': `DynamicImage${instanceId}[File]`,
             'id': `Form_EditForm_DynamicImage${instanceId}_File`,
@@ -317,4 +357,4 @@ class ImageBlock extends Component {
     }
 }
 
-export default ImageBlock;
+export default Image;

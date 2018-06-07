@@ -1,9 +1,10 @@
 .gutenberg__editor .gutenbergeditor-image {
   position: relative;
 
-  .full-preview__image {
-
+  input.entwine-uploadfield {
+    display: none;
   }
+
   .uploadfield-item {
     border: none;
     height: auto;
@@ -49,5 +50,12 @@
 
   &:hover fieldset.full-preview__fields {
     display: block;
+  }
+
+  &.gutenbergeditor-image__error {
+    background-color: #FDD;
+    border: 2px solid #C33;
+    border-radius: 5px;
+    padding: 0 9px;
   }
 }

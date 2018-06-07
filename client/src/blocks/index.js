@@ -7,6 +7,8 @@ import * as embed from './embed';
 // import * as list from './list';
 import * as heading from './heading';
 import * as image from './image';
+import * as gallery from './gallery';
+// import * as review from './review';
 
 // import * as paragraph from '@wordpress/blocks/library/paragraph';
 // import * as heading from '@wordpress/blocks/library/heading';
@@ -27,7 +29,8 @@ window.wp.blocks = wpBlocks;
 const blocks = [
     paragraph, embed, list,
     heading, quote, pullquote,
-    image,
+    image, gallery,
+    // review,
     code, /* html,*/ separator, table,
     // freeform,
 ];

@@ -46,11 +46,17 @@ class ParagraphBlock extends paragraph.settings.edit {
     constructor() {
         super( ...arguments );
         this.toggleLede = this.toggleLede.bind( this );
+        this.toggleWell = this.toggleWell.bind( this );
     }
 
     toggleLede() {
         const { attributes, setAttributes } = this.props;
         setAttributes( { lede: ! attributes.lede } );
+    }
+
+    toggleWell() {
+        const { attributes, setAttributes } = this.props;
+        setAttributes( { well: ! attributes.well } );
     }
 
     render() {
@@ -67,6 +73,7 @@ class ParagraphBlock extends paragraph.settings.edit {
             align,
             content,
             lede,
+            well,
             dropCap,
             placeholder,
             fontSize,
@@ -81,6 +88,10 @@ class ParagraphBlock extends paragraph.settings.edit {
             className.push('is-lede');
         }
 
+        if (well) {
+            className.push('is-well');
+        }
+
         if (dropCap) {
             className.push('has-drop-cap');
         }
@@ -89,6 +100,7 @@ class ParagraphBlock extends paragraph.settings.edit {
 
         const textAlignmentEnabled = isBlockFeatureEnabled('paragraph', 'textAlignment');
         const ledeEnabled = isBlockFeatureEnabled('paragraph', 'lede');
+        const wellEnabled = isBlockFeatureEnabled('paragraph', 'well');
         const dropCapEnabled = isBlockFeatureEnabled('paragraph', 'dropCap');
         const fontSizeEnabled = isBlockFeatureEnabled('paragraph', 'fontSize');
         const backgroundColorEnabled = isBlockFeatureEnabled('paragraph', 'backgroundColor');
@@ -96,7 +108,7 @@ class ParagraphBlock extends paragraph.settings.edit {
         const blockAlignmentEnabled = isBlockFeatureEnabled('paragraph', 'blockAlignment');
 
         const textSettingsEnabled = (
-            ledeEnabled || dropCapEnabled || fontSizeEnabled
+            ledeEnabled || wellEnabled || dropCapEnabled || fontSizeEnabled
         );
 
         const inspectorEnabled = (
@@ -126,6 +138,14 @@ class ParagraphBlock extends paragraph.settings.edit {
                                 label={ __( 'Lede' ) }
                                 checked={ !! lede }
                                 onChange={ this.toggleLede }
+                            />
+                        )}
+
+                        { wellEnabled && (
+                            <ToggleControl
+                                label={ __( 'Well' ) }
+                                checked={ !! well }
+                                onChange={ this.toggleWell }
                             />
                         )}
 
@@ -249,6 +269,10 @@ const schema = {
         type: 'string',
     },
     lede: {
+        type: 'boolean',
+        default: false,
+    },
+    well: {
         type: 'boolean',
         default: false,
     },

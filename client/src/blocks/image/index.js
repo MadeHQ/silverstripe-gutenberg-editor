@@ -4,6 +4,8 @@ import { __ } from '@wordpress/i18n';
 
 import ImageBlock from '../../components/blocks/image';
 
+import './style.scss';
+
 const schema = {
 	content: {
 		type: 'object'
