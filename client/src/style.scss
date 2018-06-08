@@ -25,7 +25,13 @@ div.gutenbergeditor--loaded {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   font-size: 13px;
   line-height: 1.4em;
-  margin-top: -20px;
+  margin-top: -1.5385rem;
+
+  @media (max-width: 992px) {
+    margin-left: -1.5385rem;
+    margin-right: -1.5385rem;
+    width: auto;
+  }
 
   .a11y-speak-region {
     left: -1px;
@@ -75,7 +81,7 @@ div.gutenbergeditor--loaded {
   right: 0;
 
   // mobile edgecase for toolbar
-  top: -20px;
+  top: -1.5385rem;
   position: sticky;
 }
 
@@ -90,8 +96,12 @@ div.gutenbergeditor--loaded {
     border: 1px solid transparent;
     width: 100%;
 
+    &:hover {
+      border-color: $light-gray-200;
+    }
+
     &.is-selected {
-      border: 1px solid $light-gray-300;
+      border-color: $light-gray-400;
     }
   }
 

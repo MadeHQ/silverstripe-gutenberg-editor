@@ -20,25 +20,26 @@ import { withViewportMatch } from '@wordpress/viewport';
 import './style.scss';
 import BlockInspectorButton from './block-inspector-button';
 
+function VisualEditorBlockMenu( { children, onClose } ) {
+    return (
+        <Fragment>
+            <BlockInspectorButton onClick={ onClose } role="menuitem" />
+            { children }
+        </Fragment>
+    );
+}
+
 function VisualEditor( { hasFixedToolbar, isLargeViewport } ) {
     return (
         <BlockSelectionClearer className="edit-post-visual-editor">
             <EditorGlobalKeyboardShortcuts />
             <CopyHandler />
             <MultiSelectScrollIntoView />
-            <ObserveTyping>
-                <WritingFlow>
-                    <BlockList
-                        showContextualToolbar={ ! isLargeViewport || ! hasFixedToolbar }
-                        renderBlockMenu={ ( { children, onClose } ) => (
-                            <Fragment>
-                                <BlockInspectorButton onClick={ onClose } />
-                                { children }
-                            </Fragment>
-                        ) }
-                    />
-                </WritingFlow>
-            </ObserveTyping>
+            <WritingFlow>
+                <ObserveTyping>
+                    <BlockList renderBlockMenu={ VisualEditorBlockMenu } />
+                </ObserveTyping>
+            </WritingFlow>
         </BlockSelectionClearer>
     );
 }
