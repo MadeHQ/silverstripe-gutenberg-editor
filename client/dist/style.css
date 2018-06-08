@@ -8391,7 +8391,7 @@ div.gutenbergeditor--loaded .form__field-holder {
   flex-direction: row;
   align-items: stretch;
   justify-content: space-between;
-  z-index: 30;
+  z-index: 20;
   left: 0;
   right: 0;
   top: -1.5385rem;

@@ -76,7 +76,7 @@ div.gutenbergeditor--loaded {
   flex-direction: row;
   align-items: stretch;
   justify-content: space-between;
-  z-index: z-index('.edit-post-header');
+  z-index: z-index('.editor-block-settings-menu__popover');
   left: 0;
   right: 0;
 

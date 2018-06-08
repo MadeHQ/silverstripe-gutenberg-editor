@@ -37,7 +37,7 @@ function VisualEditor( { hasFixedToolbar, isLargeViewport } ) {
             <MultiSelectScrollIntoView />
             <WritingFlow>
                 <ObserveTyping>
-                    <BlockList renderBlockMenu={ VisualEditorBlockMenu } />
+                    <BlockList showContextualToolbar={ !isLargeViewport || !hasFixedToolbar } renderBlockMenu={ VisualEditorBlockMenu } />
                 </ObserveTyping>
             </WritingFlow>
         </BlockSelectionClearer>
