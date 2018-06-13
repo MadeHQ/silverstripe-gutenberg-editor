@@ -2,7 +2,7 @@
 
 namespace MadeHQ\Gutenberg\Controllers;
 
-use SilverStripe\Control\{Controller, HTTPRequest, HTTPResponse};
+use SilverStripe\Control\{Controller, HTTPRequest, HTTPResponse, HTTP};
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Core\Convert;
 use SilverStripe\Assets\File;
@@ -55,6 +55,7 @@ class APIController extends Controller
      */
     public function filedata(HTTPRequest $request)
     {
+        HTTP::set_cache_age(60);
         if (!$request->param('ID')) {
             return $this->output();
         }

@@ -86,7 +86,7 @@ class DBGutenbergText extends DBText
 
         $block_processors = static::config()->get('block_processors');
 
-        $matcher = '/<!--\s+wp:(\w+)(\s+(\{.*?\}))?\s+(\/)?-->/s';
+        $matcher = '/<!--\s+wp:([\w\/\-]+)(\s+(\{.*?\}))?\s+(\/)?-->/s';
 
         while (preg_match($matcher, $content, $block_match, PREG_OFFSET_CAPTURE)) {
             $opening_tag = $block_match[0][0];

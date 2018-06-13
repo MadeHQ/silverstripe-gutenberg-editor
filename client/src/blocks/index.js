@@ -21,10 +21,12 @@ import * as code from '@wordpress/blocks/library/code';
 // import * as html from '@wordpress/blocks/library/html';
 import * as separator from '@wordpress/blocks/library/separator';
 import * as table from '@wordpress/blocks/library/table';
+import * as components from '@wordpress/components';
 // import * as freeform from '@wordpress/blocks/library/freeform';
 
 window.wp = window.wp || {};
 window.wp.blocks = wpBlocks;
+window.wp.components = components;
 
 const blocks = [
     paragraph, embed, list,

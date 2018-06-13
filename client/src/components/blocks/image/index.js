@@ -1,5 +1,7 @@
 import { Component } from '@wordpress/element';
 import ReactDOM from 'react-dom';
+import isEqual from 'lodash/isEqual';
+import debounce from 'lodash/debounce';
 
 class Image extends Component {
     constructor(props) {
@@ -19,6 +21,8 @@ class Image extends Component {
             title: props.attributes.title,
             width: props.attributes.width,
         };
+
+        this.setAttributes = debounce(this.setAttributes, 500);
     }
 
     componentDidMount() {
@@ -114,12 +118,12 @@ class Image extends Component {
 
     componentWillUnmount()
     {
-        this.mutationObserver.disconnect();
+        this.mutationObserver && this.mutationObserver.disconnect();
     }
 
     setState(state, onlyUpdateFileDataFromServer = false) {
         if (state.fileId !== undefined && state.fileId !== null) {
-            this.props.setAttributes({ fileId: state.fileId });
+            this.setAttributes({ fileId: state.fileId });
             if (state.fileId && this.state.fileId !== state.fileId) {
                 const that = this;
                 fetch(`/gutenberg-api/filedata/${state.fileId}`)
@@ -137,18 +141,22 @@ class Image extends Component {
             }
         }
         if (state.title !== undefined) {
-            this.props.setAttributes({title: state.title});
+            this.setAttributes({title: state.title});
         }
         if (state.altText !== undefined) {
-            this.props.setAttributes({altText: state.altText});
+            this.setAttributes({altText: state.altText});
         }
         if (state.height !== undefined) {
-            this.props.setAttributes({height: state.height});
+            this.setAttributes({height: state.height});
         }
         if (state.width !== undefined) {
-            this.props.setAttributes({width: state.width});
+            this.setAttributes({width: state.width});
         }
         super.setState(state);
+    }
+
+    setAttributes(attrs) {
+        this.props.setAttributes(attrs);
     }
 
     hasFileId() {
@@ -194,6 +202,11 @@ class Image extends Component {
             this.setState(newState, true);
         }
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !isEqual(nextProps.attributes, this.props.attributes) || nextState;
+    }
+
 
     renderWidthHeightFieldGroup() {
         return false;
