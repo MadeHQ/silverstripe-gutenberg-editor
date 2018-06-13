@@ -37,6 +37,10 @@
     display: none;
   }
 
+  .full-preview img {
+    max-width: 100%;
+  }
+
   fieldset.full-preview__fields {
     background-color: rgba(255, 255, 255, 0.8);
     display: none;
