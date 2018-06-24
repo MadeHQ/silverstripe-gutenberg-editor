@@ -308,4 +308,37 @@ export const settings = {
     edit: ParagraphBlock,
 
     attributes: schema,
+
+    save( { attributes } ) {
+        const {
+            width,
+            align,
+            content,
+            lede,
+            well,
+            dropCap,
+            backgroundColor,
+            textColor,
+            fontSize,
+            customFontSize,
+        } = attributes;
+
+        const className = classnames( {
+            [ `align${ width }` ]: width,
+            'has-background': backgroundColor,
+            'has-drop-cap': dropCap,
+            [ `is-${ fontSize }-text` ]: fontSize && FONT_SIZES[ fontSize ],
+            'o-lead': lede,
+            'o-well': well,
+        } );
+
+        const styles = {
+            backgroundColor: backgroundColor,
+            color: textColor,
+            fontSize: ! fontSize && customFontSize ? customFontSize : undefined,
+            textAlign: align,
+        };
+
+        return <p style={ styles } className={ className ? className : undefined }>{ content }</p>;
+    }
 };
