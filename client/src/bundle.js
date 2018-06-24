@@ -1,6 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { isString, debounce, isEqual, extend, has, isObject, filter, includes, without, delay } from "lodash";
+
+window._ = {
+    isEqual: isEqual,
+    isObject: isObject,
+    filter: filter,
+    contains: includes,
+    without: without,
+    delay: delay,
+};
+
+import './code-editor-config';
+
 import { registerBlocks } from "./blocks";
 import './store';
 
@@ -9,7 +22,7 @@ import Layout from "./components/layout";
 import { subscribe, select } from "@wordpress/data";
 import { rawHandler, serialize } from "@wordpress/blocks";
 
-import { isString, debounce, isEqual, extend, has } from "lodash";
+
 
 import { setConfig } from './config';
 

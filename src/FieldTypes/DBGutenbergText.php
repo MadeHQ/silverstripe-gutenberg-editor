@@ -10,7 +10,7 @@ use SilverStripe\View\ArrayData;
 use MadeHQ\Gutenberg\Blocks\{
     ParagraphBlock, EmbedBlock, ListBlock,
     PullQuoteBlock, HeadingBlock, SeparatorBlock,
-    QuoteBlock, CodeBlock, TableBlock
+    QuoteBlock, CodeBlock, TableBlock, HTMLBlock
 };
 
 class DBGutenbergText extends DBText
@@ -31,6 +31,7 @@ class DBGutenbergText extends DBText
         'quote' => QuoteBlock::class,
         'code' => CodeBlock::class,
         'table' => TableBlock::class,
+        'html' => HTMLBlock::class,
     ];
 
     private static $casting = [

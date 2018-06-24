@@ -18,7 +18,7 @@ import * as quote from '@wordpress/blocks/library/quote';
 import * as pullquote from '@wordpress/blocks/library/pullquote';
 import * as code from '@wordpress/blocks/library/code';
 // import * as embed from '@wordpress/blocks/library/embed';
-// import * as html from '@wordpress/blocks/library/html';
+import * as html from '@wordpress/blocks/library/html';
 import * as separator from '@wordpress/blocks/library/separator';
 import * as table from '@wordpress/blocks/library/table';
 import * as components from '@wordpress/components';
@@ -33,7 +33,7 @@ const blocks = [
     heading, quote, pullquote,
     image, gallery,
     // review,
-    code, /* html,*/ separator, table,
+    code, html, separator, table,
     // freeform,
 ];
 
