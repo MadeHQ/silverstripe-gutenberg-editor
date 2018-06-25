@@ -95,7 +95,7 @@ class APIController extends Controller
         ]);
     }
 
-    private static function calculateWidthHeight(int $originalWidth, int $originalHeight, int $width)
+    private static function calculateWidthHeight(int $originalWidth = null, int $originalHeight = null, int $width)
     {
         if ($width > $originalWidth) {
             return [
