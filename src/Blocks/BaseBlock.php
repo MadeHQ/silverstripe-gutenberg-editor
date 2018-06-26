@@ -2,9 +2,10 @@
 
 namespace MadeHQ\Gutenberg\Blocks;
 
+use SilverStripe\View\ViewableData;
 use SilverStripe\Core\Config\Configurable;
 
-class BaseBlock
+class BaseBlock extends ViewableData
 {
     use Configurable;
 

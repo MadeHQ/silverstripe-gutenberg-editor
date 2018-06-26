@@ -28,7 +28,6 @@ export const settings = {
     },
 
     save: function(data) {
-console.log('Gallery::save', data);
         return '';
     }
 };
