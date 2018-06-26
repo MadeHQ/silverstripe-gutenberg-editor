@@ -114,7 +114,7 @@ div.gutenbergeditor--loaded {
 }
 
 .edit-post-sidebar {
-  position: absolute;
+  position: fixed;
   z-index: z-index('.edit-post-sidebar');
   top: 0;
   right: 0;
