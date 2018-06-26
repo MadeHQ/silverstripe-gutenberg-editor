@@ -6,7 +6,17 @@ use SilverStripe\Assets\File;
 
 class ImageBlock extends BaseBlock
 {
-    private static $imageWidth = 800;
+    /**
+     * @config
+     * @var int
+     */
+    private static $width = 800;
+
+    /**
+     * @config
+     * @var int
+     */
+    private static $height = 450;
 
     public function render($content, array $attributes = array())
     {
@@ -22,6 +32,17 @@ class ImageBlock extends BaseBlock
         $alt = array_key_exists('altText', $attributes) ? $attributes['altText'] : '';
         $title = array_key_exists('title', $attributes) ? $attributes['title'] : '';
 
-        return sprintf('<img src="%s" alt="%s" title="%s" />', $file->resizeByWidth(static::config()->get('imageWidth')), $alt, $title);
+        $width = (int) static::config()->get('width');
+        $height = (int) static::config()->get('height');
+
+        if ($width && $height) {
+            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->URL($width, $height), $alt, $title);
+        } else if ($width) {
+            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->resizeByWidth($width), $alt, $title);
+        } else if ($height) {
+            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->resizeByHeight($height), $alt, $title);
+        }
+
+        return sprintf('<img src="%s" alt="%s" title="%s" />', $file->URL(800, 450), $alt, $title);
     }
 }
