@@ -17,6 +17,12 @@ class EmbedBlock extends BaseBlock
     private static $height = 315;
 
     /**
+     * @config
+     * @var String
+     */
+    private static $wrapperClass = '';
+
+    /**
      * @param string $content
      * @param array $attributes
      * @return string
@@ -29,9 +35,9 @@ class EmbedBlock extends BaseBlock
         if (array_key_exists('html', $attributes)) {
             $markup = $attributes['html'];
 
-            return preg_replace(['/width="(\w+)"/', '/height="(\w+)"/'], [$width, $height], $markup);
+            return sprintf("<div class=\"embed-block %s\">%s</div>", static::config()->get('wrapperClass'), preg_replace(['/width="(\w+)"/', '/height="(\w+)"/'], [$width, $height], $markup));
         }
 
-        return $content;
+        return sprintf("<div class=\"embed-block %s\">%s</div>", $content);
     }
 }
