@@ -53,7 +53,8 @@ class ImageGallery extends BaseBlock
 
             $images->push([
                 'Image' => $file,
-                'Caption' => $item['altText'],
+                'Caption' => array_key_exists('caption', $item) ? $item['caption'] : '',
+                'Credit' => array_key_exists('credit', $item) ? $item['credit'] : '',
             ]);
         }
 

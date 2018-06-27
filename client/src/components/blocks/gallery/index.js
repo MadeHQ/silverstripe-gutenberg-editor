@@ -1,4 +1,5 @@
 import { Component } from '@wordpress/element';
+import { TextControl } from '@wordpress/components';
 import ReactDOM from 'react-dom';
 import Image from '../image';
 
@@ -47,13 +48,36 @@ class Gallery extends Component {
         setAttributes = setAttributes.bind(this);
 
         return (
-            <div className="gutenberg-gallery__item">
+            <div className="gutenberg-gallery__item" key={index}>
                 <button
                     className="gutenberg-gallery__item-remove font-icon-cancel"
                     onClick={() => {this.removeItem(index)}}
                     title="Remove"
                 />
-                <Image key={index} attributes={item} setAttributes={setAttributes} instanceId={`gallery-${instanceId}-${index}-${item.fileId}`} />
+                <Image
+                    key={index}
+                    attributes={item}
+                    setAttributes={setAttributes}
+                    instanceId={`gallery-${instanceId}-${index}-${item.fileId}`}
+                />
+                { item.fileId && (
+                    <div key="wrapper" className="ui-widget">
+                        <TextControl
+                            label="Caption"
+                            key="caption"
+                            value={item.caption}
+                            onChange={value => {setAttributes({'caption': value})}}
+                            placeholder="Caption"
+                        />
+                        <TextControl
+                            label="Credit"
+                            key="credit"
+                            value={item.credit}
+                            onChange={value => {setAttributes({'credit': value})}}
+                            placeholder="Credit"
+                        />
+                    </div>
+                )}
             </div>
         );
     }
