@@ -9,6 +9,7 @@ import * as heading from './heading';
 import * as image from './image';
 import * as gallery from './gallery';
 // import * as review from './review';
+import * as button from './button';
 
 // import * as paragraph from '@wordpress/blocks/library/paragraph';
 // import * as heading from '@wordpress/blocks/library/heading';
@@ -35,6 +36,7 @@ const blocks = [
     // review,
     code, html, separator, table,
     // freeform,
+    button,
 ];
 
 export const registerBlocks = () => {

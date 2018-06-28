@@ -127,6 +127,10 @@ div.gutenbergeditor--loaded {
   overflow: auto;
 }
 
+.blocks-rich-text__tinymce:not(.mce-content-body) {
+  pointer-events: none;
+}
+
 // Other
 .screen-reader-text {
   border: 0;
