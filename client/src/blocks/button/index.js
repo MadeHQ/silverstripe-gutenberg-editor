@@ -1,4 +1,5 @@
 import * as button from '@wordpress/blocks/library/button';
+import './style.scss';
 
 class ButtonBlock extends button.settings.edit {
 }
