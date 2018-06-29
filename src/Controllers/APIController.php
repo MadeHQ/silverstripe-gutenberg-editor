@@ -56,6 +56,7 @@ class APIController extends Controller
     public function filedata(HTTPRequest $request)
     {
         HTTP::set_cache_age(60);
+
         if (!$request->param('ID')) {
             return $this->output();
         }
@@ -117,11 +118,19 @@ class APIController extends Controller
      */
     public function oembed(HTTPRequest $request)
     {
+        HTTP::set_cache_age(600);
+
         // Grab the URL
         $url = $request->getVar('url');
 
         if (is_null($url) || !strlen($url)) {
             return $this->output(null);
+        }
+
+        if (stripos($url, 'itunes.apple.com') !== false) {
+            return $this->output(
+                static::get_podcast_details($url)
+            );
         }
 
         try {
@@ -150,6 +159,54 @@ class APIController extends Controller
         }
 
         return $this->output($data);
+    }
+
+    /**
+     * @param string $url
+     * @return array|null
+     */
+    public static function get_podcast_details($url)
+    {
+        if (!preg_match('/id(\d+)/', $url, $matches)) {
+            return null;
+        }
+
+        $feed = file_get_contents(
+            'https://itunes.apple.com/lookup?entity=podcast&id=' . $matches[1]
+        );
+
+        $feed = json_decode(trim($feed));
+
+        if (!$feed || (int) $feed->resultCount !== 1) {
+            return null;
+        }
+
+        $result = $feed->results[0];
+
+        $rss = file_get_contents((string) $result->feedUrl);
+
+        $rss = simplexml_load_string($rss);
+
+        $items = [];
+
+        foreach ($rss->channel->item as $item) {
+            array_push($items, [
+                'title' => (string) $item->title,
+                'mp3' => (string) $item->enclosure->attributes()->url,
+            ]);
+        }
+
+        if (!count($items)) {
+            return null;
+        }
+
+        return [
+            'title' => trim((string) $rss->channel->title),
+            'description' => (string) $rss->channel->description,
+            'artwork' => (string) $result->artworkUrl600,
+            'url' => (string) $result->collectionViewUrl,
+            'items' => $items,
+        ];
     }
 
     /**

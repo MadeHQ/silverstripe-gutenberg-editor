@@ -19,7 +19,7 @@ export const name = 'core/heading';
 export const settings = {
     ...heading.settings,
 
-    edit( { attributes, setAttributes, isSelected, mergeBlocks, insertBlocksAfter, onReplace, className, onFocus, allowNodeChange } ) {
+    edit( { attributes, setAttributes, isSelected, mergeBlocks, insertBlocksAfter, onReplace, className, onFocus, allowNodeChange, onSplit } ) {
         const {
             align,
             content,
@@ -31,6 +31,17 @@ export const settings = {
 
         if (isUndefined(allowNodeChange)) {
             allowNodeChange = true;
+        }
+
+        if (isUndefined(onSplit)) {
+            onSplit = !insertBlocksAfter ? undefined : ( before, after, ...blocks ) => {
+                setAttributes( { content: before } );
+
+                insertBlocksAfter( [
+                    ...blocks,
+                    createBlock( 'core/paragraph', { content: after } ),
+                ] );
+            };
         }
 
         return [
@@ -89,17 +100,7 @@ export const settings = {
                 value={ content }
                 onChange={ ( value ) => setAttributes( { content: value } ) }
                 onMerge={ mergeBlocks }
-                onSplit={
-                    insertBlocksAfter ?
-                        ( before, after, ...blocks ) => {
-                            setAttributes( { content: before } );
-                            insertBlocksAfter( [
-                                ...blocks,
-                                createBlock( 'core/paragraph', { content: after } ),
-                            ] );
-                        } :
-                        undefined
-                }
+                onSplit={ onSplit }
                 onRemove={ () => onReplace( [] ) }
                 style={ { textAlign: align } }
                 className={ className }
