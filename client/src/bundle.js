@@ -46,28 +46,12 @@ jQuery.entwine('ss', ($) => {
             // Grab the entire field
             const field = this.parents('div.gutenbergeditor');
 
-            // Grab the holder & container
-            let container = field.siblings('.gutenberg__editor');
-
-            // If no container is present, make a container
-            if (!container.length) {
-                const newContainer = $('<div class="gutenberg__editor"></div>');
-
-                this.parent().before(newContainer);
-
-                container = newContainer;
-            }
-
-            // Tell field we're ready to hide everything
-            field.addClass('gutenbergeditor--loaded');
-
             // Set the global config
             setConfig(this.data('gutenberg'));
             // this.setConfig(this.data('gutenberg') || {});
 
-            // Store field & container for future
+            // Store field for future
             this.setField(field);
-            this.setContainer(container);
 
             // Register blocks if not registered
             if (!blocksRegistered) {
@@ -106,26 +90,17 @@ jQuery.entwine('ss', ($) => {
 
             // Content to object which wordpress expects since
             // we only store the raw value
-            let post = {
-                content: {
-                    raw: originalValue || '',
-                }
-            };
+            let currentContent = originalValue || '';
 
             // Listen for changes
             subscribe(debounce(() => {
                 const content = select('core/editor').getEditedPostContent();
 
-                if (isEqual(post.content.raw, content)) {
+                if (isEqual(currentContent, content)) {
                     return false;
                 }
 
-                // Update post
-                post = {
-                    content: {
-                        raw: content,
-                    }
-                };
+                currentContent = content;
 
                 // Using the textarea...
                 this
@@ -135,17 +110,40 @@ jQuery.entwine('ss', ($) => {
                     .trigger('change');
             }, 250));
 
+             // Grab the holder & container
+            let container = this.getField().siblings('.gutenberg__editor');
+            let newContainer = null;
+
+            // If no container is present, make a container
+            if (!container.length) {
+                newContainer = document.createElement('div');
+                newContainer.setAttribute('class', 'gutenberg__editor');
+
+                container = newContainer;
+            }
+
             // @todo rework entwine so that react has control of holder
             ReactDOM.render(
-                <EditorProvider post={post} settings={{bodyPlaceholder: 'Begin adding your content&hellip;'}}><Layout /></EditorProvider>,
-                this.getContainer().get(0)
+                <EditorProvider post={ { content: { raw: originalValue || '' } } } settings={{bodyPlaceholder: 'Begin adding your content&hellip;'}}>
+                    <Layout />
+                </EditorProvider>,
+                container
             );
+
+            this.setContainer(container);
+
+            if (newContainer) {
+                this.getField().append(container);
+            }
+
+            // Tell field we're ready to hide everything
+            this.getField().addClass('gutenbergeditor--loaded');
         },
 
         stopGutenberg() {
             // Remove gutenberg
             ReactDOM.unmountComponentAtNode(
-                this.getContainer().get(0)
+                this.getContainer()
             );
         }
     });

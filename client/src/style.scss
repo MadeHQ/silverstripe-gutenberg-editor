@@ -1,147 +1,172 @@
 @mixin visually-hidden {
-  border: 0 !important;
-  clip: rect(0 0 0 0) !important;
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  position: absolute !important;
-  width: 1px !important;
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
 }
 
 div.gutenbergeditor--loaded {
-  .form__field-label,
-  .form__field-holder {
-    @include visually-hidden;
-  }
+    .form__field-label,
+    .form__field-holder {
+        @include visually-hidden;
+    }
 }
 
 .gutenberg__editor {
-  width: 100%;
-  min-height: 500px;
-  background: $white;
-  position: relative;
-  color: #444;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  font-size: 13px;
-  line-height: 1.4em;
-  margin-top: -1.5385rem;
+    width: 100%;
+    min-height: 500px;
+    background: $white;
+    position: relative;
+    color: #444;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    line-height: 1.4em;
+    margin-top: -1.5385rem;
 
-  @media (max-width: 992px) {
-    margin-left: -1.5385rem;
-    margin-right: -1.5385rem;
-    width: auto;
-  }
+    @media (max-width: 992px) {
+        margin-left: -1.5385rem;
+        margin-right: -1.5385rem;
+        width: auto;
+    }
 
-  .a11y-speak-region {
-    left: -1px;
-    top: -1px;
-  }
+    .a11y-speak-region {
+        left: -1px;
+        top: -1px;
+    }
 
-  svg {
-    fill: currentColor;
-    outline: none;
-  }
+    svg {
+        fill: currentColor;
+        outline: none;
+    }
 
-  * {
-    box-sizing: border-box;
-  }
+    * {
+        box-sizing: border-box;
+    }
 
-  ul:not(.wp-block-gallery) {
-    list-style-type: disc;
-  }
+    ul:not(.wp-block-gallery) {
+        list-style-type: disc;
+    }
 
-  ol:not(.wp-block-gallery) {
-    list-style-type: decimal;
-  }
+    ol:not(.wp-block-gallery) {
+        list-style-type: decimal;
+    }
 
-  ul,
-  ol {
-    margin: 0;
-    padding: 0;
-  }
+    ul,
+    ol {
+        margin: 0;
+        padding: 0;
+    }
 
-  select {
-    font-size: $default-font-size;
-    color: $dark-gray-500;
-  }
+    select {
+        font-size: $default-font-size;
+        color: $dark-gray-500;
+    }
 }
 
 .edit-post-header {
-  height: $header-height;
-  padding: $item-spacing;
-  border-bottom: 1px solid $light-gray-500;
-  background: $white;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: space-between;
-  z-index: z-index('.editor-block-settings-menu__popover');
-  left: 0;
-  right: 0;
+    height: $header-height;
+    padding: $item-spacing;
+    border-bottom: 1px solid $light-gray-500;
+    background: $white;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    z-index: z-index('.editor-block-settings-menu__popover');
+    left: 0;
+    right: 0;
 
-  // mobile edgecase for toolbar
-  top: -1.5385rem;
-  position: sticky;
+    // mobile edgecase for toolbar
+    top: -1.5385rem;
+    position: sticky;
 }
 
 .edit-post-header-toolbar {
-  display: inline-flex;
-  align-items: center;
+    display: inline-flex;
+    align-items: center;
 }
 
 .edit-post-visual-editor {
-  .editor-block-list__block {
-    outline: 0 none;
-    border: 1px solid transparent;
-    width: 100%;
+    .editor-block-list__block {
+        outline: 0 none;
+        border: 1px solid transparent;
+        width: 100%;
 
-    &:hover {
-      border-color: $light-gray-200;
+        &:hover {
+            border-color: $light-gray-200;
+        }
+
+        &.is-selected {
+            border-color: $light-gray-400;
+        }
     }
 
-    &.is-selected {
-      border-color: $light-gray-400;
+    .editor-writing-flow__click-redirect {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: $content-width;
+        width: 100%;
     }
-  }
-
-  .editor-writing-flow__click-redirect {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: $content-width;
-    width: 100%;
-  }
 }
 
 .edit-post-sidebar {
-  position: fixed;
-  z-index: z-index('.edit-post-sidebar');
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: $sidebar-width;
-  border-left: 1px solid $light-gray-500;
-  background: $light-gray-300;
-  color: $dark-gray-500;
-  min-height: 500px;
-  overflow: auto;
+    position: fixed;
+    z-index: z-index('.edit-post-sidebar');
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: $sidebar-width;
+    border-left: 1px solid $light-gray-500;
+    background: $light-gray-300;
+    color: $dark-gray-500;
+    min-height: 500px;
+    overflow: auto;
 }
 
 .blocks-rich-text__tinymce:not(.mce-content-body) {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 // Other
 .screen-reader-text {
-  border: 0;
-  clip: rect(1px, 1px, 1px, 1px);
-  -webkit-clip-path: inset(50%);
-  clip-path: inset(50%);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-  word-wrap: normal !important; /* many screen reader and browser combinations announce broken words as they would appear visually */
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important; /* many screen reader and browser combinations announce broken words as they would appear visually */
+}
+
+// Playlist block
+.playlist-details {
+    margin-left: -16px;
+
+    .playlist-details__items,
+    .playlist-details__media {
+        padding-left: 16px;
+        display: inline-block;
+    }
+
+    .playlist-details__items {
+        width: 70%;
+    }
+
+    .playlist-details__media {
+        width: 30%;
+        vertical-align: top;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
 }

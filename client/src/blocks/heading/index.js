@@ -12,12 +12,14 @@ import {
 import { PanelBody, Toolbar } from '@wordpress/components';
 import { createBlock } from '@wordpress/blocks/api';
 
+import { isUndefined } from 'lodash';
+
 export const name = 'core/heading';
 
 export const settings = {
     ...heading.settings,
 
-    edit( { attributes, setAttributes, isSelected, mergeBlocks, insertBlocksAfter, onReplace, className } ) {
+    edit( { attributes, setAttributes, isSelected, mergeBlocks, insertBlocksAfter, onReplace, className, onFocus, allowNodeChange } ) {
         const {
             align,
             content,
@@ -27,8 +29,12 @@ export const settings = {
 
         const textAlignmentEnabled = isBlockFeatureEnabled(name, 'textAlignment');
 
+        if (isUndefined(allowNodeChange)) {
+            allowNodeChange = true;
+        }
+
         return [
-            isSelected && (
+            isSelected && allowNodeChange && (
                 <BlockControls
                     key="controls"
                     controls={
@@ -44,21 +50,25 @@ export const settings = {
             ),
             isSelected && (
                 <InspectorControls key="inspector">
-                    <h3>{ __( 'Heading Settings' ) }</h3>
+                    { allowNodeChange && (
+                        <div>
+                            <h3>{ __( 'Heading Settings' ) }</h3>
 
-                    <p>{ __( 'Level' ) }</p>
+                            <p>{ __( 'Level' ) }</p>
 
-                    <Toolbar
-                        controls={
-                            '23456'.split( '' ).map( ( level ) => ( {
-                                icon: 'heading',
-                                title: sprintf( __( 'Heading %s' ), level ),
-                                isActive: 'H' + level === nodeName,
-                                onClick: () => setAttributes( { nodeName: 'H' + level } ),
-                                subscript: level,
-                            } ) )
-                        }
-                    />
+                            <Toolbar
+                                controls={
+                                    '23456'.split( '' ).map( ( level ) => ( {
+                                        icon: 'heading',
+                                        title: sprintf( __( 'Heading %s' ), level ),
+                                        isActive: 'H' + level === nodeName,
+                                        onClick: () => setAttributes( { nodeName: 'H' + level } ),
+                                        subscript: level,
+                                    } ) )
+                                }
+                            />
+                        </div>
+                    ) }
 
                     { textAlignmentEnabled && (
                         <PanelBody title={ __( 'Text Alignment' ) }>
@@ -95,6 +105,9 @@ export const settings = {
                 className={ className }
                 placeholder={ placeholder || __( 'Write heading…' ) }
                 isSelected={ isSelected }
+                onFocus={ onFocus }
+                keepPlaceholderOnFocus={ true }
+                multiline={ false }
             />,
         ];
     },
