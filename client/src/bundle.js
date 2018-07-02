@@ -1,6 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import * as components from '@wordpress/components';
+import * as blocks from '@wordpress/blocks';
+
+import { ImageControl } from './components';
+
+window.wp = window.wp || {};
+window.wp.components = {
+    ...components,
+    ImageControl,
+};
+
+window.wp.blocks = blocks;
+
 import { isString, debounce, isEqual, extend, has, isObject, filter, includes, without, delay } from "lodash";
 
 window._ = {
@@ -21,8 +34,6 @@ import { EditorProvider } from "@wordpress/editor";
 import Layout from "./components/layout";
 import { subscribe, select } from "@wordpress/data";
 import { rawHandler, serialize } from "@wordpress/blocks";
-
-
 
 import { setConfig } from './config';
 

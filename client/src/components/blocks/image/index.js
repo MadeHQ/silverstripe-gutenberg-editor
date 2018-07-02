@@ -1,7 +1,8 @@
-import { Component } from '@wordpress/element';
 import ReactDOM from 'react-dom';
-import isEqual from 'lodash/isEqual';
-import debounce from 'lodash/debounce';
+
+import { Component } from '@wordpress/element';
+
+import { isEqual, debounce } from 'lodash';
 
 class Image extends Component {
     constructor(props) {

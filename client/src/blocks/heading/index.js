@@ -107,7 +107,7 @@ export const settings = {
                 placeholder={ placeholder || __( 'Write heading…' ) }
                 isSelected={ isSelected }
                 onFocus={ onFocus }
-                keepPlaceholderOnFocus={ true }
+                keepPlaceholderOnFocus={ false }
                 multiline={ false }
             />,
         ];

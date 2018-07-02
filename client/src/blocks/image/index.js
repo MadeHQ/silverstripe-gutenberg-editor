@@ -1,6 +1,5 @@
-import { withInstanceId } from '@wordpress/components';
-
 import { __ } from '@wordpress/i18n';
+import { withInstanceId } from '@wordpress/components';
 
 import ImageBlock from '../../components/blocks/image';
 

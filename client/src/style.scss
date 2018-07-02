@@ -115,7 +115,7 @@ div.gutenbergeditor--loaded {
 
 .edit-post-sidebar {
     position: fixed;
-    z-index: z-index('.edit-post-sidebar');
+    z-index: 1049;
     top: 0;
     right: 0;
     bottom: 0;
@@ -168,5 +168,29 @@ div.gutenbergeditor--loaded {
             width: 100%;
             height: auto;
         }
+    }
+}
+
+// Feature panel
+.feature-panel {
+    margin-left: -16px;
+    background-size: cover;
+    background-position: center;
+    min-height: 179px;
+
+    .feature-panel__media,
+    .feature-panel__content {
+        padding-left: 16px;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 24px 0;
+    }
+
+    .feature-panel__media {
+        width: 40%;
+    }
+
+    .feature-panel__content {
+        width: 60%;
     }
 }

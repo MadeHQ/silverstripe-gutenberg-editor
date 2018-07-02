@@ -64,6 +64,17 @@ window._wpDateSettings = {
   timezone: { offset: 1, string: "Europe/Paris" }
 };
 
+window.cloudinaryImage = (url, width = 636, height = 358, crop = 'fill', effect = null, quality = 'auto') => {
+    if (!url) {
+        return undefined;
+    }
+
+    // Build up the options
+    const options = `c_${crop},h_${height},q_${quality},w_${width}/g_auto`;
+
+    return url.replace(/upload\/(.*?)\//i, 'upload/' + options + '/').replace('http:', 'https:');
+};
+
 // User settings used to persist store caches
 window.userSettings = { uid: "dummy" };
 

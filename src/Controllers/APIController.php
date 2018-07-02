@@ -86,6 +86,7 @@ class APIController extends Controller
             'type' => $file->Type,
             'category' => File::get_app_category($file->Format),
             'name' => $file->Name,
+            'url' => $file->SecureURL,
             'largeThumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $previewWidth, $previewHeight),
             'smallThumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $smallWidth, $smallHeight),
             'thumbnail' => $this->getThumbnailGenerator()->generateThumbnailLink($file, $largeWidth, $largeHeight),

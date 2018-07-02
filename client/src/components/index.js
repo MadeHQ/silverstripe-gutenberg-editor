@@ -4,8 +4,4 @@ export { default as Layout } from './layout';
 export { default as Sidebar } from './sidebar';
 export { default as VisualEditor } from './visual-editor';
 export { default as Personalisation } from './personalisation';
-
-
-
-
-window.wp = window.wp || {};
+export { default as ImageControl } from './image';
