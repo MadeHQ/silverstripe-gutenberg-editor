@@ -14,7 +14,7 @@ const loadFileData = fileId => {
         return fileDataCache[fileId];
     }
 
-    fileDataCache[fileId] = fetch(`/gutenberg-api/filedata/${fileId}`)
+    fileDataCache[fileId] = fetch(`/gutenberg-api/filedata/${fileId}`, { credentials: 'same-origin'})
     .then(response => response.json())
     .then(fileData => {
         return fileData;
