@@ -8,7 +8,7 @@ use SilverStripe\Core\Convert;
 use SilverStripe\View\ArrayData;
 
 use MadeHQ\Gutenberg\Blocks\{
-    ParagraphBlock, EmbedBlock, ListBlock,
+    BaseBlock, ParagraphBlock, EmbedBlock, ListBlock,
     PullQuoteBlock, HeadingBlock, SeparatorBlock,
     QuoteBlock, CodeBlock, TableBlock, HTMLBlock,
     ImageBlock, ImageGallery
@@ -124,15 +124,16 @@ class DBGutenbergText extends DBText
                 $content = substr($content, $end_offset + strlen($end_tag));
             }
 
-            if (!array_key_exists($block_name, $block_processors)) {
-                user_error(sprintf(
-                    'The block "%s" does not have a processor', $block_name
-                ), E_USER_WARNING);
+            if (array_key_exists($block_name, $block_processors)) {
+                // user_error(sprintf(
+                //     'The block "%s" does not have a processor', $block_name
+                // ), E_USER_WARNING);
 
-                continue;
+                // continue;
+                $block_type = singleton($block_processors[$block_name]);
+            } else {
+                $block_type = singleton(BaseBlock::class);
             }
-
-            $block_type = singleton($block_processors[$block_name]);
 
             $attributes = array();
 
