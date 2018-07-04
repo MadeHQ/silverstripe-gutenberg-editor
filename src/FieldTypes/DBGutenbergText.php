@@ -11,7 +11,7 @@ use MadeHQ\Gutenberg\Blocks\{
     BaseBlock, ParagraphBlock, EmbedBlock, ListBlock,
     PullQuoteBlock, HeadingBlock, SeparatorBlock,
     QuoteBlock, CodeBlock, TableBlock, HTMLBlock,
-    ImageBlock, ImageGallery
+    ImageBlock, ImageGallery, Image2Block
 };
 
 class DBGutenbergText extends DBText
@@ -35,6 +35,7 @@ class DBGutenbergText extends DBText
         'html' => HTMLBlock::class,
         'madehq/image-selector' => ImageBlock::class,
         'madehq/image-gallery' => ImageGallery::class,
+        'madehq/image' => Image2Block::class,
     ];
 
     private static $casting = [

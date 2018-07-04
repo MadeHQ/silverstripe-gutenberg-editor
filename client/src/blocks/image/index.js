@@ -3,7 +3,7 @@ import { withInstanceId } from '@wordpress/components';
 
 import ImageBlock from '../../components/blocks/image';
 
-import './style.scss';
+// import './style.scss';
 
 const schema = {
 	content: {

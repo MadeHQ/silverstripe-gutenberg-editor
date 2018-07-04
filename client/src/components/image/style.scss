@@ -1,69 +1,96 @@
-.gutenberg__editor .gutenbergeditor-image {
+.gutenbergeditor-image2 {
+  .full-preview-list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+
+  .full-preview {
+    flex: 0 0 auto;
+    margin-left: 10px;
+    width: 90%;
+    position: relative;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .uploadfield-holder {
+    margin-top: 10px;
+  }
+
+  .full-preview__fields {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0.9;
+
+    div:first-child {
+      margin-bottom: 5px;
+    }
+  }
+
+  .full-preview:hover {
+    .full-preview__fields {
+      opacity: 1;
+    }
+  }
+}
+
+.gutenbergeditor-image2.has-one {
+  .full-preview {
+    width: 100%;
+  }
+}
+
+.gutenbergeditor-image2.single-image.has-one {
   position: relative;
 
-  input.entwine-uploadfield {
-    display: none;
+  .uploadfield-holder {
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 0;
   }
 
   .uploadfield-item {
-    border: none;
-    height: auto;
     position: static;
   }
-  .uploadfield-item:last-child {
-    height: auto;
-  }
-  .uploadfield-item__thumbnail,
-  .uploadfield-item__details {
-    display: none;
+
+  .uploadfield-item__view-btn,
+  .uploadfield-item__remove-btn {
+    position: absolute;
+    top: 5px;
+    background: rgba(255, 255, 255, 0.75);
   }
 
   .uploadfield-item__view-btn {
-    background-color: rgba(231, 235, 240, 0.6);
-    border-radius: 100%;
-    bottom: 5%;
-    position: absolute;
-    right: 5%;
-
-    &::before {
-      top: -2px;
-    }
+    right: 45px;
   }
 
-  /**
-   * As the block can be removed there is no need for the image to be removed
-   */
   .uploadfield-item__remove-btn {
-    display: none;
+    right: 5px;
+  }
+}
+
+.gutenbergeditor-image2.is-hidden {
+  .uploadfield-holder {
+    height: 0;
+    overflow: hidden;
   }
 
-  .full-preview img {
-    max-width: 100%;
-  }
-
-  fieldset.full-preview__fields {
-    background-color: rgba(255, 255, 255, 0.8);
-    display: none;
-    height: 100%;
-    left: 0;
-    padding: 10%;
-    position: absolute;
-    top: 0;
-    width: 100%;
-
-    & > div:first-child {
-      margin-bottom: 0.5em;
-    }
-  }
-
-  &:hover fieldset.full-preview__fields {
-    display: block;
-  }
-
-  &.gutenbergeditor-image__error {
-    background-color: #FDD;
-    border: 2px solid #C33;
-    border-radius: 5px;
-    padding: 0 9px;
+  .full-preview__fields {
+    height: auto;
   }
 }

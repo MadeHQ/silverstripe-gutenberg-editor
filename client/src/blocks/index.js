@@ -10,6 +10,7 @@ import * as image from './image';
 import * as gallery from './gallery';
 // import * as review from './review';
 import * as button from './button';
+import * as image2 from './image2';
 
 // import * as paragraph from '@wordpress/blocks/library/paragraph';
 // import * as heading from '@wordpress/blocks/library/heading';
@@ -27,7 +28,7 @@ import * as table from '@wordpress/blocks/library/table';
 const blocks = [
     paragraph, embed, list,
     heading, quote, pullquote,
-    image, gallery,
+    image, gallery, image2,
     // review,
     code, html, separator, table,
     // freeform,
