@@ -3,18 +3,21 @@ import ReactDOM from 'react-dom';
 
 import * as components from '@wordpress/components';
 import * as blocks from '@wordpress/blocks';
+import * as element from '@wordpress/element';
 
-import { ImageControl } from './components';
+import { ImageControl, withFetch } from './components';
 
 window.wp = window.wp || {};
 window.wp.components = {
     ...components,
     ImageControl,
+    withFetch,
 };
 
 window.wp.blocks = blocks;
+window.wp.element = element;
 
-import { isString, debounce, isEqual, extend, has, isObject, filter, includes, without, delay } from "lodash";
+import { isString, debounce, isEqual, extend, has, isObject, filter, includes, without, delay, find, isNull } from "lodash";
 
 window._ = {
     isEqual: isEqual,
@@ -23,6 +26,8 @@ window._ = {
     contains: includes,
     without: without,
     delay: delay,
+    find: find,
+    isNull: isNull,
 };
 
 import './code-editor-config';
@@ -119,7 +124,7 @@ jQuery.entwine('ss', ($) => {
                     .val(content)
                     // ...and trigger the change
                     .trigger('change');
-            }, 250));
+            }, 100));
 
              // Grab the holder & container
             let container = this.getField().siblings('.gutenberg__editor');
