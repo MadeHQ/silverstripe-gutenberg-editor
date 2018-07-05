@@ -1,3 +1,5 @@
+$content-width: 700px;
+
 @mixin visually-hidden {
     border: 0 !important;
     clip: rect(0 0 0 0) !important;
@@ -95,6 +97,7 @@ div.gutenbergeditor--loaded {
         outline: 0 none;
         border: 1px solid transparent;
         width: 100%;
+        max-width: $content-width;
 
         &:hover {
             border-color: $light-gray-200;
@@ -125,6 +128,14 @@ div.gutenbergeditor--loaded {
     color: $dark-gray-500;
     min-height: 500px;
     overflow: auto;
+
+    .blocks-url-input input {
+        border: 1px solid rgb(238, 238, 238);
+    }
+
+    .blocks-url-input__suggestions {
+        width: 100%;
+    }
 }
 
 .blocks-rich-text__tinymce:not(.mce-content-body) {
@@ -168,29 +179,5 @@ div.gutenbergeditor--loaded {
             width: 100%;
             height: auto;
         }
-    }
-}
-
-// Feature panel
-.feature-panel {
-    margin-left: -16px;
-    background-size: cover;
-    background-position: center;
-    min-height: 179px;
-
-    .feature-panel__media,
-    .feature-panel__content {
-        padding-left: 16px;
-        display: inline-block;
-        vertical-align: middle;
-        margin: 24px 0;
-    }
-
-    .feature-panel__media {
-        width: 40%;
-    }
-
-    .feature-panel__content {
-        width: 60%;
     }
 }

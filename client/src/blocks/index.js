@@ -11,6 +11,7 @@ import * as gallery from './gallery';
 // import * as review from './review';
 import * as button from './button';
 import * as image2 from './image2';
+// import * as rows from './rows';
 
 // import * as paragraph from '@wordpress/blocks/library/paragraph';
 // import * as heading from '@wordpress/blocks/library/heading';
@@ -24,6 +25,7 @@ import * as html from '@wordpress/blocks/library/html';
 import * as separator from '@wordpress/blocks/library/separator';
 import * as table from '@wordpress/blocks/library/table';
 // import * as freeform from '@wordpress/blocks/library/freeform';
+// import * as columns from '@wordpress/blocks/library/columns';
 
 const blocks = [
     paragraph, embed, list,
@@ -33,6 +35,8 @@ const blocks = [
     code, html, separator, table,
     // freeform,
     button,
+    // columns,
+    // rows,
 ];
 
 export const registerBlocks = () => {

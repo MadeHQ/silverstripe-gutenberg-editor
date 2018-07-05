@@ -1,0 +1,16 @@
+.wp-block-rows {
+  display: grid;
+  grid-auto-flow: dense;
+
+  @for $i from 2 through 6 {
+    &.has-#{ $i }-rows {
+      grid-auto-rows: #{ 100% / $i };
+    }
+  }
+
+  @for $i from 1 through 6 {
+    .layout-row-#{ $i } {
+      grid-row: #{ $i };
+    }
+  }
+}

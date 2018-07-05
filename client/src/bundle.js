@@ -17,7 +17,7 @@ window.wp.components = {
 window.wp.blocks = blocks;
 window.wp.element = element;
 
-import { isString, debounce, isEqual, extend, has, isObject, filter, includes, without, delay, find, isNull } from "lodash";
+import { isArray, isString, debounce, isEqual, extend, has, isObject, filter, includes, without, delay, find, isNull } from "lodash";
 
 window._ = {
     isEqual: isEqual,
@@ -28,6 +28,7 @@ window._ = {
     delay: delay,
     find: find,
     isNull: isNull,
+    isArray: isArray,
 };
 
 import './code-editor-config';
