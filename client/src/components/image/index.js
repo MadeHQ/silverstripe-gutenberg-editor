@@ -26,10 +26,10 @@ const loadFileData = fileId => {
     }
 
     fileDataCache[fileId] = fetch(`/gutenberg-api/filedata/${fileId}`, { credentials: 'same-origin' })
-    .then(response => response.json())
-    .then(fileData => {
-        return fileData;
-    });
+        .then(response => response.json())
+        .then(fileData => {
+            return fileData;
+        });
 
     return fileDataCache[fileId];
 };
@@ -40,6 +40,10 @@ class ImageControl extends Component {
 
         const { instanceId } = props;
         let { value } = props;
+
+        if (!value || isEmpty(value)) {
+            value = [];
+        }
 
         if (value && !isArray(value)) {
             value = [value];
