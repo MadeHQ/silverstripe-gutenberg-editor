@@ -12,6 +12,8 @@ import {
     omit,
     isArray,
     isObject,
+    mapValues,
+    values,
 } from 'lodash';
 
 const cloudinaryImage = window.cloudinaryImage;
@@ -42,22 +44,17 @@ class ImageControl extends Component {
         let { value } = props;
 
         if (!value || isEmpty(value)) {
-            value = [];
+            value = {};
         }
 
-        if (value && !isArray(value)) {
-            value = [value];
+        if (value && has('id', value)) {
+            value = {};
+            value[ value.id ] = value;
         }
-
-        const files = value.reduce((carry, file) => {
-            carry[file.id] = file;
-
-            return carry;
-        }, {});
 
         this.state = {
             instanceId: instanceId,
-            files: files,
+            files: value,
             error: null,
             loading: true,
         };
@@ -67,9 +64,6 @@ class ImageControl extends Component {
 
         this.addListeners = this.addListeners.bind(this);
         this.entwineField = this.entwineField.bind(this);
-        this.renderImage = this.renderImage.bind(this);
-        this.updateCredit = this.updateCredit.bind(this);
-        this.updateCaption = this.updateCaption.bind(this);
         this.getStateData = this.getStateData.bind(this);
         this.getSchemaData = this.getSchemaData.bind(this);
     }
@@ -114,12 +108,12 @@ class ImageControl extends Component {
             return false;
         }
 
-        let files = map(state.files, file => {
+        let files = mapValues(state.files, file => {
             return omit(file, 'data');
         });
 
         if (!this.props.multiFiles) {
-            files = files[0];
+            files = values(files)[0];
         }
 
         this.props.onChange( files );
@@ -233,84 +227,10 @@ class ImageControl extends Component {
         this.mounted = true;
     }
 
-    updateCredit(file, value) {
-        let files = this.state.files;
-
-        files[file].credit = value;
-
-        this.setState({ files: files });
-    }
-
-    updateCaption(file, value) {
-        let files = this.state.files;
-
-        files[file].caption = value;
-
-        this.setState({ files: files });
-    }
-
-    renderImage(image) {
-        // this.setState({ credit: e.target.value })
-        // Adds the `ui-widget` class so as to reset the font being used (want it to match the rest of the admin)
-        return (
-            <div key={ image.id } className="full-preview ui-widget">
-                <img className="full-preview__image" src={ cloudinaryImage(image.url, 606, 341) } />
-
-            { (this.props.allowCredit || this.props.allowCaption) && (
-                <fieldset className="full-preview__fields">
-
-                { this.props.allowCredit && (
-                    <div id={`DynamicImage${image.id}_Caption_Holder`}>
-                        <label
-                            htmlFor={`DynamicImage${image.id}_Credit`}
-                            id={`title-DynamicImage${image.id}_Credit`}
-                            className="screen-reader-text"
-                        >
-                            Credit
-                        </label>
-
-                        <input
-                            type="text"
-                            className="text"
-                            placeholder="Credit (&copy;)"
-                            id={ `DynamicImage${image.id}_Credit` }
-                            value={ image.credit }
-                            onChange={ e => this.updateCredit(image.id, e.target.value) }
-                        />
-                    </div>
-                ) }
-
-                { this.props.allowCaption && (
-                    <div id={`DynamicImage${image.id}_Caption_Holder`}>
-                        <label
-                            htmlFor={`DynamicImage${image.id}_Caption`}
-                            id={`title-DynamicImage${image.id}_Caption`}
-                            className="screen-reader-text"
-                        >
-                            Caption
-                        </label>
-
-                        <input
-                            type="text"
-                            className="text"
-                            placeholder="Caption"
-                            id={ `DynamicImage${image.id}_Caption` }
-                            value= { image.caption }
-                            onChange={ e => this.updateCaption(image.id, e.target.value) }
-                        />
-                    </div>
-                ) }
-
-                </fieldset>
-            ) }
-            </div>
-        );
-    }
-
     render() {
         if (this.state.loading) {
             return (
-                <div className="ui-widget">Loading</div>
+                <div className="ui-widget">Loading&nbsp;</div>
             );
         }
 
@@ -323,49 +243,24 @@ class ImageControl extends Component {
         const { instanceId, files } = this.state;
         const { isSelected, multiFiles } = this.props;
 
-        const showUploader = isEmpty(files) || isSelected || !multiFiles;
-
-        let classes = ['gutenbergeditor-image2'];
-
-        if (!showUploader) {
-            classes.push('is-hidden');
-        }
-
-        if (!multiFiles) {
-            classes.push('single-image');
-        }
-
-        if (map(this.state.files).length === 1) {
-            classes.push('has-one');
-        }
-
-        classes = classes.join(' ');
-
         return (
             <div
                 id={`Form_EditForm_DynamicImage${instanceId}_Holder`}
-                className={ classes }
+                className="gutenbergeditor-image2 no-change-track"
             >
                 <div
                     id={`Form_EditForm_DynamicImage${instanceId}`}
+                    className="no-change-track"
                     aria-describedby={`describes-Form_EditForm_DynamicImage${instanceId}`}
                     aria-labelledby={`title-Form_EditForm_DynamicImage${instanceId}`}
                 >
                     <div id={`Form_EditForm_DynamicImage${instanceId}_File_Holder`}>
-                    { !isEmpty(this.state.files) && (
-                        <div className="full-preview-holder">
-                            <div className="full-preview-list">
-                                { map(this.state.files, this.renderImage) }
-                            </div>
-                        </div>
-                    ) }
-
-                        <div className="uploadfield-holder" />
+                        <div className="uploadfield-holder no-change-track" />
 
                         <input
                             type="file"
                             multiple="multiple"
-                            className="entwine-uploadfield"
+                            className="entwine-uploadfield no-change-track"
                             id={`Form_EditForm_DynamicImage${instanceId}_File`}
                             aria-labelledby={`title-Form_EditForm_DynamicImage${instanceId}_File`}
                             data-schema={JSON.stringify(this.getSchemaData())}
@@ -442,8 +337,6 @@ class ImageControl extends Component {
 }
 
 ImageControl.defaultProps = {
-    allowCaption: true,
-    allowCredit: true,
     multiFiles: true,
     value: [],
 };

@@ -90,7 +90,7 @@ jQuery.entwine('ss', ($) => {
 
         startGutenberg() {
             // Grab current value
-            let originalValue = this.val();
+            let originalValue = this.val().trim();
 
             // Check if we have wordpress content to ensure that
             // we can provide raw content as editable content
@@ -102,7 +102,7 @@ jQuery.entwine('ss', ($) => {
                 });
 
                 // Turn into text for usage!
-                originalValue = serialize(blocks);
+                originalValue = serialize(blocks).trim();
             }
 
             // Content to object which wordpress expects since
@@ -111,7 +111,10 @@ jQuery.entwine('ss', ($) => {
 
             // Listen for changes
             subscribe(debounce(() => {
-                const content = select('core/editor').getEditedPostContent();
+                const content = select('core/editor').getEditedPostContent().trim();
+
+                // console.log(currentContent);
+                // console.log(content);
 
                 if (isEqual(currentContent, content)) {
                     return false;

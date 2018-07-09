@@ -1,13 +1,13 @@
 import { __ } from '@wordpress/i18n';
-import { withInstanceId, withState, PanelBody } from '@wordpress/components';
+import { withInstanceId, withState, PanelBody, BaseControl } from '@wordpress/components';
 import { InspectorControls, BlockAlignmentToolbar } from '@wordpress/blocks';
 import { ImageControl } from '../../components';
 
-import { findIndex } from 'lodash';
+import { map, mapValues, extend, isEmpty } from 'lodash';
 
 const cloudinaryImage = window.cloudinaryImage;
 
-// import './style.scss';
+import './style.scss';
 
 export const name = 'madehq/image';
 
@@ -22,101 +22,135 @@ export const settings = {
 
     keywords: [ __( 'text' ) ],
 
-    edit({ attributes, setAttributes, isSelected, editable, setState }) {
-        const { images, align } = attributes;
+    edit({ attributes, setAttributes, isSelected }) {
+        const { images, captions, credits } = attributes;
 
-        const updateImages = images => {
-            setAttributes({ images: images });
+        const updateImages = value => {
+            let newImages = mapValues(value, (item, key) => {
+                let image = images[key];
+
+                if (!image) {
+                    return item;
+                }
+
+                item.credit = image.credit;
+                item.caption = image.caption;
+
+                return item;
+            });
+
+            setAttributes({ images: newImages });
         };
+
+        const updateCredit = (key, value) => {
+            let newImages = extend({}, images);
+
+            newImages[key].credit = value;
+
+            setAttributes({ images: newImages });
+        }
+
+        const updateCaption = (key, value) => {
+            let newImages = extend({}, images);
+
+            newImages[key].caption = value;
+
+            setAttributes({ images: newImages });
+        }
+
+        const renderImage = (image, key) => {
+            return (
+                <div key={ key } className="full-preview ui-widget">
+                    <img className="full-preview__image" src={ cloudinaryImage(image.url, 606, 341) } />
+
+                    <fieldset className="full-preview__fields">
+                        <div id={`DynamicImage${image.id}_Caption_Holder`}>
+                            <label
+                                htmlFor={`DynamicImage${image.id}_Credit`}
+                                id={`title-DynamicImage${image.id}_Credit`}
+                                className="screen-reader-text"
+                            >
+                                Credit
+                            </label>
+
+                            <input
+                                type="text"
+                                className="text no-change-track"
+                                placeholder="Credit (&copy;)"
+                                id={ `DynamicImage${image.id}_Credit` }
+                                value={ image.credit }
+                                onChange={ e => updateCredit(key, e.target.value) }
+                            />
+                        </div>
+
+                        <div id={`DynamicImage${image.id}_Caption_Holder`}>
+                            <label
+                                htmlFor={`DynamicImage${image.id}_Caption`}
+                                id={`title-DynamicImage${image.id}_Caption`}
+                                className="screen-reader-text"
+                            >
+                                Caption
+                            </label>
+
+                            <input
+                                type="text"
+                                className="text no-change-track"
+                                placeholder="Caption"
+                                id={ `DynamicImage${image.id}_Caption` }
+                                value= { image.caption }
+                                onChange={ e => updateCaption(key, e.target.value) }
+                            />
+                        </div>
+                    </fieldset>
+                </div>
+            );
+        };
+
+        const classes = ['full-preview-holder'];
+
+        if (images.length === 1) {
+            classes.push('has-one');
+        }
 
         return [
             isSelected && (
                 <InspectorControls key="inspector">
-                    <PanelBody title={ __( 'Block Alignment' ) }>
-                        <BlockAlignmentToolbar
-                            value={ align }
-                            onChange={ ( nextAlign ) => setAttributes( { align: nextAlign } ) }
+                    <BaseControl label="Image Browser">
+                        <ImageControl
+                            value={ images }
+                            onChange={ updateImages }
+                            isSelected={ isSelected }
                         />
-                    </PanelBody>
+                    </BaseControl>
                 </InspectorControls>
             ),
 
-            <ImageControl
-                value={ images }
-                onChange={ updateImages }
-                isSelected={ isSelected }
-            />
+            <div key="editor">
+                { !images || isEmpty(images) && (
+                    <p className="block-select-prompt">Please select an image&hellip;</p>
+                ) }
+
+                { images && !isEmpty(images) && (
+                    <div className={ classes.join(' ') }>
+                        <div className="full-preview-list">
+                            { map(images, renderImage) }
+                        </div>
+                    </div>
+                ) }
+            </div>
         ];
     },
 
     attributes: {
         images: {
-            type: 'array',
-            default: [],
-        },
-        align: {
-            type: 'string',
-            default: 'left',
+            type: 'object',
+            default: {},
         },
     },
 
     save({ attributes }) {
-        const { images, align } = attributes;
-
-        let classes = ['inline-gallery js-inline-gallery'];
-
-        classes.push(`inline-gallery--align-${align}`);
-
-        classes = classes.join(' ');
-
         return (
-            <div className={ classes } itemScope itemType="http://schema.org/ImageGallery">
-                <div className="inline-gallery__list js-inline-gallery__list">
-
-                { images.map(image => (
-                    <div className="inline-gallery__item">
-                        <figure
-                            className="gallery-item o-figure"
-                            itemProp="associatedMedia" itemScope itemType="http://schema.org/ImageObject"
-                            data-width="1920" data-height="1080"
-                            data-large-src={ cloudinaryImage(image.url, 1920, 1080, 'fill') }
-                            { ...(image.caption.length && { 'data-caption': image.caption } ) }
-                            { ...(image.credit.length && { 'data-credit': image.credit } ) }
-                        >
-                            <button className="gallery-item__link js-gallery-popup">
-                                <svg className="o-icon o-icon--medium" aria-hidden="true">
-                                    <use xlinkHref="#icon-expand"></use>
-                                </svg>
-                            </button>
-
-                            <div className="gallery-item__media u-ratio u-ratio--3-2">
-                                <img className="gallery-item__image"
-                                    itemProp="thumbnail"
-                                    src={ cloudinaryImage(image.url, 800, 450, 'fill') }
-                                />
-                            </div>
-
-                            <figcaption className="gallery-item__meta o-figure__meta">
-                                <span className="gallery-item__slide-number"></span>
-
-                                { image.caption.length && (
-                                    <p itemProp="caption" className="gallery-item__caption o-figure__caption">
-                                        { image.caption }
-                                    </p>
-                                ) }
-
-                                { image.credit.length && (
-                                    <span itemProp="credit" className="gallery-item__credit">
-                                        { image.credit }
-                                    </span>
-                                ) }
-                            </figcaption>
-                        </figure>
-                    </div>
-                )) }
-
-                </div>
-            </div>
+            <div className="inline-gallery"></div>
         );
     }
 };

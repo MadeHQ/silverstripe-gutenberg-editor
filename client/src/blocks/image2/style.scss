@@ -1,0 +1,56 @@
+.full-preview-holder {
+  .full-preview-list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+
+  .full-preview {
+    flex: 0 0 auto;
+    margin-left: 10px;
+    width: 90%;
+    position: relative;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .uploadfield-holder {
+    margin-top: 10px;
+  }
+
+  .full-preview__fields {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0.9;
+
+    div:first-child {
+      margin-bottom: 5px;
+    }
+  }
+
+  .full-preview:hover {
+    .full-preview__fields {
+      opacity: 1;
+    }
+  }
+}
+
+.full-preview-holder.has-one {
+  .full-preview {
+    width: 100%;
+  }
+}
