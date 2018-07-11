@@ -3,46 +3,48 @@ import { get, extend, isEmpty } from 'lodash';
 const defaultConfig = {
     blocks: {
         paragraph: {
-            textAlignment: true,
-            lede: true,
-            dropCap: true,
+            textAlignment: false,
+            dropCap: false,
             fontSize: false,
             backgroundColor: false,
             textColor: false,
             blockAlignment: false,
-            personalisation: true,
+            personalisation: false,
+        },
+        lede: {
+            dropCap: false,
         },
         embed: {
             blockAlignment: false,
             caption: true,
-            personalisation: true,
+            personalisation: false,
         },
         list: {
-            personalisation: true,
+            personalisation: false,
         },
         heading: {
             className: false,
             anchor: true,
             textAlignment: false,
-            personalisation: true,
+            personalisation: false,
         },
         pullquote: {
-            personalisation: true,
+            personalisation: false,
         },
         quote: {
-            personalisation: true,
+            personalisation: false,
         },
         code: {
-            personalisation: true,
+            personalisation: false,
         },
         html: {
-            personalisation: true,
+            personalisation: false,
         },
         table: {
-            personalisation: true,
+            personalisation: false,
         },
         separator: {
-            personalisation: true,
+            personalisation: false,
         },
     },
     oembed: null,

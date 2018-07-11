@@ -3,6 +3,8 @@ import '../hooks';
 import { registerBlockType, setDefaultBlockName, unregisterBlockType } from '@wordpress/blocks';
 
 import * as paragraph from './paragraph';
+import * as lede from './lede';
+import * as well from './well';
 import * as embed from './embed';
 // import * as list from './list';
 import * as heading from './heading';
@@ -28,7 +30,7 @@ import * as table from '@wordpress/blocks/library/table';
 // import * as columns from '@wordpress/blocks/library/columns';
 
 const blocks = [
-    paragraph, embed, list,
+    paragraph, lede, well, embed, list,
     heading, quote, pullquote,
     image, gallery, image2,
     // review,

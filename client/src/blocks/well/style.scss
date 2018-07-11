@@ -1,0 +1,7 @@
+.well--block {
+  background-color: #fefefe;
+
+  .editor-block-list__block:not(.is-multi-selected) .wp-block-paragraph {
+    background-color: transparent;
+  }
+}

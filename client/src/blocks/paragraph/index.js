@@ -1,5 +1,6 @@
 import { isBlockFeatureEnabled } from '../../config';
 
+import classnames from 'classnames';
 import * as paragraph from '@wordpress/blocks/library/paragraph';
 import { __ } from '@wordpress/i18n';
 
@@ -45,18 +46,6 @@ const ContrastCheckerWithFallbackStyles = withFallbackStyles((node, ownProps) =>
 class ParagraphBlock extends paragraph.settings.edit {
     constructor() {
         super( ...arguments );
-        this.toggleLede = this.toggleLede.bind( this );
-        this.toggleWell = this.toggleWell.bind( this );
-    }
-
-    toggleLede() {
-        const { attributes, setAttributes } = this.props;
-        setAttributes( { lede: ! attributes.lede } );
-    }
-
-    toggleWell() {
-        const { attributes, setAttributes } = this.props;
-        setAttributes( { well: ! attributes.well } );
     }
 
     render() {
@@ -72,8 +61,6 @@ class ParagraphBlock extends paragraph.settings.edit {
         const {
             align,
             content,
-            lede,
-            well,
             dropCap,
             placeholder,
             fontSize,
@@ -82,25 +69,7 @@ class ParagraphBlock extends paragraph.settings.edit {
             width,
         } = attributes;
 
-        let className = [];
-
-        if (lede) {
-            className.push('is-lede');
-        }
-
-        if (well) {
-            className.push('is-well');
-        }
-
-        if (dropCap) {
-            className.push('has-drop-cap');
-        }
-
-        className = className.join(' ');
-
         const textAlignmentEnabled = isBlockFeatureEnabled('paragraph', 'textAlignment');
-        const ledeEnabled = isBlockFeatureEnabled('paragraph', 'lede');
-        const wellEnabled = isBlockFeatureEnabled('paragraph', 'well');
         const dropCapEnabled = isBlockFeatureEnabled('paragraph', 'dropCap');
         const fontSizeEnabled = isBlockFeatureEnabled('paragraph', 'fontSize');
         const backgroundColorEnabled = isBlockFeatureEnabled('paragraph', 'backgroundColor');
@@ -108,7 +77,7 @@ class ParagraphBlock extends paragraph.settings.edit {
         const blockAlignmentEnabled = isBlockFeatureEnabled('paragraph', 'blockAlignment');
 
         const textSettingsEnabled = (
-            ledeEnabled || wellEnabled || dropCapEnabled || fontSizeEnabled
+            dropCapEnabled || fontSizeEnabled
         );
 
         const inspectorEnabled = (
@@ -133,22 +102,6 @@ class ParagraphBlock extends paragraph.settings.edit {
 
                 { textSettingsEnabled && (
                     <PanelBody title={ __( 'Text Settings' ) }>
-                        { ledeEnabled && (
-                            <ToggleControl
-                                label={ __( 'Lede' ) }
-                                checked={ !! lede }
-                                onChange={ this.toggleLede }
-                            />
-                        )}
-
-                        { wellEnabled && (
-                            <ToggleControl
-                                label={ __( 'Well' ) }
-                                checked={ !! well }
-                                onChange={ this.toggleWell }
-                            />
-                        )}
-
                         { dropCapEnabled && (
                             <ToggleControl
                                 label={ __( 'Drop Cap' ) }
@@ -216,8 +169,9 @@ class ParagraphBlock extends paragraph.settings.edit {
                     { ( { isExpanded, listBoxId, activeId } ) => (
                         <RichText
                             tagName="p"
-                            className={ classnames( 'wp-block-paragraph', className, {
+                            className={ classnames( 'wp-block-paragraph', {
                                 'has-background': backgroundColor,
+                                'has-drop-cap': dropCap,
                             } ) }
                             style={ {
                                 backgroundColor: backgroundColor,
@@ -268,14 +222,6 @@ const schema = {
     align: {
         type: 'string',
     },
-    lede: {
-        type: 'boolean',
-        default: false,
-    },
-    well: {
-        type: 'boolean',
-        default: false,
-    },
     dropCap: {
         type: 'boolean',
         default: false,
@@ -314,8 +260,6 @@ export const settings = {
             width,
             align,
             content,
-            lede,
-            well,
             dropCap,
             backgroundColor,
             textColor,
@@ -328,8 +272,6 @@ export const settings = {
             'has-background': backgroundColor,
             'has-drop-cap': dropCap,
             [ `is-${ fontSize }-text` ]: fontSize && FONT_SIZES[ fontSize ],
-            'o-lead': lede,
-            'o-well': well,
         } );
 
         const styles = {

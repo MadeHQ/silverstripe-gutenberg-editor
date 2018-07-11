@@ -256,7 +256,7 @@ class APIController extends Controller
     /**
      * @return HTTPResponse
      */
-    protected function output(array $data = null)
+    public function output(array $data = null)
     {
         // Body & status code
         $responseBody = Convert::array2json($data);

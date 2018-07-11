@@ -70,9 +70,9 @@ window.cloudinaryImage = (url, width = 636, height = 358, crop = 'fill', effect 
     }
 
     // Build up the options
-    const options = `c_${crop},h_${height},q_${quality},w_${width}/g_auto`;
+    const options = `h_${height},w_${width},c_${crop},q_${quality},g_auto`;
 
-    return url.replace(/upload\/(.*?)\//i, 'upload/' + options + '/').replace('http:', 'https:');
+    return url.replace('/upload/', '/upload/' + options + '/').replace('http:', 'https:');
 };
 
 // User settings used to persist store caches
