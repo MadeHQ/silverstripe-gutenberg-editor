@@ -8265,7 +8265,7 @@ input[type="search"].editor-inserter__search {
  * Applies editor right position to the selector passed as argument
  */
 .well--block {
-  background-color: #fefefe; }
+  background-color: #eeeeee; }
   .well--block .editor-block-list__block:not(.is-multi-selected) .wp-block-paragraph {
     background-color: transparent; }
 /**
