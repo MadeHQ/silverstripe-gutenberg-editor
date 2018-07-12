@@ -38,6 +38,6 @@ class EmbedBlock extends BaseBlock
             return sprintf("<div class=\"embed-block %s\">%s</div>", static::config()->get('wrapperClass'), preg_replace(['/width="(\w+)"/', '/height="(\w+)"/'], [$width, $height], $markup));
         }
 
-        return sprintf("<div class=\"embed-block %s\">%s</div>", $content);
+        return sprintf("<div class=\"embed-block %s\">%s</div>", static::config()->get('wrapperClass'), $content);
     }
 }
