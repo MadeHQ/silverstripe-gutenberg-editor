@@ -51,6 +51,16 @@ class DBGutenbergText extends DBText
     }
 
     /**
+     * Plain text version
+     *
+     * @return string Plain text
+     */
+    public function Plain()
+    {
+        return preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', strip_tags($this->forTemplate()));
+    }
+
+    /**
      * @return DBHTMLText
      */
     public function forTemplate()
