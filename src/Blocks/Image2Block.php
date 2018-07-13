@@ -56,6 +56,10 @@ class Image2Block extends BaseBlock
 
         return ArrayData::create([
             'Images' => $images,
+            'Width' => static::config()->get('width'),
+            'Height' => static::config()->get('height'),
+            'FullWidth' => static::config()->get('full_width'),
+            'FullHeight' => static::config()->get('full_height'),
         ]);
     }
 }

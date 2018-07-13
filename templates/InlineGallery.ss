@@ -2,7 +2,7 @@
     <div class="inline-gallery__list  js-inline-gallery__list">
     <% loop Images %>
         <div class="inline-gallery__item">
-            <figure class="gallery-item o-figure" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" data-width="$FullWidth" data-height="$FullHeight" data-large-src="$Image.URL($Up.FullWidth, $Up.FullHeight).crop('fill')" <% if Caption %>data-caption="$Caption"<% end_if %> <% if Credit %>data-credit="$Credit"<% end_if %>>
+            <figure class="gallery-item o-figure" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" data-width="$FullWidth" data-height="$FullHeight" data-large-src="$Image.URL($Up.FullWidth, $Up.FullHeight).crop('fit')" <% if Caption %>data-caption="$Caption"<% end_if %> <% if Credit %>data-credit="$Credit"<% end_if %>>
                 <button class="gallery-item__link js-gallery-popup">
                     <svg class="o-icon o-icon--medium" aria-hidden="true">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-expand"></use>
@@ -10,7 +10,7 @@
                 </button>
 
                 <div class="gallery-item__media u-ratio u-ratio--3-2">
-                    <img class="gallery-item__image" itemprop="thumbnail" src="$Image.URL($Up.Width, $Up.Height).crop('fill')" />
+                    <img class="gallery-item__image" itemprop="thumbnail" src="$Image.Size($Up.Width, $Up.Height).crop('fill')" />
                 </div>
 
                 <figcaption class="gallery-item__meta o-figure__meta">
