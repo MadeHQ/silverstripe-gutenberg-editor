@@ -4,6 +4,8 @@ import { Component } from '@wordpress/element';
 
 import { isEqual, debounce } from 'lodash';
 
+import './style.scss';
+
 class Image extends Component {
     constructor(props) {
         super(props);
