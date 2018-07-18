@@ -122,6 +122,54 @@ export const settings = {
 
     attributes: schema,
 
+    transforms: {
+		from: [
+			{
+				type: 'block',
+				blocks: [ 'core/paragraph' ],
+				transform: ( { content } ) => {
+					return createBlock( 'madehq/lede-copy', {
+						content,
+					} );
+				},
+			},
+			{
+				type: 'raw',
+				isMatch: ( node ) => /P/.test( node.nodeName ),
+			},
+			{
+				type: 'pattern',
+				regExp: /^(#{2,6})\s/,
+				transform: ( { content } ) => {
+					return createBlock( 'madehq/lede-copy', {
+						nodeName: 'P',
+						content,
+					} );
+				},
+			},
+		],
+		to: [
+			{
+				type: 'block',
+				blocks: [ 'core/paragraph' ],
+				transform: ( { content } ) => {
+					return createBlock( 'core/paragraph', {
+						content,
+					} );
+				},
+			},
+			{
+				type: 'block',
+				blocks: [ 'core/heading' ],
+				transform: ( { content } ) => {
+					return createBlock( 'core/heading', {
+						content,
+					} );
+				},
+			},
+		],
+    },
+
     save( { attributes } ) {
         const { content, dropCap, } = attributes;
 

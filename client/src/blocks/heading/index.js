@@ -16,8 +16,22 @@ import { isUndefined } from 'lodash';
 
 export const name = 'core/heading';
 
+const transforms = heading.settings.transforms;
+
+transforms.to.push({
+    type: 'block',
+    blocks: [ 'madehq/lede-copy' ],
+    transform: ( { content } ) => {
+        return createBlock( 'madehq/lede-copy', {
+            content,
+        } );
+    },
+});
+
 export const settings = {
     ...heading.settings,
+
+    transforms,
 
     edit( { attributes, setAttributes, isSelected, mergeBlocks, insertBlocksAfter, onReplace, className, onFocus, allowNodeChange, onSplit } ) {
         const {
