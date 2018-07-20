@@ -31,7 +31,7 @@ import * as table from '@wordpress/blocks/library/table';
 
 const blocks = [
     paragraph, lede, well, embed, list,
-    heading, quote, pullquote,
+    heading, quote,
     image, gallery, image2,
     // review,
     code, html, separator, table,
