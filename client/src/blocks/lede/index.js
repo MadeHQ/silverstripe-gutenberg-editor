@@ -134,10 +134,6 @@ export const settings = {
 				},
 			},
 			{
-				type: 'raw',
-				isMatch: ( node ) => /P/.test( node.nodeName ),
-			},
-			{
 				type: 'pattern',
 				regExp: /^(#{2,6})\s/,
 				transform: ( { content } ) => {

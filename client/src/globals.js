@@ -64,13 +64,21 @@ window._wpDateSettings = {
   timezone: { offset: 1, string: "Europe/Paris" }
 };
 
-window.cloudinaryImage = (url, width = 636, height = 358, crop = 'fill', effect = null, quality = 'auto') => {
+window.cloudinaryImage = (url, width = 636, height = 358, crop = 'fill', effect = null, quality = 'auto', gravity = 'auto') => {
     if (!url) {
         return undefined;
     }
 
     // Build up the options
-    const options = `h_${height},w_${width},c_${crop},q_${quality},g_auto`;
+    const options = [
+        `h_${height}`,
+        `w_${width}`,
+        `c_${crop}`,
+        `q_${quality}`,
+    ];
+    if (gravity) {
+        options.push(`g_${gravity}`);
+    }
 
     return url.replace('/upload/', '/upload/' + options + '/').replace('http:', 'https:');
 };
