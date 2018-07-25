@@ -33,7 +33,6 @@ window._ = {
 
 import './code-editor-config';
 
-import { registerBlocks } from "./blocks";
 import './store';
 
 import { EditorProvider } from "@wordpress/editor";
@@ -43,7 +42,11 @@ import { rawHandler, serialize } from "@wordpress/blocks";
 
 import { setConfig } from './config';
 
+import { registerBlocks } from "./blocks";
+
 import "./style.scss";
+
+const gutenbergConfigSetEvent = new Event('GutenbergConfigSet');
 
 let blocksRegistered = false;
 
@@ -65,7 +68,9 @@ jQuery.entwine('ss', ($) => {
 
             // Set the global config
             setConfig(this.data('gutenberg'));
-            // this.setConfig(this.data('gutenberg') || {});
+
+            // Trigger event for other block registers
+            document.dispatchEvent(gutenbergConfigSetEvent);
 
             // Store field for future
             this.setField(field);

@@ -159,7 +159,11 @@ class DBGutenbergText extends DBText
             $this->extend('beforeBlockRender', $block_content, $attributes);
 
             if (is_string($block_content)) {
-                $rendered_content .= $block_type->render($block_content, $attributes);
+                $block_content = $block_type->render($block_content, $attributes);
+
+                $this->extend('afterBlockRender', $block_content, $attributes);
+
+                $rendered_content .= $block_content;
             }
 
             $content = trim($content);

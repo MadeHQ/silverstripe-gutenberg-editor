@@ -1,4 +1,4 @@
-import { get, extend, isEmpty } from 'lodash';
+import { get, merge, isEmpty } from 'lodash';
 
 const defaultConfig = {
     blocks: {
@@ -66,7 +66,7 @@ export function setConfig(config) {
         return false;
     }
 
-    configCache = extend({}, defaultConfig, config || {});
+    configCache = merge({}, defaultConfig, config || {});
 }
 
 export function isBlockFeatureEnabled(block, feature) {

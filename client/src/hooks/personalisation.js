@@ -1,13 +1,13 @@
 /**
  * External dependencies
  */
-import { assign, pull, map } from 'lodash';
+import { assign, pull, map, get } from 'lodash';
 import classnames from 'classnames';
 
 /**
  * WordPress dependencies
  */
-import { getWrapperDisplayName } from '@wordpress/element';
+import { getWrapperDisplayName, Fragment } from '@wordpress/element';
 import { addFilter } from '@wordpress/hooks';
 import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
@@ -31,8 +31,8 @@ export function addAttribute( settings ) {
     if (isBlockFeatureEnabled(settings.name, 'personalisation')) {
         settings.attributes = assign(settings.attributes, {
             personalisation: {
-                type: 'string',
-                default: '',
+                type: 'array',
+                default: [],
             }
         });
     }
@@ -43,25 +43,27 @@ export function addAttribute( settings ) {
 export function withInspectorControl( BlockEdit ) {
     const WrappedBlockEdit = ( props ) => {
         const personalisationEnabled = isBlockFeatureEnabled(props.name, 'personalisation') && props.isSelected;
+        const configValues = getConfigValue('personalisation', []);
 
-        let values = props.attributes.personalisation || '';
-
-        values = pull(values.split(','), '');
+        let values = props.attributes.personalisation || [];
 
         const onChange = (event) => {
+            let newValues = values.slice();
+
             if (event.target.checked) {
-                values.push( event.target.value );
+                newValues.push( event.target.value );
             } else {
-                values = pull( values, event.target.value );
+                newValues = pull(newValues, event.target.value);
             }
 
-            props.setAttributes( { personalisation: values.join(',') } );
+            props.setAttributes( { personalisation: newValues } );
         };
 
-        const checkboxes = getConfigValue('personalisation', []).map((option, index) => {
+        const checkboxes = configValues.map((option, index) => {
             const { label, value } = option;
 
             const id = `personalisation-${value}`;
+
             const isChecked = values.some(item => {
                 return String(item).toLowerCase() === String(value).toLowerCase();
             });
@@ -84,14 +86,20 @@ export function withInspectorControl( BlockEdit ) {
             );
         });
 
-        return [
-            <BlockEdit key="block-edit-personalisation" { ...props } />,
-            personalisationEnabled && <InspectorControls key="inspector-personalisation">
-                <PanelBody title={ __( 'Personalisation' ) }>
-                    { checkboxes }
-                </PanelBody>
-            </InspectorControls>,
-        ];
+        if (personalisationEnabled) {
+            return (
+                <Fragment>
+                    <BlockEdit { ...props } />
+                    <InspectorControls key="inspector-personalisation">
+                        <PanelBody title={ __( 'Personalisation' ) }>
+                            { checkboxes }
+                        </PanelBody>
+                    </InspectorControls>
+                </Fragment>
+            );
+        }
+
+        return <BlockEdit { ...props } />;
     };
 
     WrappedBlockEdit.displayName = getWrapperDisplayName( BlockEdit, 'personalisation' );
