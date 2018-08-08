@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { withInstanceId, withState, PanelBody, BaseControl } from '@wordpress/components';
+import { withInstanceId, withState, PanelBody, BaseControl, ToggleControl } from '@wordpress/components';
 import { InspectorControls, BlockAlignmentToolbar } from '@wordpress/blocks';
 import { ImageControl } from '../../components';
 
@@ -23,7 +23,7 @@ export const settings = {
     keywords: [ __( 'text' ) ],
 
     edit({ attributes, setAttributes, isSelected }) {
-        const { images, captions, credits } = attributes;
+        const { images, captions, credits, inline } = attributes;
 
         const updateImages = value => {
             let newImages = mapValues(value, (item, key) => {
@@ -56,6 +56,10 @@ export const settings = {
             newImages[key].caption = value;
 
             setAttributes({ images: newImages });
+        }
+
+        const updateInline = () => {
+            setAttributes({ inline: !inline });
         }
 
         const renderImage = (image, key) => {
@@ -115,6 +119,11 @@ export const settings = {
         return [
             isSelected && (
                 <InspectorControls key="inspector">
+                    <ToggleControl
+                        label="Show images inline"
+                        checked={ !! inline }
+                        onChange={ updateInline }
+                    />
                     <BaseControl label="Image Browser">
                         <ImageControl
                             value={ images }
@@ -146,6 +155,10 @@ export const settings = {
             type: 'object',
             default: {},
         },
+        inline: {
+            type: 'boolean',
+            default: false
+        }
     },
 
     save({ attributes }) {

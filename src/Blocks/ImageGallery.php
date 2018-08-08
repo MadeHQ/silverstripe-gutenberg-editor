@@ -62,7 +62,7 @@ class ImageGallery extends BaseBlock
             return false;
         }
 
-        return $this->renderWith('InlineGallery', [
+        return $this->renderWith('Blocks/Image2Gallery', [
             'Images' => $images,
             'Width' => static::config()->get('width'),
             'Height' => static::config()->get('height'),
