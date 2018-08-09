@@ -4,7 +4,7 @@
             <div class="inline-gallery__item">
                 <figure class="gallery-item o-figure" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" data-width="{$Width}" data-height="{$Height}" data-large-src="{$Image.Size($Width, $Height)}" data-caption="{$Caption}" data-credit="{$Credit}">
                     <button class="gallery-item__link js-gallery-popup">
-                        $Icon('expand', 'medium')
+                        {$Top.Icon('expand', 'medium')}
                     </button>
                     <div class="gallery-item__media u-ratio u-ratio--16-9">
                         <img class="gallery-item__image" itemprop="thumbnail" src="{$Image.Size($Up.Width, $Up.Height).Crop('fill')}" alt=""/>
