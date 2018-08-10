@@ -22,6 +22,7 @@ class ListBlock extends list.settings.edit {
             mergeBlocks,
             onReplace,
             className,
+            onFocus,
         } = this.props;
 
         const { nodeName, values, personalisation } = attributes;
@@ -86,6 +87,7 @@ class ListBlock extends list.settings.edit {
                 value={ values }
                 wrapperClassName="blocks-list"
                 className={ className }
+                onFocus={ onFocus }
                 placeholder={ __( 'Write list…' ) }
                 onMerge={ mergeBlocks }
                 onSplit={
