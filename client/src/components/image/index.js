@@ -47,9 +47,10 @@ class ImageControl extends Component {
             value = {};
         }
 
-        if (value && has('id', value)) {
+        if (value && has(value, 'id')) {
+            const oldValue = value;
             value = {};
-            value[ value.id ] = value;
+            value[ oldValue.id ] = oldValue;
         }
 
         this.state = {
@@ -71,13 +72,13 @@ class ImageControl extends Component {
     componentDidMount() {
         let stateFiles = this.state.files;
 
-        const promises = keys(stateFiles).map(fileId => {
-            return loadFileData(fileId);
+        const promises = map(stateFiles, fileData => {
+            return loadFileData(fileData.id);
         });
 
         Promise.all(promises)
         .then(files => {
-            files.forEach(file => {
+            forEach(files, (file) => {
                 stateFiles[file.id].data = file;
             });
 
@@ -174,11 +175,15 @@ class ImageControl extends Component {
                     stateFiles.push(id);
                 });
 
-                toAdd.forEach(fileId => {
-                    stateFiles.push(fileId);
+                toAdd.forEach(fileData => {
+                    stateFiles.push(fileData);
                 });
 
-                let promises = stateFiles.map(fileId => {
+                stateFiles = stateFiles.filter(fileId => {
+                    return fileId;
+                })
+
+                let promises = map(stateFiles, fileId => {
                     return loadFileData(fileId);
                 });
 
