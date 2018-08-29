@@ -181,3 +181,8 @@ div.gutenbergeditor--loaded {
         }
     }
 }
+
+// set Custom html block preview iframe width to bigger than 0px
+.editor-block-list__block-edit .wp-block-html iframe {
+    width: 100%
+}
