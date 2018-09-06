@@ -2,6 +2,8 @@
 
 namespace MadeHQ\Gutenberg\Blocks;
 
+use SilverStripe\Control\Controller;
+
 class EmbedBlock extends BaseBlock
 {
     /**
@@ -32,12 +34,29 @@ class EmbedBlock extends BaseBlock
         $width = sprintf('width="%s"', static::config()->get('width'));
         $height = sprintf('height="%s"', static::config()->get('height'));
 
-        if (array_key_exists('html', $attributes)) {
-            $markup = $attributes['html'];
+        $wrapperClass = static::config()->get('wrapperClass');
 
-            return sprintf("<div class=\"embed-block %s\">%s</div>", static::config()->get('wrapperClass'), preg_replace(['/width="(\w+)"/', '/height="(\w+)"/'], [$width, $height], $markup));
+        if (!array_key_exists('html', $attributes)) {
+            return sprintf("<div class=\"embed-block %s\">%s</div>", $wrapperClass, $content);
         }
 
-        return sprintf("<div class=\"embed-block %s\">%s</div>", static::config()->get('wrapperClass'), $content);
+        $markup = $attributes['html'];
+
+        preg_match('/src\s*=\s*"(.+?)"/', $markup, $matches);
+
+        if (count($matches) === 2) {
+            $url = $matches[1];
+
+            if (stripos($url, 'youtube') !== false) {
+                $url = Controller::join_links($url, '?rel=0&fs=0&showinfo=0');
+            }
+
+            $markup = str_replace($matches[1], $url, $markup);
+        }
+
+        // Replace width & height
+        $markup = preg_replace(['/width="(\w+)"/', '/height="(\w+)"/'], [$width, $height], $markup);
+
+        return sprintf("<div class=\"embed-block %s\">%s</div>", $wrapperClass, $markup);
     }
 }
