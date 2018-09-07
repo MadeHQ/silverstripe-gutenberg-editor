@@ -187,3 +187,7 @@ div.gutenbergeditor--loaded {
     width: 100%;
     border: 0;
 }
+
+.components-popover__content .editor-block-settings-menu__control:nth-child(4) {
+    display: none;
+ }
