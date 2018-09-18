@@ -36,11 +36,11 @@ class ImageBlock extends BaseBlock
         $height = (int) static::config()->get('height');
 
         if ($width && $height) {
-            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->URL($width, $height), $alt, $title);
+            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->URL($width, $height, 'fill'), $alt, $title);
         } else if ($width) {
-            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->resizeByWidth($width), $alt, $title);
+            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->resizeByWidth($width, 'fill'), $alt, $title);
         } else if ($height) {
-            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->resizeByHeight($height), $alt, $title);
+            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->resizeByHeight($height, 'fill'), $alt, $title);
         }
 
         return sprintf('<img src="%s" alt="%s" title="%s" />', $file->URL(800, 450), $alt, $title);
