@@ -2,6 +2,13 @@ import ReactDOM from 'react-dom';
 
 import { Component } from '@wordpress/element';
 
+import { PanelBody } from '@wordpress/components';
+
+import {
+    InspectorControls,
+    UrlInput,
+} from '@wordpress/blocks';
+
 import { isEqual, debounce } from 'lodash';
 
 import './style.scss';
@@ -23,6 +30,7 @@ class Image extends Component {
             instanceId: props.instanceId,
             title: props.attributes.title,
             width: props.attributes.width,
+            url: props.attributes.url,
         };
 
         this.setAttributes = debounce(this.setAttributes, 500);
@@ -155,6 +163,9 @@ class Image extends Component {
         if (state.width !== undefined) {
             this.setAttributes({width: state.width});
         }
+        if (state.url !== undefined) {
+            this.setAttributes({url: state.url});
+        }
         super.setState(state);
     }
 
@@ -200,6 +211,9 @@ class Image extends Component {
         }
         if (this.props.attributes.width !== nextProps.attributes.width) {
             newState.width = nextProps.attributes.width;
+        }
+        if (this.props.attributes.url !== nextProps.attributes.url) {
+            newState.url = nextProps.attributes.url;
         }
         if (Object.keys(newState).length) {
             this.setState(newState, true);
@@ -285,10 +299,22 @@ class Image extends Component {
 
         const { instanceId } = this.state;
 
-        return (
+        return [
+            this.props.isSelected && (
+                <InspectorControls key="inspector">
+                    <PanelBody title={ "Image Link" }>
+                        <UrlInput
+                            value={ this.state.url }
+                            onChange={ ( value ) => this.setAttributes( { url: value } ) }
+                        />
+                    </PanelBody>
+                </InspectorControls>
+            ),
+
             <div
                 id={`Form_EditForm_DynamicImage${instanceId}_Holder`}
                 className="gutenbergeditor-image"
+                key="editor"
             >
                 <div
                     id={`Form_EditForm_DynamicImage${instanceId}`}
@@ -312,9 +338,8 @@ class Image extends Component {
                     </div>
                 </div>
             </div>
-        );
+        ];
     }
-
 
     getStateData() {
         const { instanceId } = this.state;

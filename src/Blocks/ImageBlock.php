@@ -31,18 +31,27 @@ class ImageBlock extends BaseBlock
 
         $alt = array_key_exists('altText', $attributes) ? $attributes['altText'] : '';
         $title = array_key_exists('title', $attributes) ? $attributes['title'] : '';
+        $url = array_key_exists('url', $attributes) ? $attributes['url'] : '';
 
         $width = (int) static::config()->get('width');
         $height = (int) static::config()->get('height');
 
         if ($width && $height) {
-            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->URL($width, $height, 'fill'), $alt, $title);
+            $image = sprintf('<img src="%s" alt="%s" title="%s" class="inline-image__image" />', $file->URL($width, $height, 'fill'), $alt, $title);
         } else if ($width) {
-            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->resizeByWidth($width, 'fill'), $alt, $title);
+            $image = sprintf('<img src="%s" alt="%s" title="%s" class="inline-image__image" />', $file->resizeByWidth($width, 'fill'), $alt, $title);
         } else if ($height) {
-            return sprintf('<img src="%s" alt="%s" title="%s" />', $file->resizeByHeight($height, 'fill'), $alt, $title);
+            $image = sprintf('<img src="%s" alt="%s" title="%s" class="inline-image__image" />', $file->resizeByHeight($height, 'fill'), $alt, $title);
+        } else {
+            $image = sprintf('<img src="%s" alt="%s" title="%s" class="inline-image__image" />', $file->URL(800, 450), $alt, $title);
         }
 
-        return sprintf('<img src="%s" alt="%s" title="%s" />', $file->URL(800, 450), $alt, $title);
+        if ($url && is_string($url) && strlen($url)) {
+            $markup = sprintf('<a href="%s" class="inline-image__link">%s</a>', $url, $image);
+        } else {
+            $markup = $image;
+        }
+
+        return sprintf('<div class="inline-image">%s</div>', $markup);
     }
 }

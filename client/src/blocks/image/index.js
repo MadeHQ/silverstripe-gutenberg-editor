@@ -48,6 +48,9 @@ export const settings = {
         width: {
             type: 'string'
         },
+        url: {
+            type: 'string',
+        },
     },
 
     save: function(data) {
