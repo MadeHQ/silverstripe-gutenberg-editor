@@ -6,7 +6,7 @@ use SilverStripe\Assets\File;
 use SilverStripe\View\ArrayData;
 use SilverStripe\ORM\DataObject;
 
-class FeaturePanelBlock extends BaseBlock
+class FeaturePanelBlockExample extends BaseBlock
 {
     public function render($content, array $attributes = array())
     {
