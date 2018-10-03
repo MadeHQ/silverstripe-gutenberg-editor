@@ -32,9 +32,16 @@ class ImageBlock extends BaseBlock
         $alt = array_key_exists('altText', $attributes) ? $attributes['altText'] : '';
         $title = array_key_exists('title', $attributes) ? $attributes['title'] : '';
         $url = array_key_exists('url', $attributes) ? $attributes['url'] : '';
+        $width = array_key_exists('width', $attributes) ? $attributes['width'] : null;
+        $height = array_key_exists('height', $attributes) ? $attributes['height'] : null;
 
-        $width = (int) static::config()->get('width');
-        $height = (int) static::config()->get('height');
+        if (!$width) {
+            $width = (int) static::config()->get('width');
+        }
+
+        if (!$height) {
+            $height = (int) static::config()->get('height');
+        }
 
         if ($width && $height) {
             $image = sprintf('<img src="%s" alt="%s" title="%s" class="inline-image__image" />', $file->URL($width, $height, 'fill'), $alt, $title);

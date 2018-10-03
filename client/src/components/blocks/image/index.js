@@ -43,8 +43,8 @@ class Image extends Component {
                 .then(response => response.json())
                 .then((fileData) => {
                     // Will use the state value if supplied otherwise use the image width/height
-                    const width = this.state.width || fileData.previewWidth;
-                    const height = this.state.height || fileData.previewHeight;
+                    const width = this.state.width || fileData.width;
+                    const height = this.state.height || fileData.height;
 
                     this.setState({
                         fileData,
@@ -81,9 +81,10 @@ class Image extends Component {
      * @param int height
      */
     heightChangeHandler(height) {
-        if (height > this.state.fileData.height) {
+        if (parseInt(height, 10) > parseInt(this.state.fileData.height, 10)) {
             return false;
         }
+
         this.setState({height});
     }
 
@@ -92,9 +93,10 @@ class Image extends Component {
      * @param int width
      */
     widthChangeHandler(width) {
-        if (width > this.state.fileData.width) {
+        if (parseInt(width, 10) > parseInt(this.state.fileData.width, 10)) {
             return false;
         }
+
         this.setState({width});
     }
 
@@ -107,14 +109,31 @@ class Image extends Component {
             const config = { attributes: true, childList: true, subtree: true };
 
             // Callback function to execute when mutations are observed
-            const callback = function(mutationsList) {
+            const callback = mutationsList => {
                 for(let mutation of mutationsList) {
                     if (
                         mutation.type == 'attributes' &&
                         mutation.attributeName === 'value' &&
                         mutation.target.type === 'hidden'
                     ) {
-                        this.setState({fileId: mutation.target.value});
+                        let newid = parseInt(mutation.target.value, 10);
+
+                        if (newid && newid !== parseInt(this.state.fileId, 10)) {
+                            fetch(`/gutenberg-api/filedata/${mutation.target.value}`)
+                            .then(response => response.json())
+                            .then(fileData => {
+                                // Will use the state value if supplied otherwise use the image width/height
+                                this.setState({
+                                    fileId: newid,
+                                    fileData: fileData,
+                                    width: fileData.width,
+                                    height: fileData.height,
+                                    title: fileData.title,
+                                    altText: '',
+                                    url: fileData.url,
+                                });
+                            });
+                        }
                     }
                 }
             };
@@ -132,40 +151,31 @@ class Image extends Component {
         this.mutationObserver && this.mutationObserver.disconnect();
     }
 
-    setState(state, onlyUpdateFileDataFromServer = false) {
-        if (state.fileId !== undefined && state.fileId !== null) {
-            this.setAttributes({ fileId: state.fileId });
-            if (state.fileId && this.state.fileId !== state.fileId) {
-                const that = this;
-                fetch(`/gutenberg-api/filedata/${state.fileId}`)
-                    .then(response => response.json())
-                    .then(fileData => {
-                        const newState = {
-                            fileData,
-                        }
-                        if (!onlyUpdateFileDataFromServer) {
-                            newState.title = fileData.title;
-                            newState.altText = '';
-                        }
-                        that.setState(newState);
-                    });
-            }
+    setState(state) {
+        if (state.fileId !== undefined) {
+            this.setAttributes({fileId: state.fileId});
         }
+
         if (state.title !== undefined) {
             this.setAttributes({title: state.title});
         }
+
         if (state.altText !== undefined) {
             this.setAttributes({altText: state.altText});
         }
+
         if (state.height !== undefined) {
             this.setAttributes({height: state.height});
         }
+
         if (state.width !== undefined) {
             this.setAttributes({width: state.width});
         }
+
         if (state.url !== undefined) {
             this.setAttributes({url: state.url});
         }
+
         super.setState(state);
     }
 
@@ -216,7 +226,7 @@ class Image extends Component {
             newState.url = nextProps.attributes.url;
         }
         if (Object.keys(newState).length) {
-            this.setState(newState, true);
+            this.setState(newState);
         }
     }
 
@@ -224,23 +234,15 @@ class Image extends Component {
         return !isEqual(nextProps.attributes, this.props.attributes) || nextState;
     }
 
-
     renderWidthHeightFieldGroup() {
-        return false;
+        if (!this.hasFileId() || !this.fileDataIsLoaded()) {
+            return null;
+        }
 
         const { instanceId } = this.state;
 
         return (
             <div className="form__fieldgroup field CompositeField fieldgroup">
-                <div id={`DynamicImage${instanceId}_Height_Holder`} className="form__fieldgroup-item field field--small">
-                    <label htmlFor={`DynamicImage${instanceId}_Height`} id={`title-DynamicImage${instanceId}_Height`}>Height</label>
-                    <div>
-                        <input placeholder={this.state.height} type="number" className="text" id={`DynamicImage${instanceId}_Height`} value={this.state.height} onChange={e => this.heightChangeHandler(e.target.value)} />
-                    </div>
-                    <div className="form__field-description">
-                        max. {this.state.fileData.height}px
-                    </div>
-                </div>
                 <div id={`DynamicImage${instanceId}_Width_Holder`} className="form__fieldgroup-item field field--small">
                     <label htmlFor={`DynamicImage${instanceId}_Width`} id={`title-DynamicImage${instanceId}_Width`}>Width</label>
                     <div>
@@ -248,6 +250,15 @@ class Image extends Component {
                     </div>
                     <div className="form__field-description">
                         max. {this.state.fileData.width}px
+                    </div>
+                </div>
+                <div id={`DynamicImage${instanceId}_Height_Holder`} className="form__fieldgroup-item field field--small">
+                    <label htmlFor={`DynamicImage${instanceId}_Height`} id={`title-DynamicImage${instanceId}_Height`}>Height</label>
+                    <div>
+                        <input placeholder={this.state.height} type="number" className="text" id={`DynamicImage${instanceId}_Height`} value={this.state.height} onChange={e => this.heightChangeHandler(e.target.value)} />
+                    </div>
+                    <div className="form__field-description">
+                        max. {this.state.fileData.height}px
                     </div>
                 </div>
             </div>
