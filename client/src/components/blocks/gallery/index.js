@@ -60,24 +60,6 @@ class Gallery extends Component {
                     setAttributes={setAttributes}
                     instanceId={`gallery-${instanceId}-${index}-${item.fileId}`}
                 />
-                { item.fileId && (
-                    <div key="wrapper" className="ui-widget">
-                        <TextControl
-                            label="Caption"
-                            key="caption"
-                            value={item.caption}
-                            onChange={value => {setAttributes({'caption': value})}}
-                            placeholder="Caption"
-                        />
-                        <TextControl
-                            label="Credit"
-                            key="credit"
-                            value={item.credit}
-                            onChange={value => {setAttributes({'credit': value})}}
-                            placeholder="Credit"
-                        />
-                    </div>
-                )}
             </div>
         );
     }

@@ -14,6 +14,8 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use Embed\Embed;
 use Embed\Http\CurlDispatcher;
 
+use MadeHQ\Cloudinary\Model\Image;
+
 class APIController extends Controller
 {
     private $thumbnailGenerator;
@@ -66,6 +68,10 @@ class APIController extends Controller
 
         $originalWidth = $file->getWidth();
         $originalHeight = $file->getHeight();
+
+        if ($file instanceof Image && !$originalWidth && !$originalHeight) {
+            list($originalWidth, $originalHeight) = getimagesize($file->SecureURL);
+        }
 
         list($previewWidth, $previewHeight) = static::calculateWidthHeight(
             $originalWidth,

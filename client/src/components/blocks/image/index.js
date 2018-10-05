@@ -9,7 +9,7 @@ import {
     UrlInput,
 } from '@wordpress/blocks';
 
-import { isEqual, debounce } from 'lodash';
+import { isEqual, debounce, has } from 'lodash';
 
 import './style.scss';
 
@@ -19,6 +19,7 @@ class Image extends Component {
 
         this.titleChangeHandler = this.titleChangeHandler.bind(this);
         this.altTextChangeHandler = this.altTextChangeHandler.bind(this);
+        this.calculateAspectRatioFit = this.calculateAspectRatioFit.bind(this);
         this.heightChangeHandler = this.heightChangeHandler.bind(this);
         this.widthChangeHandler = this.widthChangeHandler.bind(this);
 
@@ -33,7 +34,7 @@ class Image extends Component {
             url: props.attributes.url,
         };
 
-        this.setAttributes = debounce(this.setAttributes, 500);
+        this.setAttributes = debounce(this.setAttributes, 100);
     }
 
     componentDidMount() {
@@ -74,6 +75,28 @@ class Image extends Component {
 
     altTextChangeHandler(altText) {
         this.setState({altText});
+    }
+
+    calculateAspectRatioFit(attrs) {
+        let maxWidth = parseInt(this.state.fileData.width, 10);
+        let maxHeight = parseInt(this.state.fileData.height, 10);
+
+        let ratio = maxWidth / maxHeight;
+
+        let newWidth, newHeight;
+
+        if (has(attrs, 'width')) {
+            newWidth = parseInt(attrs.width, 10);
+            newHeight = newWidth * (1 / ratio);
+        } else if (has(attrs, 'height')) {
+            newHeight = parseInt(attrs.height, 10);
+            newWidth = newHeight * ratio;
+        }
+
+        this.setState({
+            width: Math.round(newWidth),
+            height: Math.round(newHeight)
+        });
     }
 
     /**
@@ -152,29 +175,33 @@ class Image extends Component {
     }
 
     setState(state) {
+        let attrs = {};
+
         if (state.fileId !== undefined) {
-            this.setAttributes({fileId: state.fileId});
+            attrs.fileId = state.fileId;
         }
 
         if (state.title !== undefined) {
-            this.setAttributes({title: state.title});
+            attrs.title = state.title;
         }
 
         if (state.altText !== undefined) {
-            this.setAttributes({altText: state.altText});
+            attrs.altText = state.altText;
         }
 
         if (state.height !== undefined) {
-            this.setAttributes({height: state.height});
+            attrs.height = state.height;
         }
 
         if (state.width !== undefined) {
-            this.setAttributes({width: state.width});
+            attrs.width = state.width;
         }
 
         if (state.url !== undefined) {
-            this.setAttributes({url: state.url});
+            attrs.url = state.url;
         }
+
+        this.setAttributes(attrs);
 
         super.setState(state);
     }
@@ -207,24 +234,31 @@ class Image extends Component {
         if (this.props.attributes.altText !== nextProps.attributes.altText) {
             newState.altText = nextProps.attributes.altText;
         }
+
         if (this.props.attributes.fileId !== nextProps.attributes.fileId) {
             newState.fileId = nextProps.attributes.fileId;
         }
+
         if (this.props.attributes.height !== nextProps.attributes.height) {
             newState.height = nextProps.attributes.height;
         }
+
         if (this.props.attributes.instanceId !== nextProps.attributes.instanceId) {
             newState.instanceId = nextProps.attributes.instanceId;
         }
+
         if (this.props.attributes.title !== nextProps.attributes.title) {
             newState.title = nextProps.attributes.title;
         }
+
         if (this.props.attributes.width !== nextProps.attributes.width) {
             newState.width = nextProps.attributes.width;
         }
+
         if (this.props.attributes.url !== nextProps.attributes.url) {
             newState.url = nextProps.attributes.url;
         }
+
         if (Object.keys(newState).length) {
             this.setState(newState);
         }
@@ -246,7 +280,7 @@ class Image extends Component {
                 <div id={`DynamicImage${instanceId}_Width_Holder`} className="form__fieldgroup-item field field--small">
                     <label htmlFor={`DynamicImage${instanceId}_Width`} id={`title-DynamicImage${instanceId}_Width`}>Width</label>
                     <div>
-                        <input placeholder={this.state.width} type="number" className="text" id={`DynamicImage${instanceId}_Width`} value={this.state.width} onChange={e => this.widthChangeHandler(e.target.value)} />
+                        <input placeholder={this.state.width} type="number" className="text" id={`DynamicImage${instanceId}_Width`} value={this.state.width} onChange={e => this.calculateAspectRatioFit({width: e.target.value})} />
                     </div>
                     <div className="form__field-description">
                         max. {this.state.fileData.width}px
@@ -255,7 +289,7 @@ class Image extends Component {
                 <div id={`DynamicImage${instanceId}_Height_Holder`} className="form__fieldgroup-item field field--small">
                     <label htmlFor={`DynamicImage${instanceId}_Height`} id={`title-DynamicImage${instanceId}_Height`}>Height</label>
                     <div>
-                        <input placeholder={this.state.height} type="number" className="text" id={`DynamicImage${instanceId}_Height`} value={this.state.height} onChange={e => this.heightChangeHandler(e.target.value)} />
+                        <input placeholder={this.state.height} type="number" className="text" id={`DynamicImage${instanceId}_Height`} value={this.state.height} onChange={e => this.calculateAspectRatioFit({height: e.target.value})} />
                     </div>
                     <div className="form__field-description">
                         max. {this.state.fileData.height}px
