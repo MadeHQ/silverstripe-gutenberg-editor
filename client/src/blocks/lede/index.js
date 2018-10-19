@@ -4,16 +4,15 @@ import classnames from 'classnames';
 import * as paragraph from '@wordpress/blocks/library/paragraph';
 import { __ } from '@wordpress/i18n';
 
-import {
-    InspectorControls,
-    RichText
-} from '@wordpress/blocks';
+import { InspectorControls } from '@wordpress/blocks';
 
 import { createBlock } from '@wordpress/blocks/api';
 
 import { blockAutocompleter, userAutocompleter } from '@wordpress/blocks/autocompleters';
 
 import { PanelBody, ToggleControl, Autocomplete } from '@wordpress/components';
+
+import { RichText } from '../../components';
 
 import './style.scss';
 

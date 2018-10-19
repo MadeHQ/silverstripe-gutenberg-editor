@@ -4,13 +4,14 @@ import { isBlockFeatureEnabled } from '../../config';
 
 import {
     BlockControls,
-    RichText,
     InspectorControls,
     AlignmentToolbar,
 } from '@wordpress/blocks';
 
 import { PanelBody, Toolbar } from '@wordpress/components';
 import { createBlock } from '@wordpress/blocks/api';
+
+import { RichText } from '../../components';
 
 import { isUndefined } from 'lodash';
 

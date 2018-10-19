@@ -4,13 +4,12 @@ import { isBlockFeatureEnabled } from '../../config';
 
 import {
     BlockControls,
-    RichText,
     InspectorControls,
 } from '@wordpress/blocks';
 
 import { PanelBody } from '@wordpress/components';
 import { createBlock } from '@wordpress/blocks/api';
-import { Personalisation } from '../../components';
+import { Personalisation, RichText } from '../../components';
 
 class ListBlock extends list.settings.edit {
     render() {

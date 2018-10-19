@@ -118,9 +118,6 @@ jQuery.entwine('ss', ($) => {
             subscribe(debounce(() => {
                 const content = select('core/editor').getEditedPostContent().trim();
 
-                // console.log(currentContent);
-                // console.log(content);
-
                 if (isEqual(currentContent, content)) {
                     return false;
                 }

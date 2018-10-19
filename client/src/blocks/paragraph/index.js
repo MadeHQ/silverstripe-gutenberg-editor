@@ -10,8 +10,9 @@ import {
     BlockAlignmentToolbar,
     InspectorControls,
     ColorPalette,
-    RichText
 } from '@wordpress/blocks';
+
+import { RichText } from '../../components';
 
 import { createBlock } from '@wordpress/blocks/api';
 
