@@ -16,12 +16,21 @@ class HeadingBlock extends BaseBlock
         $filter = URLSegmentFilter::create();
         $filter->setAllowMultibyte(true);
 
+        // Look for headings
         return preg_replace_callback('/(\<h[1-6](.*?))\>(.*)(<\/h[1-6]>)/i', function($matches) use ($filter) {
-            if (!stripos($matches[0], 'id=')) {
-                return $matches[1] . $matches[2] . ' id="' . $filter->filter($matches[3]) . '">' . $matches[3] . $matches[4];
+            // Ignore if there already is an ID
+            if (stripos($matches[0], 'id=') !== false) {
+                return $matches[0];
             }
 
-            return $matches[0];
+            // Remove the tags
+            $value = strip_tags($matches[3]);
+
+            // Sanitise
+            $value = $filter->filter($value);
+
+            // Compile the stuff
+            return $matches[1] . $matches[2] . ' id="' . $value . '">' . $matches[3] . $matches[4];
         }, $content);
     }
 }
