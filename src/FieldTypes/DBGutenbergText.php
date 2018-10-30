@@ -40,6 +40,7 @@ class DBGutenbergText extends DBText
 
     private static $casting = [
         'RAW' => 'HTMLText',
+        'forTemplate' => 'HTMLText',
     ];
 
     /**
@@ -89,8 +90,7 @@ class DBGutenbergText extends DBText
         // Add some functionality to make this extendebale
         $this->extend('onAfterBlockParse', $content);
 
-        // Return the new content
-        return DBHTMLText::create()->setValue($content);
+        return $content;
     }
 
     /**
