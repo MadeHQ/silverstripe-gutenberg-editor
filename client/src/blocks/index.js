@@ -14,6 +14,7 @@ import * as gallery from './gallery';
 import * as button from './button';
 import * as image2 from './image2';
 // import * as rows from './rows';
+import * as html from './html';
 
 // import * as paragraph from '@wordpress/blocks/library/paragraph';
 // import * as heading from '@wordpress/blocks/library/heading';
@@ -23,7 +24,7 @@ import * as quote from '@wordpress/blocks/library/quote';
 import * as pullquote from '@wordpress/blocks/library/pullquote';
 import * as code from '@wordpress/blocks/library/code';
 // import * as embed from '@wordpress/blocks/library/embed';
-import * as html from '@wordpress/blocks/library/html';
+// import * as html from '@wordpress/blocks/library/html';
 import * as separator from '@wordpress/blocks/library/separator';
 import * as table from '@wordpress/blocks/library/table';
 // import * as freeform from '@wordpress/blocks/library/freeform';
