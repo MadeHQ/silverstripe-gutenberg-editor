@@ -2,7 +2,7 @@
     <div class="inline-gallery__list  js-inline-gallery__list">
         <% loop $Images %>
             <div class="inline-gallery__item">
-                <figure class="gallery-item o-figure" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" data-width="{$Width}" data-height="{$Height}" data-large-src="{$Image.Size($Width, $Height).Crop('fill')}" data-caption="{$Caption}" data-credit="{$Credit}">
+                <figure class="gallery-item o-figure" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" data-width="{$Image.Width}" data-height="{$Image.Height}" data-large-src="{$Image.Size($Image.Width, $Image.Height).Crop('fill')}" data-caption="{$Caption}" data-credit="{$Credit}">
                     <button class="gallery-item__link js-gallery-popup">
                         {$Top.Icon('expand', 'medium')}
                     </button>
