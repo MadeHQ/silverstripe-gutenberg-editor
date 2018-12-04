@@ -51,23 +51,26 @@ class Image2Block extends BaseBlock
                 $width = $image->Width;
                 $height = $image->Height;
 
-                if ($width > static::config()->get('max_width')) {
-                    $height = $width * $ratio;
-                    $width = static::config()->get('max_width');
-                }
+                // If no width/height then the file has probably been removed
+                if ($width && $height) {
+                    if ($width > static::config()->get('max_width')) {
+                        $height = $width * $ratio;
+                        $width = static::config()->get('max_width');
+                    }
 
-                if ($height > static::config()->get('max_height')) {
-                    $width = $height * $ratio;
-                    $height = static::config()->get('max_height');
-                }
+                    if ($height > static::config()->get('max_height')) {
+                        $width = $height * $ratio;
+                        $height = static::config()->get('max_height');
+                    }
 
-                $carry->push(ArrayData::create([
-                    'Image' => $image,
-                    'Caption' => array_key_exists('caption', $imageData) && $imageData['caption'] ? $imageData['caption'] : $image->Caption,
-                    'Credit' => array_key_exists('credit', $imageData) && $imageData['credit'] ? $imageData['credit'] : $image->Credit,
-                    'Width' => (int) $width,
-                    'Height' => (int) $height,
-                ]));
+                    $carry->push(ArrayData::create([
+                        'Image' => $image,
+                        'Caption' => array_key_exists('caption', $imageData) && $imageData['caption'] ? $imageData['caption'] : $image->Caption,
+                        'Credit' => array_key_exists('credit', $imageData) && $imageData['credit'] ? $imageData['credit'] : $image->Credit,
+                        'Width' => (int) $width,
+                        'Height' => (int) $height,
+                    ]));
+                }
             }
             return $carry;
         }, ArrayList::create());
