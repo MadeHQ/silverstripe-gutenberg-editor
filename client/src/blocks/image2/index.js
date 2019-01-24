@@ -144,7 +144,7 @@ export const settings = {
                                 value= { image.gravity }
                                 onChange={ e => updateGravity(key, e.target.value) }
                             >
-                                { GRAVITY_VALUES.map( i => <option value={i.value}>Gravity: {i.title}</option> ) }
+                                { GRAVITY_VALUES.map( gravity => <option value={gravity.value}>Gravity: {gravity.title}</option> ) }
                             </select>
                         </div>
                     </fieldset>
