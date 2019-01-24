@@ -9,6 +9,24 @@ const cloudinaryImage = window.cloudinaryImage;
 
 import './style.scss';
 
+const GRAVITY_VALUES = [
+  { value: 'auto',          title: 'Auto'},
+  { value: 'center',        title: 'Center'},
+  { value: 'face',          title: 'Face'},
+  { value: 'face:auto',     title: 'Face (or auto)'},
+  { value: 'faces',         title: 'Faces'},
+  { value: 'faces:auto',    title: 'Faces (or auto)'},
+  { value: 'body:face',     title: 'Body or Face'},
+  { value: 'north',         title: 'Top'},
+  { value: 'north_east',    title: 'Top Right'},
+  { value: 'east',          title: 'Right'},
+  { value: 'south_east',    title: 'Bottom Right'},
+  { value: 'south',         title: 'Bottom'},
+  { value: 'south_west',    title: 'Bottom Left'},
+  { value: 'west',          title: 'Left'},
+  { value: 'north_west',    title: 'Top Left'},
+];
+
 export const name = 'madehq/image';
 
 export const settings = {
@@ -35,6 +53,7 @@ export const settings = {
 
                 item.credit = image.credit;
                 item.caption = image.caption;
+                image.gravity = image.gravity || 'auto';
 
                 return item;
             });
@@ -57,6 +76,14 @@ export const settings = {
 
             setAttributes({ images: newImages });
         }
+
+      const updateGravity = (key, value) => {
+        let newImages = extend({}, images);
+
+        newImages[key].gravity = value;
+
+        setAttributes({ images: newImages });
+      }
 
         const renderImage = (image, key) => {
             return (
@@ -100,6 +127,25 @@ export const settings = {
                                 value= { image.caption }
                                 onChange={ e => updateCaption(key, e.target.value) }
                             />
+                        </div>
+
+                        <div id={`DynamicImage${image.id}_Caption_Holder`}>
+                            <label
+                                htmlFor={`DynamicImage${image.id}_Gravity`}
+                                id={`title-DynamicImage${image.id}_Gravity`}
+                                className="screen-reader-text"
+                            >
+                                Gravity
+                            </label>
+
+                            <select
+                                className="text no-change-track"
+                                id={ `DynamicImage${image.id}_Gravity` }
+                                value= { image.gravity }
+                                onChange={ e => updateGravity(key, e.target.value) }
+                            >
+                                { GRAVITY_VALUES.map( gravity => <option value={gravity.value}>Gravity: {gravity.title}</option> ) }
+                            </select>
                         </div>
                     </fieldset>
                 </div>

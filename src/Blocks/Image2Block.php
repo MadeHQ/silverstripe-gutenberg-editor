@@ -67,6 +67,7 @@ class Image2Block extends BaseBlock
                         'Image' => $image,
                         'Caption' => array_key_exists('caption', $imageData) && $imageData['caption'] ? $imageData['caption'] : $image->Caption,
                         'Credit' => array_key_exists('credit', $imageData) && $imageData['credit'] ? $imageData['credit'] : $image->Credit,
+                        'Gravity' => array_key_exists('gravity', $imageData) && $imageData['gravity'] ? $imageData['gravity'] : 'auto',
                         'Width' => (int) $width,
                         'Height' => (int) $height,
                     ]));
@@ -79,6 +80,8 @@ class Image2Block extends BaseBlock
             'Images' => $images,
             'Width' => static::config()->get('width'),
             'Height' => static::config()->get('height'),
+            'FullWidth' => static::config()->get('max_width'),
+            'FullHeight' => static::config()->get('max_height'),
         ]);
     }
 }
