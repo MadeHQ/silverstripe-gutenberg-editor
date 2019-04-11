@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import * as components from '@wordpress/components';
 import * as blocks from '@wordpress/blocks';
 import * as element from '@wordpress/element';
-import * as library from '@wordpress/blocks/library';
+
+import * as button from '@wordpress/blocks/library/button';
 import ContrastChecker from '@wordpress/blocks/contrast-checker';
 
 import { ImageControl, withFetch } from './components';
@@ -18,8 +19,12 @@ window.wp.components = {
 
 window.wp.blocks = blocks;
 window.wp.element = element;
-window.wp.library = library;
-window.wp.ContrastChecker = ContrastChecker;
+window.wp.library = {
+    button,
+};
+window.wp.extraBlocks = {
+    ContrastChecker,
+};
 
 import { isArray, isString, debounce, isEqual, extend, has, isObject, filter, includes, without, delay, find, isNull } from "lodash";
 
