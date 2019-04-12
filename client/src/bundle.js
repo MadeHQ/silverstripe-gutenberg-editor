@@ -49,7 +49,13 @@ import Layout from "./components/layout";
 import { subscribe, select } from "@wordpress/data";
 import { rawHandler, serialize } from "@wordpress/blocks";
 
-import { setConfig } from './config';
+import { setConfig, getConfigValue, isBlockFeatureEnabled } from './config';
+
+window.wp.ssConfig = {
+    getConfigValue,
+    setConfig,
+    isBlockFeatureEnabled,
+};
 
 import { registerBlocks } from "./blocks";
 
