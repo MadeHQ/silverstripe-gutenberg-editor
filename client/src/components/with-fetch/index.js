@@ -2,6 +2,8 @@ import { Component, getWrapperDisplayName } from '@wordpress/element';
 
 import { reduce, keys } from 'lodash';
 
+const dataCache = {};
+
 function withFetch( mapPropsToData = {} ) {
     return ( OriginalComponent ) => {
         class WrappedComponent extends Component {
@@ -11,8 +13,6 @@ function withFetch( mapPropsToData = {} ) {
                 this.state = {
                     data: {},
                 };
-
-                this.dataCache = {};
 
                 this.applyMapping = this.applyMapping.bind(this);
                 this.fetchData = this.fetchData.bind(this);
@@ -54,14 +54,14 @@ function withFetch( mapPropsToData = {} ) {
             }
 
             fetchData(path) {
-                if (this.dataCache[path]) {
-                    return this.dataCache[path];
+                if (dataCache[path]) {
+                    return dataCache[path];
                 }
 
-                this.dataCache[path] = fetch(path, { credentials: 'same-origin' })
+                dataCache[path] = fetch(path, { credentials: 'same-origin' })
                     .then(response => response.json());
 
-                return this.dataCache[path];
+                return dataCache[path];
             }
 
             render() {
