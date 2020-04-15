@@ -1,15 +1,15 @@
 const Path = require('path');
-const webpack = require('webpack');
-const webpackConfig = require('@silverstripe/webpack-config');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const {
-  resolveJS,
-  externalJS,
-  moduleJS,
-  pluginJS,
-  moduleCSS,
-  pluginCSS,
-} = webpackConfig;
+// const webpack = require('webpack');
+// const webpackConfig = require('@silverstripe/webpack-config');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const {
+//   resolveJS,
+//   externalJS,
+//   moduleJS,
+//   pluginJS,
+//   moduleCSS,
+//   pluginCSS,
+// } = webpackConfig;
 
 const ENV = process.env.NODE_ENV;
 const PATHS = {
@@ -19,7 +19,6 @@ const PATHS = {
   ROOT: Path.resolve(),
   SRC: Path.resolve('client/src'),
   DIST: Path.resolve('client/dist'),
-  LEGACY_SRC: Path.resolve('client/src/legacy'),
 };
 
 const config = [
@@ -32,29 +31,29 @@ const config = [
       path: PATHS.DIST,
       filename: 'js/[name].js',
     },
-    devtool: (ENV !== 'production') ? 'source-map' : '',
-    resolve: resolveJS(ENV, PATHS),
-    externals: externalJS(ENV, PATHS),
-    module: moduleJS(ENV, PATHS),
-  },
-  {
-    name: 'css',
-    entry: {
-      bundle: `${PATHS.SRC}/styles/style.scss`,
+    module: {
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/,
+          query: {
+            cacheDirectory: true,
+            presets: ['react', 'es2015']
+          }
+        }
+      ]
     },
-    output: {
-      path: PATHS.DIST,
-      filename: 'styles/[name].css',
-    },
     devtool: (ENV !== 'production') ? 'source-map' : '',
-    module: moduleCSS(ENV, PATHS),
-    plugins: [
-      ...pluginCSS(ENV, PATHS),
-    ],
+    // resolve: resolveJS(ENV, PATHS),
+    // externals: externalJS(ENV, PATHS),
+    // module: moduleJS(ENV, PATHS),
+    devServer: {
+      contentBase: "./public"
+    }
   },
 ];
 
-// Use WEBPACK_CHILD=js or WEBPACK_CHILD=css env var to run a single config
 module.exports = (process.env.WEBPACK_CHILD)
   ? config.find((entry) => entry.name === process.env.WEBPACK_CHILD)
   : module.exports = config;
