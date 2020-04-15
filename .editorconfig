@@ -16,3 +16,11 @@ trim_trailing_whitespace = false
 [*.php]
 indent_size = 4
 indent_style = space
+
+[*.html]
+indent_size = 4
+indent_style = space
+
+[*.js]
+indent_size = 4
+indent_style = space

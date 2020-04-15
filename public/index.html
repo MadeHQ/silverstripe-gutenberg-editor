@@ -1,10 +1,67 @@
 <!doctype html>
 <html>
+
 <head>
+    <!-- <link href="dist/css/app.css" rel="stylesheet" />
+  <link href="dist/css/demo.css" rel="stylesheet" /> -->
 </head>
+
 <body>
-  <!-- The text area below is what would normally be replaced and then visually hidden -->
-  <!-- For demonstration purposes a style has been manually added to prevent it from being visually hidden -->
-  <textarea id="content-data" style="visibility: visable"></textarea>
+    <!-- The text area below is what would normally be replaced and then visually hidden -->
+    <!-- For demonstration purposes a style has been manually added to prevent it from being visually hidden -->
+    <div>
+        <div id="editor-root"></div>
+        <textarea id="content-data" style="visibility: visable">
+      {
+        "blocks": {
+          "a": {
+            "id": "a",
+            "data": {
+              "content": "<p>paragraph content</p>",
+              "attributes": {}
+            },
+            "type": "paragraph"
+          },
+          "b": {
+            "id": "b",
+            "data": {
+              "content": "<p>Custom paragraph content</p>",
+              "attributes": {}
+            },
+            "type": "paragraph"
+          },
+          "c": {
+            "id": "c",
+            "data": {
+              "content": "<p>second paragraph content</p>",
+              "attributes": {}
+            },
+            "type": "custom-para"
+          }
+        },
+        "blockOrder": ["a","b","c"]
+      }
+    </textarea>
+    </div>
+
+    <pre id="demo-data">Empty</pre>
+
+<script type="text/javascript" src="dist/js/app.js"></script>
+<!-- <script type="text/javascript" src="dist/js/demo.js"></script> -->
+<script type="text/javascript">
+
+let data;
+try {
+    data = JSON.parse(document.querySelector('textarea').value);
+} catch (e) {
+    data = {};
+}
+console.log(data);
+var inst = renderEditor(document.querySelector('#editor-root'));
+console.log('inst', inst);
+inst.getBlockManager().loadBlockData(data);
+</script>
+
 </body>
+
 </html>

@@ -1,15 +1,4 @@
 const Path = require('path');
-// const webpack = require('webpack');
-// const webpackConfig = require('@silverstripe/webpack-config');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
-// const {
-//   resolveJS,
-//   externalJS,
-//   moduleJS,
-//   pluginJS,
-//   moduleCSS,
-//   pluginCSS,
-// } = webpackConfig;
 
 const ENV = process.env.NODE_ENV;
 const PATHS = {
@@ -25,7 +14,8 @@ const config = [
   {
     name: 'js',
     entry: {
-      app: `${PATHS.SRC}/js/app.js`
+      app: `${PATHS.SRC}/js/app.js`,
+      // demo: `${PATHS.SRC}/js/demo.js`,
     },
     output: {
       path: PATHS.DIST,

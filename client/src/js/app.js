@@ -1,45 +1,41 @@
-/* global jQuery */
-import GutenbergEditor from './components/GutenbergEditor';
-import React from 'react';
 import ReactDOM from 'react-dom';
+import React from 'react';
 
-jQuery.entwine('ss', ($) => {
-  $('textarea.gutenburg-editor').entwine({
+import GutenbergEditor from './components/GutenbergEditor';
+import BlockManagement from './utils/BlockManagement';
 
-    getContainer() {
-      let container = this.closest('div.gutenburg-editor-holder')[0];
-      if (!container) {
-        const newContainer = $('<div class="gutenburg-editor-holder"></div>');
-        this.parent().before(newContainer);
-        container = newContainer[0];
-      }
-      return container;
-    },
+export * from './utils/BlockTypeInjector';
 
-    onmatch() {
-      const container = this.getContainer();
-      const form = $(this).closest('form');
+function renderEditor(element) {
+    const blockManager = BlockManagement();
 
-      const blocks = [
-        {
-          type: 'paragraph',
-          data: 'Here is a paragraph thats hard coded'
-        }
-      ];
-
-      const onChange = () => {
-        setTimeout(() => {
-          form.trigger('change');
-        });
-      };
-
-      ReactDOM.render(
+    const el = ReactDOM.render(
         <GutenbergEditor
-          blocks={blocks}
-          onChange={onChange}
+            blockManager={blockManager}
         />,
-        container
-      );
+        element
+    );
+
+    return {
+        getBlockManager: () => {
+            return blockManager;
+        }
+        // setBlockData: data => {
+        //
+        // },
+        // getBlockData: () => {
+        //
+        // },
+        // setBlockOrder: order => {
+        //
+        // },
+        // getBlockOrder: () => {
+        //
+        // },
+        // addBlock: () => {}
     }
-  });
-});
+}
+
+window.renderEditor = renderEditor;
+
+export default renderEditor;
