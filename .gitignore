@@ -21,3 +21,6 @@ Desktop.ini
 ### Source Maps ###
 /**/*.js.map
 /**/*.css.map
+
+### PHPStorm ###
+.idea/
