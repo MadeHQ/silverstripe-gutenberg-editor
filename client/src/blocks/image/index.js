@@ -48,9 +48,14 @@ export const settings = {
         width: {
             type: 'string'
         },
+        float: {
+            type: 'string'
+        },
     },
 
     save: function(data) {
-        return `<img src="${data.attributes.fileId}" alt="${data.attributes.altText}" title="${data.attributes.title}" />`;
+        const classnames = [data.attributes.title, data.attributes.float].filter(str => !!str).join(' ');
+        console.log(data, classnames);
+        return `<img src="${data.attributes.fileId}" alt="${data.attributes.altText}" title="${data.attributes.title}" class="${classnames}" />`;
     }
 };

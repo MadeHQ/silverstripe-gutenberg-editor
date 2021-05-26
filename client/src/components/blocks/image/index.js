@@ -14,6 +14,7 @@ class Image extends Component {
         this.altTextChangeHandler = this.altTextChangeHandler.bind(this);
         this.heightChangeHandler = this.heightChangeHandler.bind(this);
         this.widthChangeHandler = this.widthChangeHandler.bind(this);
+        this.floatChangeHandler = this.floatChangeHandler.bind(this); 
 
         this.state = {
             altText: props.attributes.altText,
@@ -23,6 +24,7 @@ class Image extends Component {
             instanceId: props.instanceId,
             title: props.attributes.title,
             width: props.attributes.width,
+            float: props.attributes.float,
         };
 
         this.setAttributes = debounce(this.setAttributes, 500);
@@ -90,6 +92,10 @@ class Image extends Component {
         this.setState({width});
     }
 
+    floatChangeHandler(float) {
+        this.setState({float});
+    }
+
     addListeners() {
         if (!this.mutationObserver) {
             // select the target node
@@ -155,6 +161,9 @@ class Image extends Component {
         if (state.width !== undefined) {
             this.setAttributes({width: state.width});
         }
+        if (state.float !== undefined) {
+            this.setAttributes({float: state.float});
+        }
         super.setState(state);
     }
 
@@ -212,6 +221,7 @@ class Image extends Component {
 
 
     renderWidthHeightFieldGroup() {
+        
         return false;
 
         const { instanceId } = this.state;
@@ -245,6 +255,13 @@ class Image extends Component {
             return null;
         }
 
+        const floatOptions = [
+            {val: '', text: 'None'},
+            {val: 'left', text: 'Left'},
+            {val: 'right', text: 'Right'},
+            {val: 'center', text: 'Center'},
+        ];
+
         const { instanceId } = this.state;
 
         // Adds the `ui-widget` class so as to reset the font being used (want it to match the rest of the admin)
@@ -262,6 +279,14 @@ class Image extends Component {
                         <label htmlFor={`DynamicImage${instanceId}_AltText`} id={`title-DynamicImage${instanceId}_AltText`}>Alt</label>
                         <div>
                             <input type="text" className="text" id={`DynamicImage${instanceId}_AltText`} value={this.state.altText} onChange={e => this.altTextChangeHandler(e.target.value)} />
+                        </div>
+                    </div>
+                    <div id={`DynamicImage${instanceId}_Float_Holder`}>
+                        <label htmlFor={`DynamicImage${instanceId}_Float`} id={`title-DynamicImage${instanceId}_Float`}>Float</label>
+                        <div>
+                            <select value={this.state.float} onChange={e => this.floatChangeHandler(e.target.value)} className="select">
+                                { floatOptions.map(v => <option value={v.val} >{v.text}</option>) }
+                            </select>
                         </div>
                     </div>
                     {this.renderWidthHeightFieldGroup()}
