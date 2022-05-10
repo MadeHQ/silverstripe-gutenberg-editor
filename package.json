@@ -5,7 +5,7 @@
   "dependencies": {
     "gutenberg": "github:Wordpress/gutenberg#4ba122af127bb83d679d6c019a5551279a02dbfe",
     "moment": "^2.21.0",
-    "tinymce": "^4.7.9",
+    "tinymce": "^5.10.0",
     "whatwg-fetch": "^2.0.4"
   },
   "scripts": {
