@@ -19,7 +19,7 @@
     "@wordpress/browserslist-config": "^2.1.0",
     "autoprefixer": "^9.8.8",
     "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^8.2.5",
     "babel-plugin-transform-async-generator-functions": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "cross-env": "^7.0.3",
